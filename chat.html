@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Bible Chat · Ask Me Anything</title>
+    <title>Breezy · Emotional Support</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         /* === RESET & GLOBAL === */
@@ -26,7 +26,6 @@
             -webkit-user-select: none;
         }
 
-        /* === FULL PAGE — SCROLLABLE === */
         .fullscreen {
             width: 100%;
             min-height: 100vh;
@@ -57,7 +56,7 @@
             scrollbar-color: #b8a69a #e4dad2;
         }
 
-        /* === HEADER with Back + Logo === */
+        /* === HEADER === */
         .header {
             display: flex;
             align-items: center;
@@ -147,7 +146,6 @@
             flex-shrink: 0;
         }
 
-        /* responsive header */
         @media (max-width: 480px) {
             .header {
                 flex-wrap: nowrap;
@@ -211,7 +209,6 @@
             }
         }
 
-        /* === SUBTITLE === */
         .subtitle {
             color: #5f5146;
             font-size: 0.95rem;
@@ -260,9 +257,50 @@
             scrollbar-color: #b8a69a #e4dad2;
         }
 
-        /* message bubbles */
+        .message-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            max-width: 92%;
+        }
+
+        .message-wrapper.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-wrapper.bot {
+            align-self: flex-start;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(176, 154, 139, 0.4);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1.5px solid rgba(214, 200, 188, 0.5);
+        }
+
+        .avatar i {
+            font-size: 1.2rem;
+            color: #3f342c;
+        }
+
+        .message-wrapper.user .avatar {
+            background: rgba(109, 143, 122, 0.3);
+            border-color: rgba(109, 143, 122, 0.3);
+        }
+
+        .message-wrapper.user .avatar i {
+            color: #4a6b5c;
+        }
+
         .message {
-            max-width: 88%;
             padding: 1rem 1.4rem;
             border-radius: 24px;
             font-size: 1.05rem;
@@ -270,6 +308,7 @@
             word-wrap: break-word;
             animation: msgFadeIn 0.35s ease forwards;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            flex: 1;
         }
 
         @keyframes msgFadeIn {
@@ -283,7 +322,7 @@
             }
         }
 
-        .message.user {
+        .message-wrapper.user .message {
             align-self: flex-end;
             background: rgba(176, 154, 139, 0.35);
             backdrop-filter: blur(8px);
@@ -292,7 +331,7 @@
             border-bottom-right-radius: 6px;
         }
 
-        .message.bot {
+        .message-wrapper.bot .message {
             align-self: flex-start;
             background: rgba(255, 250, 245, 0.5);
             backdrop-filter: blur(8px);
@@ -310,16 +349,15 @@
             gap: 6px;
         }
 
-        .message.bot .msg-meta {
+        .message-wrapper.bot .msg-meta {
             color: #5f5146;
         }
 
-        .message.user .msg-meta {
+        .message-wrapper.user .msg-meta {
             color: #5f5146;
             justify-content: flex-end;
         }
 
-        /* typing indicator */
         .typing-indicator {
             align-self: flex-start;
             background: rgba(255, 250, 245, 0.5);
@@ -331,6 +369,7 @@
             display: none;
             gap: 6px;
             align-items: center;
+            margin-left: 48px;
         }
 
         .typing-indicator.show {
@@ -365,7 +404,6 @@
             }
         }
 
-        /* === INPUT AREA === */
         .input-area {
             display: flex;
             gap: 12px;
@@ -430,7 +468,6 @@
             font-size: 1.1rem;
         }
 
-        /* === FOOTER === */
         .footer {
             flex-shrink: 0;
             text-align: center;
@@ -445,7 +482,6 @@
             margin: 0 3px;
         }
 
-        /* === RESPONSIVE === */
         @media (max-width: 400px) {
             .fullscreen {
                 padding: 1rem 0.8rem 1.5rem;
@@ -453,7 +489,9 @@
             .message {
                 font-size: 0.92rem;
                 padding: 0.8rem 1rem;
-                max-width: 92%;
+            }
+            .message-wrapper {
+                max-width: 96%;
             }
             .input-area input {
                 font-size: 0.92rem;
@@ -473,6 +511,16 @@
                 font-size: 0.8rem;
                 margin-bottom: 0.8rem;
             }
+            .avatar {
+                width: 30px;
+                height: 30px;
+            }
+            .avatar i {
+                font-size: 0.9rem;
+            }
+            .typing-indicator {
+                margin-left: 40px;
+            }
         }
 
         @media (min-width: 600px) {
@@ -480,8 +528,10 @@
                 max-height: 700px;
                 min-height: 400px;
             }
+            .message-wrapper {
+                max-width: 82%;
+            }
             .message {
-                max-width: 78%;
                 font-size: 1.15rem;
                 padding: 1.2rem 1.8rem;
             }
@@ -508,25 +558,21 @@
                 max-height: 800px;
                 min-height: 450px;
             }
+            .message-wrapper {
+                max-width: 75%;
+            }
             .message {
-                max-width: 70%;
                 font-size: 1.2rem;
             }
         }
 
-        /* welcome message special */
-        .welcome-msg .msg-meta {
-            color: #8a7566;
-        }
-
-        .welcome-msg i {
-            color: #6d8f7a;
-            margin-right: 4px;
-        }
-
-        /* scrollable message area smooth */
         .chat-messages {
             scroll-behavior: smooth;
+        }
+
+        .message-wrapper.bot .message .heart-icon {
+            color: #c47a7a;
+            margin-right: 4px;
         }
     </style>
 </head>
@@ -544,1026 +590,555 @@
                     <i class="fas fa-robot icon-robot"></i>
                     <i class="fas fa-feather-alt icon-feather"></i>
                 </div>
-                <h1>Bible Chat <span>AI</span></h1>
+                <h1>Breezy <span>AI</span></h1>
             </div>
             <div class="header-spacer"></div>
         </div>
 
-        <div class="subtitle">Ask anything about the Bible — Genesis to Revelation</div>
+        <div class="subtitle">Tell me how you feel — I'm here to listen and encourage you ❤️</div>
 
         <!-- Chat -->
         <div class="chat-container">
-            <div class="chat-messages" id="chatMessages">
-                <!-- messages will be inserted here -->
-            </div>
+            <div class="chat-messages" id="chatMessages"></div>
 
-            <!-- typing indicator -->
             <div class="typing-indicator" id="typingIndicator">
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
             </div>
 
-            <!-- Input -->
             <div class="input-area">
-                <input type="text" id="userInput" placeholder="Ask about any Bible book, character, or event…" autocomplete="off" />
+                <input type="text" id="userInput" placeholder="Share your feelings, or just say what's on your mind…" autocomplete="off" />
                 <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i> Ask</button>
             </div>
         </div>
 
         <div class="footer">
-            <i class="fas fa-robot"></i> Powered by Bible Knowledge · NIV <i class="fas fa-feather-alt"></i>
+            <i class="fas fa-robot"></i> Breezy · Listening with love <i class="fas fa-feather-alt"></i>
         </div>
     </div>
 
     <script>
         // ============================================================
-        // BIBLE KNOWLEDGE BASE — comprehensive from Genesis to Revelation
+        // COMPLETE FEELINGS DATABASE — every emotion with advice & verses
         // ============================================================
 
-        const bibleKnowledge = {
+        const feelingsData = {
 
-            // ---- BOOKS OF THE BIBLE ----
-            books: {
-                genesis: {
-                    name: "Genesis",
-                    summary: "The book of beginnings. It tells of the creation of the world, the fall of man, the flood, and the patriarchs: Abraham, Isaac, Jacob, and Joseph. Genesis reveals God's covenant promises and His plan for redemption through a chosen people.",
-                    key_verses: "Genesis 1:1, 12:1-3, 50:20",
-                    characters: "Adam, Eve, Noah, Abraham, Sarah, Isaac, Rebekah, Jacob, Rachel, Joseph, Judah",
-                    events: "Creation, Fall, Flood, Tower of Babel, Abrahamic covenant, Sodom and Gomorrah, Isaac's birth, Jacob's ladder, Joseph sold into slavery, Israel goes to Egypt"
-                },
-                exodus: {
-                    name: "Exodus",
-                    summary: "The story of Israel's deliverance from slavery in Egypt through God's mighty hand. Moses leads the people out, the Red Sea is parted, and God gives the Law at Mount Sinai, including the Ten Commandments.",
-                    key_verses: "Exodus 3:14, 12:13, 20:1-17",
-                    characters: "Moses, Aaron, Pharaoh, Miriam, Joshua, Zipporah, Jethro",
-                    events: "Burning bush, Ten plagues, Passover, Exodus from Egypt, Crossing the Red Sea, Manna from heaven, Ten Commandments, Golden calf, Tabernacle built"
-                },
-                leviticus: {
-                    name: "Leviticus",
-                    summary: "A manual of holiness for God's people. It contains laws about sacrifices, priesthood, purity, and festivals. The central message: 'Be holy, because I am holy.'",
-                    key_verses: "Leviticus 11:45, 19:18, 26:12",
-                    characters: "Moses, Aaron, the priests",
-                    events: "Laws on sacrifices, Day of Atonement, Holiness code, Feasts of the Lord, Jubilee year"
-                },
-                numbers: {
-                    name: "Numbers",
-                    summary: "The story of Israel's wilderness wanderings. God's people fail to trust Him and wander for 40 years. The book records the census, laws, and the journey toward the Promised Land.",
-                    key_verses: "Numbers 6:24-26, 14:18, 23:19",
-                    characters: "Moses, Aaron, Miriam, Joshua, Caleb, Korah, Balaam",
-                    events: "Census, Spies sent to Canaan, Rebellion of Korah, Bronze serpent, Balaam's donkey, Moses strikes the rock, Death of Aaron"
-                },
-                deuteronomy: {
-                    name: "Deuteronomy",
-                    summary: "Moses' farewell speeches to Israel before they enter the Promised Land. It is a renewal of the covenant, with laws and blessings for obedience and curses for disobedience.",
-                    key_verses: "Deuteronomy 6:4-9, 7:9, 31:8",
-                    characters: "Moses, Joshua, Eleazar",
-                    events: "Moses' sermons, Rehearsal of the Law, Blessings and curses, Moses sees the Promised Land, Death of Moses"
-                },
-                joshua: {
-                    name: "Joshua",
-                    summary: "The conquest of Canaan under Joshua's leadership. God fulfills His promise to give the land to Abraham's descendants. The book shows God's faithfulness and the importance of obedience.",
-                    key_verses: "Joshua 1:9, 24:15",
-                    characters: "Joshua, Caleb, Rahab, Achan, the Gibeonites",
-                    events: "Crossing the Jordan, Fall of Jericho, Ai defeated, Sun stands still, Division of the land, Joshua's farewell"
-                },
-                judges: {
-                    name: "Judges",
-                    summary: "A cycle of sin, oppression, deliverance, and apostasy. God raises up judges to deliver Israel when they cry out to Him. The book shows the need for a king.",
-                    key_verses: "Judges 2:16, 21:25",
-                    characters: "Deborah, Gideon, Samson, Jephthah, Ehud, Barak, Samuel (last judge)",
-                    events: "Cycle of sin and deliverance, Deborah and Barak defeat Sisera, Gideon's fleece, Samson's exploits, Jephthah's vow, The Levite's concubine"
-                },
-                ruth: {
-                    name: "Ruth",
-                    summary: "A beautiful story of loyalty and redemption. Ruth, a Moabite widow, commits herself to Naomi and to the God of Israel. She becomes the great-grandmother of King David.",
-                    key_verses: "Ruth 1:16-17, 4:17",
-                    characters: "Ruth, Naomi, Boaz, Orpah, Obed",
-                    events: "Naomi's family moves to Moab, Death of Naomi's husband and sons, Ruth's loyalty, Ruth gleans in Boaz's field, Boaz redeems Ruth, Ruth's marriage and genealogy"
-                },
-                samuel1: {
-                    name: "1 Samuel",
-                    summary: "The transition from judges to monarchy. Samuel anoints Saul as the first king, then David. The book shows God's sovereignty and the importance of obedience.",
-                    key_verses: "1 Samuel 15:22, 16:7",
-                    characters: "Samuel, Saul, David, Jonathan, Goliath, Eli, Hannah",
-                    events: "Hannah's prayer, Samuel's birth, Ark captured, Saul anointed, David anointed, David and Goliath, Saul's jealousy, David and Jonathan's friendship, Saul's death"
-                },
-                samuel2: {
-                    name: "2 Samuel",
-                    summary: "David's reign as king. It covers his successes, his sin with Bathsheba, the consequences of that sin, and God's covenant promise of a lasting dynasty.",
-                    key_verses: "2 Samuel 7:16, 22:31, 24:14",
-                    characters: "David, Bathsheba, Nathan, Joab, Absalom, Amnon, Tamar",
-                    events: "David becomes king, David brings the Ark to Jerusalem, David's sin with Bathsheba, Nathan's prophecy, Absalom's rebellion, David's census and plague"
-                },
-                kings1: {
-                    name: "1 Kings",
-                    summary: "The reign of Solomon and the division of the kingdom. Solomon builds the Temple, but his heart turns away. The kingdom splits into Israel (north) and Judah (south).",
-                    key_verses: "1 Kings 3:9, 8:27, 11:11",
-                    characters: "Solomon, David, Rehoboam, Jeroboam, Elijah, Ahab, Jezebel, Elisha",
-                    events: "Solomon's wisdom, Temple built, Sheba's visit, Solomon's sin, Kingdom divided, Elijah's ministry, Contest on Mount Carmel, Naboth's vineyard"
-                },
-                kings2: {
-                    name: "2 Kings",
-                    summary: "The continued story of Israel and Judah, with prophets calling the people back to God. Both kingdoms eventually fall — Israel to Assyria and Judah to Babylon.",
-                    key_verses: "2 Kings 17:13-14, 25:21",
-                    characters: "Elijah, Elisha, Hezekiah, Josiah, Naaman, Sennacherib, Nebuchadnezzar",
-                    events: "Elijah taken up to heaven, Elisha's miracles, Healing of Naaman, Hezekiah's reform, Josiah's reform, Fall of Israel, Fall of Judah, Exile to Babylon"
-                },
-                chronicles1: {
-                    name: "1 Chronicles",
-                    summary: "A genealogical and historical account from Adam to David. It focuses on David's reign and his preparations for building the Temple, emphasizing worship and the Levitical order.",
-                    key_verses: "1 Chronicles 16:11, 29:11-12",
-                    characters: "David, Solomon, the Levites, the priests",
-                    events: "Genealogies, David's reign, Ark brought to Jerusalem, David's prayer, Preparations for the Temple"
-                },
-                chronicles2: {
-                    name: "2 Chronicles",
-                    summary: "The history of Judah from Solomon to the exile, with a focus on the Temple and worship. The book ends with Cyrus's decree allowing the people to return.",
-                    key_verses: "2 Chronicles 7:14, 36:16",
-                    characters: "Solomon, Rehoboam, Hezekiah, Josiah, Jehoshaphat, Asa, Cyrus",
-                    events: "Solomon's Temple, Division of the kingdom, Hezekiah's reform, Josiah's reform, Fall of Judah, Decree of Cyrus"
-                },
-                ezra: {
-                    name: "Ezra",
-                    summary: "The return from exile and the rebuilding of the Temple. Ezra the scribe leads the people to return to God's Law and restore proper worship.",
-                    key_verses: "Ezra 3:11, 7:10",
-                    characters: "Ezra, Zerubbabel, Nehemiah, Jeshua, Artaxerxes",
-                    events: "Cyrus's decree, First return, Temple rebuilding, Opposition, Temple completed, Ezra's arrival, Reading of the Law"
-                },
-                nehemiah: {
-                    name: "Nehemiah",
-                    summary: "The rebuilding of Jerusalem's walls under Nehemiah's leadership. The book combines prayer, perseverance, and practical faith in the face of opposition.",
-                    key_verses: "Nehemiah 1:4, 8:10",
-                    characters: "Nehemiah, Ezra, Sanballat, Tobiah, Shemaiah",
-                    events: "Nehemiah's prayer, Rebuilding the wall, Opposition, Completion of the wall, Reading of the Law, Covenant renewal"
-                },
-                esther: {
-                    name: "Esther",
-                    summary: "A story of courage and divine deliverance. Queen Esther risks her life to save her people from genocide, showing God's providence even when His name is not mentioned.",
-                    key_verses: "Esther 4:14, 8:17",
-                    characters: "Esther, Mordecai, Haman, Xerxes, Vashti",
-                    events: "Vashti deposed, Esther becomes queen, Haman's plot, Mordecai's refusal to bow, Esther's bravery, Jews delivered, Feast of Purim"
-                },
-                job: {
-                    name: "Job",
-                    summary: "A profound exploration of suffering and God's sovereignty. Job, a righteous man, loses everything. He questions God but ultimately humbles himself before God's wisdom.",
-                    key_verses: "Job 1:21, 42:5-6",
-                    characters: "Job, Eliphaz, Bildad, Zophar, Elihu, God, Satan",
-                    events: "Job's prosperity, Testing of Job, Three friends' dialogues, Elihu's speech, God's response, Job's restoration"
-                },
-                psalms: {
-                    name: "Psalms",
-                    summary: "A collection of 150 songs and prayers expressing the full range of human emotion—praise, lament, thanksgiving, and trust. The Psalms point to God's character and His covenant love.",
-                    key_verses: "Psalm 23:1, 27:1, 51:10, 100:1-5, 119:105",
-                    characters: "David (many psalms), Asaph, the Sons of Korah, Moses, Solomon",
-                    events: "Various occasions of worship, lament, praise, and reflection"
-                },
-                proverbs: {
-                    name: "Proverbs",
-                    summary: "Wisdom literature offering practical guidance for daily living. It teaches the fear of the Lord as the beginning of wisdom and covers themes of work, relationships, and speech.",
-                    key_verses: "Proverbs 1:7, 3:5-6, 9:10, 15:1, 31:30",
-                    characters: "Solomon, Agur, Lemuel",
-                    events: "Collections of wise sayings and instructions"
-                },
-                ecclesiastes: {
-                    name: "Ecclesiastes",
-                    summary: "A philosophical reflection on the meaning of life. The Preacher concludes that life 'under the sun' is meaningless apart from God. The key: Fear God and keep His commandments.",
-                    key_verses: "Ecclesiastes 1:2, 3:11, 12:13",
-                    characters: "The Preacher (often Solomon), the people",
-                    events: "Reflections on vanity, wisdom, wealth, and time"
-                },
-                songofsolomon: {
-                    name: "Song of Solomon",
-                    summary: "A poetic celebration of love between a bride and groom. It is often interpreted as an allegory of God's love for Israel or Christ's love for the Church.",
-                    key_verses: "Song 2:4, 8:6-7",
-                    characters: "The Beloved, the Bride, the daughters of Jerusalem",
-                    events: "Courtship, wedding, celebration of love"
-                },
-                isaiah: {
-                    name: "Isaiah",
-                    summary: "A major prophetic book with 66 chapters. Isaiah prophesies judgment and salvation, with powerful messianic prophecies including the suffering servant and the coming of Christ.",
-                    key_verses: "Isaiah 7:14, 9:6, 40:31, 53:5, 61:1",
-                    characters: "Isaiah, King Hezekiah, Shebna, Eliakim, Cyrus (mentioned)",
-                    events: "Isaiah's call, Prophecies of judgment, Messianic prophecies, Hezekiah's illness, Babylon's fall"
-                },
-                jeremiah: {
-                    name: "Jeremiah",
-                    summary: "The weeping prophet. Jeremiah preaches to Judah before the exile, calling for repentance. He suffers greatly but delivers God's word faithfully, including the promise of a new covenant.",
-                    key_verses: "Jeremiah 1:5, 29:11, 31:31-34, 33:3",
-                    characters: "Jeremiah, Baruch, King Zedekiah, Jehoiakim, Ebed-melech, the Rechabites",
-                    events: "Jeremiah's call, Temple sermon, The potter's house, The cup of wrath, The new covenant prophecy, Fall of Jerusalem"
-                },
-                lamentations: {
-                    name: "Lamentations",
-                    summary: "A collection of poetic laments over the destruction of Jerusalem and the Temple. It expresses deep grief but also hope in God's steadfast love.",
-                    key_verses: "Lamentations 3:22-23, 3:31-33",
-                    characters: "Jeremiah (traditionally), the people of Judah",
-                    events: "Lament over Jerusalem's fall, Appeal for mercy, Hope in God's faithfulness"
-                },
-                ezekiel: {
-                    name: "Ezekiel",
-                    summary: "Prophetic visions of God's glory and judgment. Ezekiel prophesies to the exiles in Babylon, with dramatic symbolic actions and visions of restoration, including the valley of dry bones.",
-                    key_verses: "Ezekiel 3:17, 18:23, 36:26, 37:14",
-                    characters: "Ezekiel, King Zedekiah, Gog and Magog (mentioned)",
-                    events: "Ezekiel's call, Vision of God's glory, Symbolic acts, Valley of dry bones, Temple vision, Gog and Magog prophecy"
-                },
-                daniel: {
-                    name: "Daniel",
-                    summary: "A book of faith and prophecy. Daniel and his friends remain faithful to God in exile. The book contains apocalyptic visions of future kingdoms and the coming of the Son of Man.",
-                    key_verses: "Daniel 1:8, 3:18, 6:22, 7:13-14, 9:24-27",
-                    characters: "Daniel, Shadrach, Meshach, Abednego, Nebuchadnezzar, Belshazzar, Darius, Cyrus",
-                    events: "Daniel in the lion's den, Fiery furnace, Statue vision, Four beasts, Writing on the wall, Seventy weeks prophecy"
-                },
-                hosea: {
-                    name: "Hosea",
-                    summary: "A prophetic book using Hosea's marriage to a unfaithful wife as a symbol of God's relationship with unfaithful Israel. It shows God's persistent love and call to repentance.",
-                    key_verses: "Hosea 2:19-20, 6:6, 11:1-4",
-                    characters: "Hosea, Gomer, Jezreel, Lo-ruhamah, Lo-ammi",
-                    events: "Hosea's marriage, Children given symbolic names, Israel's unfaithfulness, God's love and restoration"
-                },
-                joel: {
-                    name: "Joel",
-                    summary: "A prophecy about the Day of the Lord, using a locust plague as a sign of coming judgment. Joel calls for repentance and promises the outpouring of the Holy Spirit.",
-                    key_verses: "Joel 2:12-13, 2:28-29, 3:16",
-                    characters: "Joel, the priests, the people",
-                    events: "Locust plague, Call to repentance, Day of the Lord, Promise of the Spirit, Judgment of the nations"
-                },
-                amos: {
-                    name: "Amos",
-                    summary: "A prophecy of judgment against Israel for social injustice and religious hypocrisy. Amos emphasizes that God requires justice and righteousness, not empty rituals.",
-                    key_verses: "Amos 3:2, 5:24, 8:11-12",
-                    characters: "Amos, Amaziah, Jeroboam II",
-                    events: "Amos's visions, Judgment on nations, Judgment on Israel, Restoration of David's tabernacle"
-                },
-                obadiah: {
-                    name: "Obadiah",
-                    summary: "The shortest Old Testament book. A prophecy against Edom for their pride and mistreatment of Israel. The book promises that God's kingdom will ultimately prevail.",
-                    key_verses: "Obadiah 1:15, 1:21",
-                    characters: "Obadiah, Edomites, Israelites",
-                    events: "Judgment on Edom, Israel's restoration"
-                },
-                jonah: {
-                    name: "Jonah",
-                    summary: "The story of a reluctant prophet who runs from God's call to preach to Nineveh. After being swallowed by a great fish, Jonah obeys, and the city repents. It shows God's mercy to all nations.",
-                    key_verses: "Jonah 1:3, 2:1, 3:10, 4:11",
-                    characters: "Jonah, the sailors, the Ninevites, God",
-                    events: "Jonah's flight, Storm at sea, Swallowed by the fish, Jonah's prayer, Preaching in Nineveh, Nineveh's repentance, Jonah's anger"
-                },
-                micah: {
-                    name: "Micah",
-                    summary: "A prophecy of judgment and hope. Micah condemns injustice and predicts the fall of Jerusalem, but also foretells the birth of the Messiah in Bethlehem and a future peace.",
-                    key_verses: "Micah 5:2, 6:8, 7:18-19",
-                    characters: "Micah, the rulers of Israel and Judah",
-                    events: "Judgment on Samaria and Jerusalem, Prophecy of the ruler from Bethlehem, God's case against Israel, Promise of restoration"
-                },
-                nahum: {
-                    name: "Nahum",
-                    summary: "A prophecy of Nineveh's downfall. Nahum declares that God is just and will judge Assyria for its cruelty and pride. It is a message of comfort for Judah.",
-                    key_verses: "Nahum 1:7, 3:1-3",
-                    characters: "Nahum, Nineveh, Assyria",
-                    events: "God's wrath against Nineveh, The fall of Nineveh, Judah's comfort"
-                },
-                habakkuk: {
-                    name: "Habakkuk",
-                    summary: "A dialogue between the prophet and God. Habakkuk questions God's justice, and God responds that He will use Babylon to judge Judah. The book ends with a powerful song of faith.",
-                    key_verses: "Habakkuk 1:2, 2:4, 3:17-18",
-                    characters: "Habakkuk, the Chaldeans (Babylon), God",
-                    events: "Habakkuk's complaint, God's response, The just shall live by faith, Habakkuk's prayer and praise"
-                },
-                zephaniah: {
-                    name: "Zephaniah",
-                    summary: "A prophecy of the Day of the Lord, a day of judgment and blessing. Zephaniah calls for repentance and promises restoration for the humble and faithful.",
-                    key_verses: "Zephaniah 1:7, 3:17",
-                    characters: "Zephaniah, the people of Judah, the nations",
-                    events: "Judgment on Judah and nations, Call to repentance, Promise of restoration, Song of joy"
-                },
-                haggai: {
-                    name: "Haggai",
-                    summary: "A call to rebuild the Temple. Haggai challenges the people to prioritize God's house, promising that God will bless them if they do. The book encourages commitment and hope.",
-                    key_verses: "Haggai 1:5-6, 2:9",
-                    characters: "Haggai, Zerubbabel, Joshua the high priest",
-                    events: "Call to rebuild the Temple, Encouragement, Promise of blessing, Glory of the new Temple"
-                },
-                zechariah: {
-                    name: "Zechariah",
-                    summary: "A book of visions and prophecies encouraging the rebuilding of the Temple and looking forward to the coming Messiah. It is rich in apocalyptic imagery and hope.",
-                    key_verses: "Zechariah 4:6, 9:9, 13:1, 14:9",
-                    characters: "Zechariah, Zerubbabel, Joshua the high priest",
-                    events: "Visions (horses, horns, measuring line, lampstand, flying scroll, chariots), The Branch prophecy, The King's entry, The shepherd struck"
-                },
-                malachi: {
-                    name: "Malachi",
-                    summary: "The last Old Testament book. Malachi confronts Israel's spiritual apathy, calling them to honor God in worship and relationships. It ends with a promise of the coming Elijah.",
-                    key_verses: "Malachi 1:11, 3:10, 4:5-6",
-                    characters: "Malachi, the priests, the people",
-                    events: "God's love for Israel, Priests' dishonor, Marriage and divorce, Tithes and offerings, The day of the Lord, Elijah's coming"
-                },
-                matthew: {
-                    name: "Matthew",
-                    summary: "The Gospel of the King. Matthew presents Jesus as the long-awaited Messiah, the King of the Jews. It includes the Sermon on the Mount, many parables, and the Great Commission.",
-                    key_verses: "Matthew 5:3-12, 16:16, 28:18-20",
-                    characters: "Jesus, Peter, James, John, Judas, Mary, Joseph, John the Baptist, the disciples",
-                    events: "Birth of Jesus, Baptism, Temptation, Sermon on the Mount, Miracles, Transfiguration, Last Supper, Crucifixion, Resurrection, Great Commission"
-                },
-                mark: {
-                    name: "Mark",
-                    summary: "The Gospel of action. Mark portrays Jesus as the suffering servant and the Son of God. It is fast-paced, focusing on Jesus' deeds and His sacrificial death.",
-                    key_verses: "Mark 8:34-35, 10:45, 16:6",
-                    characters: "Jesus, Peter, James, John, the disciples, John the Baptist, Pilate, Barabbas",
-                    events: "Jesus' ministry, Miracles, Parables, Transfiguration, Last Supper, Crucifixion, Resurrection, Ascension"
-                },
-                luke: {
-                    name: "Luke",
-                    summary: "The Gospel of compassion. Luke gives a detailed, orderly account of Jesus' life, emphasizing His care for the poor, women, and outcasts. It includes the most parables.",
-                    key_verses: "Luke 2:11, 10:27, 19:10, 24:6",
-                    characters: "Jesus, Mary, Elizabeth, Zechariah, the disciples, the shepherds, Simeon, Anna, Zacchaeus, the Samaritan, the prodigal son",
-                    events: "Birth of Jesus, John the Baptist, Jesus' genealogy, Parables (Good Samaritan, Prodigal Son), Triumphal entry, Last Supper, Crucifixion, Resurrection"
-                },
-                john: {
-                    name: "John",
-                    summary: "The Gospel of belief. John emphasizes Jesus' divine identity as the Son of God. It contains seven 'I am' statements, deep theological teaching, and the promise of eternal life.",
-                    key_verses: "John 1:1, 3:16, 11:25, 14:6, 20:31",
-                    characters: "Jesus, John the Baptist, the disciples, Mary, Martha, Lazarus, Nicodemus, Pilate, Thomas",
-                    events: "Logos theology, Wedding at Cana, Nicodemus, Woman at the well, Feeding the 5000, Raising Lazarus, Last Supper discourses, Crucifixion, Resurrection, Thomas's doubt"
-                },
-                acts: {
-                    name: "Acts",
-                    summary: "The history of the early church. Acts records the coming of the Holy Spirit, the preaching of the apostles, the growth of the church, and the mission to the Gentiles, focusing on Peter and Paul.",
-                    key_verses: "Acts 1:8, 2:38, 4:12, 9:15, 16:31",
-                    characters: "Peter, Paul, John, Stephen, Philip, Barnabas, James, Cornelius, Lydia, Paul's missionary companions",
-                    events: "Ascension, Pentecost, Stephen's martyrdom, Paul's conversion, Peter and Cornelius, Paul's missionary journeys, Council of Jerusalem, Paul's arrest, Voyage to Rome"
-                },
-                romans: {
-                    name: "Romans",
-                    summary: "Paul's theological masterpiece. Romans explains the gospel: all are sinful, justified by faith in Christ, and called to live in righteousness by the Spirit. It is a systematic presentation of salvation.",
-                    key_verses: "Romans 1:16-17, 3:23, 6:23, 8:1, 8:28, 12:1-2",
-                    characters: "Paul, the Roman believers",
-                    events: "Paul's introduction, Sin and judgment, Justification by faith, Life in the Spirit, God's sovereignty, Practical exhortations"
-                },
-                corinthians1: {
-                    name: "1 Corinthians",
-                    summary: "Paul addresses issues in the Corinthian church: divisions, sexual immorality, lawsuits, marriage, spiritual gifts, and the resurrection. It contains the famous 'love chapter'.",
-                    key_verses: "1 Corinthians 6:19-20, 10:13, 13:4-7, 15:57",
-                    characters: "Paul, Apollos, Cephas, Chloe, the Corinthians",
-                    events: "Division in the church, Sexual immorality, Communion, Spiritual gifts, Love, Resurrection"
-                },
-                corinthians2: {
-                    name: "2 Corinthians",
-                    summary: "Paul's defense of his apostleship and his deep love for the Corinthians. He writes about suffering, comfort, generosity, and the power of God in weakness.",
-                    key_verses: "2 Corinthians 1:3-4, 5:17, 9:7, 12:9",
-                    characters: "Paul, Titus, the Corinthians",
-                    events: "Paul's comfort in suffering, The ministry of reconciliation, Generosity, Paul's vision and thorn, Paul's defense"
-                },
-                galatians: {
-                    name: "Galatians",
-                    summary: "Paul's passionate defense of the gospel of grace. He argues that salvation is by faith in Christ alone, not by works of the Law. The book is a declaration of freedom.",
-                    key_verses: "Galatians 2:20, 3:11, 5:1, 5:22-23",
-                    characters: "Paul, Peter, Barnabas, the Galatian churches",
-                    events: "Paul's defense, Faith vs. Law, Sonship, Freedom in Christ, Fruit of the Spirit"
-                },
-                ephesians: {
-                    name: "Ephesians",
-                    summary: "Paul's letter on the purpose and unity of the church. It begins with the heavenly blessings in Christ, then applies them to practical living, emphasizing love and spiritual warfare.",
-                    key_verses: "Ephesians 2:8-9, 4:2-3, 6:11-12",
-                    characters: "Paul, the church at Ephesus",
-                    events: "Spiritual blessings, Prayer for wisdom, Unity in Christ, New identity, The armour of God"
-                },
-                philippians: {
-                    name: "Philippians",
-                    summary: "Paul's joyful letter from prison. He encourages the church to rejoice in the Lord, to have the mind of Christ, and to live with peace and contentment.",
-                    key_verses: "Philippians 1:6, 2:5-11, 4:4-7, 4:13",
-                    characters: "Paul, Timothy, Epaphroditus, the Philippian believers",
-                    events: "Paul's imprisonment, The humility of Christ, Rejoicing in all circumstances, Paul's contentment"
-                },
-                colossians: {
-                    name: "Colossians",
-                    summary: "Paul emphasizes the supremacy of Christ. Christ is the head of the church, the creator, and the one in whom all fullness dwells. Believers are hidden with Christ.",
-                    key_verses: "Colossians 1:15-20, 2:6-7, 3:1-2",
-                    characters: "Paul, Epaphras, the Colossian believers",
-                    events: "Paul's prayer, The supremacy of Christ, Warnings against false teaching, New identity in Christ"
-                },
-                thessalonians1: {
-                    name: "1 Thessalonians",
-                    summary: "Paul's letter to the Thessalonian church, encouraging them in faith, love, and hope. It includes teaching on the second coming of Christ and the resurrection of believers.",
-                    key_verses: "1 Thessalonians 1:3, 4:16-17, 5:16-18",
-                    characters: "Paul, Silas, Timothy, the Thessalonians",
-                    events: "Thanksgiving, Paul's ministry, The coming of the Lord, Exhortations to holiness"
-                },
-                thessalonians2: {
-                    name: "2 Thessalonians",
-                    summary: "Paul addresses confusion about the day of the Lord. He encourages the church to stand firm, warns of the man of lawlessness, and calls for disciplined work.",
-                    key_verses: "2 Thessalonians 1:11-12, 2:3-4, 3:10-12",
-                    characters: "Paul, Silas, Timothy, the Thessalonians",
-                    events: "Persecution, The man of lawlessness, Thanks and encouragement, Command to work"
-                },
-                timothy1: {
-                    name: "1 Timothy",
-                    summary: "Paul's pastoral instructions to Timothy, a young leader. It covers church order, qualifications for elders and deacons, sound doctrine, and personal conduct.",
-                    key_verses: "1 Timothy 2:5, 3:1-7, 4:12, 6:10",
-                    characters: "Paul, Timothy, the church at Ephesus",
-                    events: "Sound doctrine, Prayer, Church leadership, Personal conduct, The love of money"
-                },
-                timothy2: {
-                    name: "2 Timothy",
-                    summary: "Paul's final letter, written from prison. He urges Timothy to be faithful, to endure hardship, to preach the word, and to guard the gospel. It is a powerful call to perseverance.",
-                    key_verses: "2 Timothy 1:7, 2:15, 3:16-17, 4:2, 4:7",
-                    characters: "Paul, Timothy, Mark, Luke, the believers",
-                    events: "Paul's imprisonment, Call to faithfulness, The last days, Paul's testimony"
-                },
-                titus: {
-                    name: "Titus",
-                    summary: "Paul's letter to Titus, his partner in ministry. It focuses on church leadership, sound doctrine, and practical living for believers on the island of Crete.",
-                    key_verses: "Titus 1:5, 2:11-13, 3:5",
-                    characters: "Paul, Titus, the believers in Crete",
-                    events: "Elders appointed, Sound doctrine, Good works, God's grace"
-                },
-                philemon: {
-                    name: "Philemon",
-                    summary: "Paul's short personal letter to Philemon, asking him to forgive Onesimus, a runaway slave who has become a believer in Christ. It is a powerful appeal for grace.",
-                    key_verses: "Philemon 1:6, 1:15-16",
-                    characters: "Paul, Philemon, Onesimus, Archippus",
-                    events: "Paul's appeal, The transformation of Onesimus, Reconciliation"
-                },
-                hebrews: {
-                    name: "Hebrews",
-                    summary: "A theological masterpiece demonstrating that Jesus Christ is superior to angels, Moses, and the Levitical priesthood. He is the ultimate high priest and the new covenant.",
-                    key_verses: "Hebrews 1:1-2, 4:14-16, 11:1, 12:1-2",
-                    characters: "Jesus, Melchizedek, Moses, Joshua, the patriarchs",
-                    events: "Superiority of Christ, The high priesthood of Jesus, The new covenant, The faith hall of fame, Exhortation to endure"
-                },
-                james: {
-                    name: "James",
-                    summary: "A practical letter on living out faith. James emphasizes that faith without works is dead, and gives instructions on wisdom, speech, and care for the poor.",
-                    key_verses: "James 1:5, 1:22, 2:17, 3:5-6, 5:16",
-                    characters: "James (the brother of Jesus), the scattered believers",
-                    events: "Trials and faith, Tongue control, Works and faith, Prayer and healing"
-                },
-                peter1: {
-                    name: "1 Peter",
-                    summary: "Peter writes to suffering believers, encouraging them to stand firm in grace. He calls them to holy living, submission, and to entrust themselves to the faithful Creator.",
-                    key_verses: "1 Peter 1:3-4, 2:9, 3:15, 5:7, 5:10",
-                    characters: "Peter, Silvanus, the believers in Asia Minor",
-                    events: "Living hope, Holy calling, Suffering for Christ, Elders' duties"
-                },
-                peter2: {
-                    name: "2 Peter",
-                    summary: "Peter warns against false teachers and encourages growth in the knowledge of Christ. He reminds believers of the Lord's return and the need for holy lives.",
-                    key_verses: "2 Peter 1:3-4, 3:8-9, 3:18",
-                    characters: "Peter, the believers, false teachers",
-                    events: "Growth in godliness, False teachers, The day of the Lord"
-                },
-                john1: {
-                    name: "1 John",
-                    summary: "John writes about the assurance of salvation, the importance of love, and the truth about Jesus Christ. God is light, God is love, and Jesus is the Son of God.",
-                    key_verses: "1 John 1:9, 3:16, 4:8, 5:13",
-                    characters: "John, the believers, false teachers",
-                    events: "Fellowship with God, Obedience and love, Warning against antichrists, Eternal life"
-                },
-                john2: {
-                    name: "2 John",
-                    summary: "A short letter warning believers to be on guard against deceivers who deny the truth of Christ. It emphasizes love and obedience as marks of genuine faith.",
-                    key_verses: "2 John 1:6, 1:9",
-                    characters: "John, the elect lady, the believers",
-                    events: "Love and truth, Warning against deception"
-                },
-                john3: {
-                    name: "3 John",
-                    summary: "A personal letter commending Gaius for his hospitality to travelling teachers. It also warns against Diotrephes, who opposes the truth and refuses to welcome fellow believers.",
-                    key_verses: "3 John 1:4, 1:11",
-                    characters: "John, Gaius, Diotrephes, Demetrius",
-                    events: "Hospitality, Opposition to the truth, Good testimony"
-                },
-                jude: {
-                    name: "Jude",
-                    summary: "A call to contend for the faith against false teachers. Jude urges believers to build themselves up in faith and to keep themselves in the love of God.",
-                    key_verses: "Jude 1:3, 1:20-21, 1:24-25",
-                    characters: "Jude (brother of Jesus), the believers",
-                    events: "Contending for the faith, Warnings against false teachers, Exhortation to perseverance"
-                },
-                revelation: {
-                    name: "Revelation",
-                    summary: "The final book of the Bible, an apocalyptic vision given to John. It reveals the victory of Christ over evil, the judgment of the nations, and the glorious hope of a new heaven and a new earth.",
-                    key_verses: "Revelation 1:8, 3:20, 21:1-4, 22:12-13",
-                    characters: "John, Jesus, the seven churches, the Lamb, the beast, the false prophet, Satan, Michael",
-                    events: "Vision of Christ, Letters to seven churches, Throne room vision, Seven seals, Seven trumpets, Seven bowls, Babylon's fall, The millennium, The new creation"
-                }
+            // ----- SADNESS & GRIEF -----
+            sad: {
+                keywords: ['sad', 'sorrow', 'grief', 'mourn', 'cry', 'weep', 'depressed', 'down', 'brokenhearted',
+                    'heartbroken', 'grieving', 'blue', 'melancholy', 'despondent', 'tears'
+                ],
+                responses: [{
+                    advice: "I'm sorry you're feeling so sad. It's okay to let the tears flow — they water the seeds of healing. God sees every tear and holds them in His bottle. You are not forgotten, and this sadness will not last forever. Let yourself rest in His comfort.",
+                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
+                }, {
+                    advice: "Sadness can feel like a heavy blanket, but you are not alone in this. God is close to the brokenhearted, and He promises to bind up your wounds. Take a slow breath, and know that you are deeply loved even in this valley.",
+                    verse: "Psalm 147:3 — 'He heals the brokenhearted and binds up their wounds.'"
+                }, {
+                    advice: "It's hard to carry sadness, but remember that even Jesus wept. Your tears are precious to God. He doesn't ask you to be strong on your own — He offers you His strength. Let Him hold you today.",
+                    verse: "John 11:35 — 'Jesus wept.' (He understands your sorrow.)"
+                }, {
+                    advice: "Grief is a journey, not a destination. Give yourself permission to feel it all. God is with you in every step, and He will carry you through the darkest valleys.",
+                    verse: "Psalm 23:4 — 'Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.'"
+                }]
             },
 
-            // ---- MAJOR CHARACTERS ----
-            characters: {
-                adam: {
-                    name: "Adam",
-                    description: "The first man created by God. He was created in the image of God and placed in the Garden of Eden. He sinned by eating the forbidden fruit, bringing death into the world. He is the head of the human race and a type of Christ (Romans 5:14).",
-                    reference: "Genesis 1–5, Romans 5:12-21, 1 Corinthians 15:45"
-                },
-                eve: {
-                    name: "Eve",
-                    description: "The first woman, created from Adam's rib as his helpmate. She was deceived by the serpent and ate the forbidden fruit, leading to the fall of humanity. She is called the 'mother of all living.'",
-                    reference: "Genesis 2–4, 1 Timothy 2:13-14"
-                },
-                noah: {
-                    name: "Noah",
-                    description: "A righteous man who found favor with God in a corrupt generation. He built the ark according to God's instructions and preserved his family and animals through the flood. He is a symbol of salvation and a new beginning.",
-                    reference: "Genesis 6–9, Hebrews 11:7, 1 Peter 3:20-21"
-                },
-                abraham: {
-                    name: "Abraham",
-                    description: "The father of the faith. God called him from Ur of the Chaldeans and promised to make him a great nation, to bless all peoples through him. He believed God, and it was credited to him as righteousness. He is the father of the nation of Israel.",
-                    reference: "Genesis 12–25, Romans 4, Hebrews 11:8-19"
-                },
-                moses: {
-                    name: "Moses",
-                    description: "The great lawgiver and prophet who led Israel out of Egypt. He received the Ten Commandments on Mount Sinai and wrote the first five books of the Bible. He is a mediator of the Old Covenant and a type of Christ.",
-                    reference: "Exodus, Leviticus, Numbers, Deuteronomy, Hebrews 3:1-6, 11:24-28"
-                },
-                david: {
-                    name: "David",
-                    description: "The second king of Israel, a man after God's own heart. He defeated Goliath, unified the nation, and established Jerusalem as the capital. He wrote many psalms and received the promise of an everlasting dynasty (the Davidic Covenant).",
-                    reference: "1 Samuel 16–31, 2 Samuel, 1 Kings 1–2, Psalm 23, Acts 13:22"
-                },
-                solomon: {
-                    name: "Solomon",
-                    description: "The son of David and the third king of Israel, renowned for his wisdom. He built the Temple in Jerusalem. His wisdom was a gift from God, but he later turned away from God through idolatry.",
-                    reference: "1 Kings 1–11, Proverbs, Ecclesiastes, Song of Solomon"
-                },
-                elijah: {
-                    name: "Elijah",
-                    description: "A mighty prophet who challenged the prophets of Baal on Mount Carmel. He was taken up to heaven in a whirlwind, and his mantle passed to Elisha. He is a symbol of prophetic power and is associated with the coming of the Lord.",
-                    reference: "1 Kings 17–2 Kings 2, Malachi 4:5-6"
-                },
-                isaiah: {
-                    name: "Isaiah",
-                    description: "One of the major prophets, called to proclaim judgment and salvation to Judah. He prophesied the virgin birth of Jesus (Isaiah 7:14) and the suffering servant (Isaiah 53). His book is rich with messianic prophecy.",
-                    reference: "Isaiah (entire book), John 12:38-41"
-                },
-                jeremiah: {
-                    name: "Jeremiah",
-                    description: "The weeping prophet, who preached to Judah before the exile. He called for repentance, but was rejected. He prophesied the new covenant (Jeremiah 31:31-34) and the seventy-year captivity.",
-                    reference: "Jeremiah (entire book), Lamentations"
-                },
-                daniel: {
-                    name: "Daniel",
-                    description: "A man of unwavering faith who served as a prophet in Babylon. He interpreted dreams, survived the lion's den, and received visions of the end times, including the coming of the Son of Man.",
-                    reference: "Daniel (entire book), Matthew 24:15"
-                },
-                jonah: {
-                    name: "Jonah",
-                    description: "A reluctant prophet who was swallowed by a great fish. He preached to Nineveh, and the city repented. His story reveals God's mercy to all nations and his own struggle with God's compassion.",
-                    reference: "Jonah (entire book), Matthew 12:40-41"
-                },
-                jesus: {
-                    name: "Jesus Christ",
-                    description: "The Son of God, the Messiah, the Word made flesh. He was born of a virgin, lived a sinless life, performed miracles, taught the kingdom of God, died on the cross for our sins, rose on the third day, and ascended to heaven. He is the only way to salvation and the hope of glory.",
-                    reference: "Matthew, Mark, Luke, John, Acts 2:36, Romans 10:9, Revelation"
-                },
-                peter: {
-                    name: "Peter",
-                    description: "One of the twelve disciples, originally named Simon. He was a fisherman called by Jesus, a leader among the apostles, and the one who preached on the day of Pentecost. He denied Jesus but was restored and became a pillar of the early church.",
-                    reference: "Matthew, Mark, Luke, John, Acts, 1 Peter, 2 Peter"
-                },
-                paul: {
-                    name: "Paul",
-                    description: "Originally Saul of Tarsus, a persecutor of the church. He was converted on the road to Damascus and became the apostle to the Gentiles. He wrote much of the New Testament and suffered greatly for the gospel.",
-                    reference: "Acts 9, 13–28, Romans, Corinthians, Galatians, Ephesians, Philippians, Colossians, Timothy, Titus, Philemon"
-                },
-                john: {
-                    name: "John",
-                    description: "The beloved disciple, the author of the Gospel of John, the three epistles, and Revelation. He was a son of Zebedee, a brother of James, and one of Jesus' closest followers. He is known for his emphasis on love and his visions.",
-                    reference: "John, 1 John, 2 John, 3 John, Revelation"
-                },
-                mary: {
-                    name: "Mary",
-                    description: "The mother of Jesus, a young virgin from Nazareth. She was chosen by God to bear the Messiah. She is honored as a faithful servant who said, 'May it be to me as you have said.'",
-                    reference: "Matthew 1, Luke 1–2, John 2, Acts 1:14"
-                },
-                joseph: {
-                    name: "Joseph (Old Testament)",
-                    description: "The son of Jacob, sold into slavery by his brothers. He rose to power in Egypt, saved many from famine, and forgave his brothers. His story is a powerful picture of God's sovereignty and redemption.",
-                    reference: "Genesis 37, 39–50, Acts 7:9-16"
-                },
-                josephnt: {
-                    name: "Joseph (New Testament)",
-                    description: "The husband of Mary, a righteous carpenter from Nazareth. He was a descendant of David and accepted God's plan for his family. He protected Jesus and Mary, and raised Jesus as his own son.",
-                    reference: "Matthew 1–2, Luke 1–2"
-                },
-                esther: {
-                    name: "Esther",
-                    description: "A Jewish queen of Persia who risked her life to save her people from genocide. She courageously approached the king to expose Haman's plot. Her story shows God's providence and the power of faith.",
-                    reference: "Esther (entire book)"
-                },
-                ruth: {
-                    name: "Ruth",
-                    description: "A Moabite widow who showed extraordinary loyalty to her mother-in-law Naomi. She married Boaz and became the great-grandmother of King David. She is included in the genealogy of Jesus.",
-                    reference: "Ruth (entire book), Matthew 1:5"
-                },
-                samuel: {
-                    name: "Samuel",
-                    description: "The last judge and the first prophet of the monarchy. He anointed Saul and David as kings. He was dedicated to God by his mother Hannah and served as a faithful leader in Israel.",
-                    reference: "1 Samuel 1–16, Acts 3:24"
-                },
-                ezra: {
-                    name: "Ezra",
-                    description: "A scribe and priest who led the second return from exile. He was devoted to the Law of God, taught the people, and led them in repentance and covenant renewal.",
-                    reference: "Ezra 7–10, Nehemiah 8"
-                },
-                nehemiah: {
-                    name: "Nehemiah",
-                    description: "A cupbearer to King Artaxerxes who became the governor of Judah. He led the rebuilding of Jerusalem's walls in the face of opposition. He was a man of prayer, vision, and determination.",
-                    reference: "Nehemiah (entire book)"
-                },
-                job: {
-                    name: "Job",
-                    description: "A righteous man who suffered greatly. He lost his children, his wealth, and his health. He questioned God but never cursed Him. In the end, God restored him, and Job understood that God's ways are beyond human comprehension.",
-                    reference: "Job (entire book), James 5:11"
-                },
-                abigail: {
-                    name: "Abigail",
-                    description: "A wise and beautiful woman who prevented David from shedding innocent blood. She was married to Nabal, who foolishly refused David's request for food. After Nabal's death, she became David's wife.",
-                    reference: "1 Samuel 25"
-                },
-                hannah: {
-                    name: "Hannah",
-                    description: "A devoted woman who prayed earnestly for a child. God gave her Samuel, and she dedicated him to the Lord. Her prayer is a model of faith and praise.",
-                    reference: "1 Samuel 1–2"
-                },
-                gideon: {
-                    name: "Gideon",
-                    description: "A judge who delivered Israel from the Midianites with only 300 men. He doubted God's calling but eventually obeyed. He is listed in the hall of faith for his trust in God.",
-                    reference: "Judges 6–8, Hebrews 11:32"
-                },
-                samson: {
-                    name: "Samson",
-                    description: "A judge of Israel known for his great strength, which came from his Nazirite vow. He fought against the Philistines but was betrayed by Delilah. His story shows that God can use flawed people for His purposes.",
-                    reference: "Judges 13–16, Hebrews 11:32"
-                },
-                josiah: {
-                    name: "Josiah",
-                    description: "One of Judah's most righteous kings, who began a reform in the eighth year of his reign. He repaired the Temple and rediscovered the Book of the Law. He turned the nation back to God.",
-                    reference: "2 Kings 22–23, 2 Chronicles 34–35"
-                },
-                hezekiah: {
-                    name: "Hezekiah",
-                    description: "A faithful king of Judah who trusted in God. He destroyed idols, purified the Temple, and led a great Passover celebration. God delivered him from the Assyrian army and extended his life by fifteen years.",
-                    reference: "2 Kings 18–20, 2 Chronicles 29–32"
-                },
-                joash: {
-                    name: "Joash",
-                    description: "A king of Judah who was saved as an infant by his aunt Jehosheba. He repaired the Temple during his reign, but later turned away from God after the death of the priest Jehoiada.",
-                    reference: "2 Kings 11–12, 2 Chronicles 22–24"
-                },
-                timothy: {
-                    name: "Timothy",
-                    description: "A young leader and Paul's companion in ministry. He was the son of a Jewish mother and a Greek father. Paul mentored him, and he became a pastor in Ephesus. Two of Paul's letters are addressed to him.",
-                    reference: "Acts 16:1-3, 1 Timothy, 2 Timothy"
-                },
-                titus: {
-                    name: "Titus",
-                    description: "A Greek believer and Paul's trusted companion. He was a skilled leader who helped oversee the church in Crete. Paul's letter to Titus instructs him on church leadership and sound doctrine.",
-                    reference: "2 Corinthians 8:16-24, Galatians 2:3, Titus"
-                },
-                barnabas: {
-                    name: "Barnabas",
-                    description: "A Levite from Cyprus, known as the 'son of encouragement.' He introduced Paul to the apostles, traveled with him on the first missionary journey, and later parted ways. He was a generous and supportive leader.",
-                    reference: "Acts 4:36-37, 9:27, 11:22-26, 13–15"
-                },
-                stephen: {
-                    name: "Stephen",
-                    description: "The first Christian martyr. He was a man full of faith and the Holy Spirit, chosen to serve the church in Jerusalem. He boldly proclaimed Christ and was stoned to death, with Paul (then Saul) present.",
-                    reference: "Acts 6–7"
-                },
-                philipphil: {
-                    name: "Philip",
-                    description: "One of the seven deacons and an evangelist. He preached in Samaria and baptized the Ethiopian eunuch. He was guided by the Spirit to share the gospel with those in need.",
-                    reference: "Acts 6:1-6, 8:4-40"
-                },
-                johnbaptist: {
-                    name: "John the Baptist",
-                    description: "The forerunner of Jesus, who prepared the way for the Lord. He preached repentance and baptized in the Jordan River. He recognized Jesus as the Lamb of God and was later beheaded by Herod.",
-                    reference: "Matthew 3, Mark 1, Luke 3, John 1:29-34"
-                },
-                pilate: {
-                    name: "Pontius Pilate",
-                    description: "The Roman governor of Judea who presided over the trial of Jesus. He found no fault in Jesus but allowed Him to be crucified to appease the crowd. He famously asked, 'What is truth?'",
-                    reference: "Matthew 27, Mark 15, Luke 23, John 18–19"
-                },
-                herod: {
-                    name: "Herod",
-                    description: "Several kings named Herod are mentioned in the New Testament. Herod the Great tried to kill the infant Jesus. Herod Antipas beheaded John the Baptist and questioned Jesus. Herod Agrippa persecuted the early church.",
-                    reference: "Matthew 2, Mark 6, Luke 13, Acts 12"
-                },
-                cain: {
-                    name: "Cain",
-                    description: "The firstborn son of Adam and Eve. He was a farmer who murdered his brother Abel out of jealousy because God accepted Abel's offering but not his. He was marked by God and became a wanderer.",
-                    reference: "Genesis 4, Hebrews 11:4, 1 John 3:12"
-                },
-                abel: {
-                    name: "Abel",
-                    description: "The second son of Adam and Eve. He was a shepherd who offered an acceptable sacrifice to God. He was killed by his brother Cain. He is the first martyr and is commended for his faith.",
-                    reference: "Genesis 4, Matthew 23:35, Hebrews 11:4"
-                },
-                enoch: {
-                    name: "Enoch",
-                    description: "A godly man who walked faithfully with God and did not die. He was taken by God, a rare instance of being spared from death. He is a model of faith and intimacy with God.",
-                    reference: "Genesis 5:21-24, Hebrews 11:5, Jude 1:14"
-                },
-                melchizedek: {
-                    name: "Melchizedek",
-                    description: "The king of Salem and priest of God Most High who blessed Abraham. He is a type of Christ, a king-priest whose priesthood is eternal. Jesus is called a priest in the order of Melchizedek.",
-                    reference: "Genesis 14:18-20, Psalm 110:4, Hebrews 7"
-                },
-                isaac: {
-                    name: "Isaac",
-                    description: "The son of Abraham and Sarah, born when they were old. He is the child of promise and the heir of the covenant. He was nearly sacrificed by Abraham but God provided a ram. He is the father of Jacob and Esau.",
-                    reference: "Genesis 21–28, Romans 9:7-10"
-                },
-                jacob: {
-                    name: "Jacob",
-                    description: "The son of Isaac and Rebekah, and the younger twin of Esau. He was a deceiver but later became Israel, the father of the twelve tribes. He wrestled with God and was given the name Israel.",
-                    reference: "Genesis 25–50, Romans 9:10-13"
-                },
-                josephot: {
-                    name: "Joseph (son of Jacob)",
-                    description: "The favorite son of Jacob who was sold into slavery by his brothers. He rose to power in Egypt, saved many during famine, and forgave his brothers. His story is a powerful picture of God's sovereignty and redemption.",
-                    reference: "Genesis 37, 39–50, Acts 7:9-16"
-                },
-                aaron: {
-                    name: "Aaron",
-                    description: "The brother of Moses, appointed as the first high priest of Israel. He spoke for Moses and helped lead the people. He was involved in the golden calf incident but was later restored. He is a key figure in the priestly line.",
-                    reference: "Exodus 4–5, 28–29, Leviticus, Numbers, Hebrews 5:4"
-                },
-                joshuaot: {
-                    name: "Joshua (son of Nun)",
-                    description: "The successor of Moses who led Israel into the Promised Land. He was a faithful warrior and leader, known for the conquest of Canaan and the fall of Jericho. He encouraged the people to serve the Lord.",
-                    reference: "Joshua (entire book), Deuteronomy 31, Hebrews 4:8"
-                },
-                caleb: {
-                    name: "Caleb",
-                    description: "One of the two faithful spies who trusted God when Israel refused to enter the Promised Land. He was 85 years old when he received his inheritance in Hebron, demonstrating his enduring faith.",
-                    reference: "Numbers 13–14, Joshua 14–15"
-                },
-                rahab: {
-                    name: "Rahab",
-                    description: "A Gentile prostitute in Jericho who hid the Israelite spies and helped them escape. She is commended for her faith and is included in the genealogy of Jesus. She is a picture of God's grace to all peoples.",
-                    reference: "Joshua 2, 6, Matthew 1:5, Hebrews 11:31, James 2:25"
-                },
-                deborah: {
-                    name: "Deborah",
-                    description: "A prophetess and judge of Israel who led the people with wisdom. She went to battle with Barak and celebrated the victory in a song. She is a model of leadership and faith in God.",
-                    reference: "Judges 4–5"
-                },
-                gideonjudge: {
-                    name: "Gideon",
-                    description: "A judge who delivered Israel from the Midianites with only 300 men. He doubted God's calling but obeyed after receiving multiple signs. He is listed in the hall of faith for his trust in God.",
-                    reference: "Judges 6–8, Hebrews 11:32"
-                },
-                samsonjudge: {
-                    name: "Samson",
-                    description: "A judge known for his supernatural strength, which came from his Nazirite vow. He fought the Philistines but was betrayed by Delilah. His final act was a prayer for strength to defeat his enemies.",
-                    reference: "Judges 13–16, Hebrews 11:32"
-                },
-                saulking: {
-                    name: "Saul (first king)",
-                    description: "The first king of Israel, chosen by God and anointed by Samuel. He started well but disobeyed God and was rejected. He became jealous of David and pursued him relentlessly. He died in battle with the Philistines.",
-                    reference: "1 Samuel 9–31"
-                },
-                jonathan: {
-                    name: "Jonathan",
-                    description: "The son of King Saul and a close friend of David. He loved David as his own brother and protected him from Saul's wrath. He is a model of loyalty and friendship.",
-                    reference: "1 Samuel 13–20, 2 Samuel 1:17-27"
-                },
-                uriah: {
-                    name: "Uriah",
-                    description: "A Hittite soldier in David's army, the husband of Bathsheba. David arranged for him to be killed in battle to cover his sin with Bathsheba. His death was a grievous sin that brought judgment on David's house.",
-                    reference: "2 Samuel 11–12"
-                },
-                nathan: {
-                    name: "Nathan",
-                    description: "A prophet who confronted David about his sin with Bathsheba. He told the parable of the poor man's lamb and declared God's judgment on David. He also prophesied that Solomon would build the Temple.",
-                    reference: "2 Samuel 7, 12, 1 Kings 1"
-                },
-                absalom: {
-                    name: "Absalom",
-                    description: "The third son of David, who rebelled against him and tried to take the throne. He was handsome but prideful. He died during the rebellion, and David grieved for him deeply.",
-                    reference: "2 Samuel 13–18"
-                },
-                elisha: {
-                    name: "Elisha",
-                    description: "The successor of Elijah, a prophet who performed many miracles. He received a double portion of Elijah's spirit. He healed Naaman, raised the Shunammite's son, and warned Israel of enemy attacks.",
-                    reference: "1 Kings 19, 2 Kings 2–13"
-                },
-                naaman: {
-                    name: "Naaman",
-                    description: "A commander of the army of Aram who was a leper. He was healed by Elisha after bathing in the Jordan River seven times. He acknowledged the God of Israel as the only true God.",
-                    reference: "2 Kings 5, Luke 4:27"
-                },
-                jesabel: {
-                    name: "Jezebel",
-                    description: "A Phoenician princess who married King Ahab and led Israel into idolatry. She was a wicked queen who killed the prophets of the Lord and opposed Elijah. She met a violent death as prophesied.",
-                    reference: "1 Kings 16–21, 2 Kings 9"
-                },
-                athaliah: {
-                    name: "Athaliah",
-                    description: "The daughter of Ahab and Jezebel, who became queen of Judah. She killed the royal family but was overthrown by the priest Jehoiada. She was an evil ruler who worshiped Baal.",
-                    reference: "2 Kings 11, 2 Chronicles 22–23"
-                },
-                zerubbabel: {
-                    name: "Zerubbabel",
-                    description: "A leader of the return from exile and the governor of Judah. He oversaw the rebuilding of the Temple. He is an ancestor of Jesus and is mentioned in the book of Haggai and Zechariah.",
-                    reference: "Ezra 2–5, Haggai 1–2, Zechariah 4, Matthew 1:12"
-                },
-                zechariahprophet: {
-                    name: "Zechariah (prophet)",
-                    description: "A prophet who encouraged the rebuilding of the Temple. He had visions that pointed to the Messiah and the future restoration of Israel. His book is rich with apocalyptic imagery.",
-                    reference: "Zechariah (entire book)"
-                },
-                malachiprophet: {
-                    name: "Malachi (prophet)",
-                    description: "The last Old Testament prophet. He called Israel to repent and warned of the coming day of the Lord. He also prophesied the coming of Elijah before the great and dreadful day of the Lord.",
-                    reference: "Malachi (entire book)"
-                }
+            // ----- ANXIETY & WORRY -----
+            anxious: {
+                keywords: ['anxious', 'anxiety', 'worried', 'worry', 'stress', 'overwhelmed', 'panic', 'fearful',
+                    'afraid', 'scared', 'nervous', 'troubled', 'dread', 'uneasy', 'fret', 'jittery'
+                ],
+                responses: [{
+                    advice: "I hear your anxiety — it's like a storm inside. But the God of peace is greater than any storm. He promises to guard your heart and mind with a peace that doesn't make sense in the middle of chaos. Cast your worries on Him, one by one.",
+                    verse: "Philippians 4:6-7 — 'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.'"
+                }, {
+                    advice: "Your worries are real, but they are not the final word. God holds tomorrow, and He holds you. Try to hand Him one worry at a time — He can carry it all. You are not alone in this fight.",
+                    verse: "1 Peter 5:7 — 'Cast all your anxiety on him because he cares for you.'"
+                }, {
+                    advice: "When anxiety whispers 'what if,' let faith whisper 'even if.' Even if everything falls apart, God is still with you. He has not given you a spirit of fear, but of power, love, and a sound mind.",
+                    verse: "2 Timothy 1:7 — 'For God has not given us a spirit of fear, but of power and of love and of a sound mind.'"
+                }, {
+                    advice: "Take a deep breath. You don't have to solve everything today. God is with you in this moment, and He will give you the strength for each step as it comes.",
+                    verse: "Matthew 6:34 — 'Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.'"
+                }]
             },
 
-            // ---- KEY EVENTS ----
-            events: {
-                creation: {
-                    name: "Creation",
-                    description: "In the beginning, God created the heavens and the earth. He spoke everything into existence in six days and rested on the seventh. He created humanity in His own image to have dominion over the earth.",
-                    reference: "Genesis 1–2, Psalm 33:6-9, John 1:1-3"
-                },
-                fall: {
-                    name: "The Fall",
-                    description: "Adam and Eve disobeyed God by eating from the tree of the knowledge of good and evil. Sin entered the world, bringing death and separation from God. God promised a Redeemer who would crush the serpent's head.",
-                    reference: "Genesis 3, Romans 5:12-21, 1 Corinthians 15:21-22"
-                },
-                flood: {
-                    name: "The Flood",
-                    description: "God sent a great flood to judge the world because of its wickedness. Noah, a righteous man, built an ark and saved his family and pairs of animals. The flood demonstrates God's judgment and mercy.",
-                    reference: "Genesis 6–9, Matthew 24:37-39, 1 Peter 3:20-21"
-                },
-                towerofbabel: {
-                    name: "Tower of Babel",
-                    description: "Humanity united in pride to build a tower to reach the heavens. God confused their language and scattered them across the earth. It explains the origin of diverse languages and nations.",
-                    reference: "Genesis 11:1-9"
-                },
-                abrahamiccovenant: {
-                    name: "Abrahamic Covenant",
-                    description: "God called Abraham and promised to make him a great nation, to bless him, and to bless all peoples on earth through him. This is the foundational covenant of the Old Testament, confirmed through Isaac and Jacob.",
-                    reference: "Genesis 12:1-3, 15:1-21, 17:1-22"
-                },
-                exodusfromegypt: {
-                    name: "Exodus from Egypt",
-                    description: "God delivered Israel from slavery in Egypt through mighty signs and wonders, including the ten plagues and the parting of the Red Sea. It is the central saving event of the Old Testament.",
-                    reference: "Exodus 1–15, Deuteronomy 5:6-15, Psalm 105:26-45"
-                },
-                sinaicovenant: {
-                    name: "Sinai Covenant / The Law",
-                    description: "At Mount Sinai, God made a covenant with Israel and gave them the Law, including the Ten Commandments. It established Israel as a holy nation and a priestly kingdom.",
-                    reference: "Exodus 19–24, Deuteronomy 5, 9:10"
-                },
-                conquestofcanaan: {
-                    name: "Conquest of Canaan",
-                    description: "Under Joshua's leadership, Israel entered and conquered the Promised Land. The fall of Jericho was the first major victory. God gave Israel the land, fulfilling His promise to Abraham.",
-                    reference: "Joshua 1–12, Hebrews 4:8-11"
-                },
-                judgestime: {
-                    name: "The Time of the Judges",
-                    description: "A period of repeated cycles of sin, oppression, deliverance, and apostasy. God raised up judges to rescue Israel when they cried out. The book of Judges shows the need for a king.",
-                    reference: "Judges 2:10-23, 21:25"
-                },
-                davidiccovenant: {
-                    name: "Davidic Covenant",
-                    description: "God promised David that his throne would be established forever and that a descendant would reign on it. This pointed to Jesus, the Son of David, who would reign eternally.",
-                    reference: "2 Samuel 7:12-16, Psalm 89, Acts 2:29-36"
-                },
-                templebuilt: {
-                    name: "Solomon's Temple Built",
-                    description: "Solomon built the Temple in Jerusalem as a permanent dwelling place for God's presence. It was a magnificent structure that served as the center of worship for Israel.",
-                    reference: "1 Kings 5–8, 2 Chronicles 2–7"
-                },
-                kingdomdivided: {
-                    name: "Division of the Kingdom",
-                    description: "After Solomon's reign, the kingdom split into two: Israel (north) and Judah (south). This was due to Solomon's sin and the rebellion of the people. The divided kingdom lasted until the exile.",
-                    reference: "1 Kings 12, 2 Chronicles 10"
-                },
-                fallofisrael: {
-                    name: "Fall of Israel (Northern Kingdom)",
-                    description: "Israel was conquered by the Assyrian Empire in 722 BC. The people were taken into exile because of their persistent idolatry and rejection of God's prophets.",
-                    reference: "2 Kings 17, Hosea 8:14"
-                },
-                fallofjudah: {
-                    name: "Fall of Judah (Southern Kingdom)",
-                    description: "Judah was conquered by Babylon in 586 BC. Jerusalem and the Temple were destroyed, and the people were taken into exile. This happened because of their unfaithfulness and idolatry.",
-                    reference: "2 Kings 24–25, Jeremiah 39, 52, Lamentations"
-                },
-                exile: {
-                    name: "The Exile",
-                    description: "The Israelites were taken captive to Babylon for seventy years, as prophesied by Jeremiah. During this time, they learned to worship God without a temple and to trust in His faithfulness.",
-                    reference: "2 Kings 25, Jeremiah 29, Ezekiel 1–24, Daniel 1"
-                },
-                returnfromexile: {
-                    name: "Return from Exile",
-                    description: "Under the Persian king Cyrus, the exiles were allowed to return to Jerusalem. They rebuilt the Temple and the walls of Jerusalem under the leadership of Zerubbabel, Ezra, and Nehemiah.",
-                    reference: "Ezra 1–6, Nehemiah 1–6, Isaiah 44:28, Jeremiah 29:10"
-                },
-                birthofjesus: {
-                    name: "Birth of Jesus",
-                    description: "Jesus Christ was born of a virgin, Mary, in Bethlehem. His birth fulfilled Old Testament prophecies and was announced by angels to shepherds. He is the Messiah, the King of the Jews, and the Savior of the world.",
-                    reference: "Matthew 1–2, Luke 1–2, John 1:14, Galatians 4:4-5"
-                },
-                ministryofjesus: {
-                    name: "Ministry of Jesus",
-                    description: "Jesus began His public ministry at about age 30. He taught, healed, performed miracles, and proclaimed the kingdom of God. He called disciples, and His message was one of love, repentance, and faith.",
-                    reference: "Matthew 4–25, Mark 1–13, Luke 4–21, John 2–17"
-                },
-                crucifixion: {
-                    name: "Crucifixion of Jesus",
-                    description: "Jesus was arrested, tried, and crucified under Pontius Pilate. He died on the cross as a sacrifice for the sins of the world. His death was prophesied in Isaiah 53 and fulfilled all the Old Testament types.",
-                    reference: "Matthew 26–27, Mark 14–15, Luke 22–23, John 18–19, Isaiah 53"
-                },
-                resurrection: {
-                    name: "Resurrection of Jesus",
-                    description: "Jesus rose from the dead on the third day, conquering death and sin. His resurrection is the foundation of the Christian faith. He appeared to many witnesses and ascended to the Father.",
-                    reference: "Matthew 28, Mark 16, Luke 24, John 20, 1 Corinthians 15, Romans 6:4-11"
-                },
-                ascension: {
-                    name: "Ascension of Jesus",
-                    description: "Forty days after the resurrection, Jesus ascended to heaven from the Mount of Olives. He is seated at the right hand of God, interceding for believers and preparing a place for them.",
-                    reference: "Mark 16:19, Luke 24:50-53, Acts 1:9-11, Ephesians 1:20-23"
-                },
-                pentecost: {
-                    name: "Pentecost",
-                    description: "The Holy Spirit descended on the disciples in power, as Jesus had promised. They began to speak in tongues, and Peter preached the gospel, leading to the conversion of 3,000 people. This was the birth of the church.",
-                    reference: "Acts 2:1-47, Joel 2:28-29"
-                },
-                paulsconversion: {
-                    name: "Conversion of Paul",
-                    description: "Saul of Tarsus, a fierce persecutor of the church, was converted on the road to Damascus. He encountered the risen Jesus and was blind for three days. He became the apostle to the Gentiles.",
-                    reference: "Acts 9:1-31, 22:1-21, 26:9-18, Galatians 1:11-24"
-                },
-                missionsjourneys: {
-                    name: "Paul's Missionary Journeys",
-                    description: "Paul traveled throughout the Roman Empire, planting churches, preaching the gospel, and training leaders. His journeys are recorded in Acts and his letters form much of the New Testament.",
-                    reference: "Acts 13–28, Romans 15:19-24"
-                },
-                newcreation: {
-                    name: "New Creation (Revelation)",
-                    description: "The final vision of the Bible: a new heaven and a new earth where God dwells with His people. There will be no more death, sorrow, or pain. Christ will reign forever in glory.",
-                    reference: "Revelation 21–22, Isaiah 65:17, 2 Peter 3:13"
-                }
+            // ----- ANGER & FRUSTRATION -----
+            angry: {
+                keywords: ['angry', 'anger', 'furious', 'rage', 'frustrated', 'bitter', 'resentful', 'irritated',
+                    'annoyed', 'wrath', 'mad', 'outraged', 'enraged', 'fuming'
+                ],
+                responses: [{
+                    advice: "I feel your anger, and it's a powerful emotion. Anger can be a signal that something important is at stake. But don't let it control you — pause, breathe, and give your anger to God. He can handle it, and He can help you respond with wisdom.",
+                    verse: "Ephesians 4:26-27 — 'In your anger do not sin: Do not let the sun go down while you are still angry, and do not give the devil a foothold.'"
+                }, {
+                    advice: "It's okay to be angry, but don't let it take root in your heart. God understands your frustration, and He invites you to bring it to Him. Speak to Him honestly, and let His peace quiet your storm.",
+                    verse: "Psalm 37:8 — 'Refrain from anger and turn from wrath; do not fret—it leads only to evil.'"
+                }, {
+                    advice: "Anger can be like fire — useful when controlled, destructive when wild. Ask God to help you channel your anger into something good: justice, change, or even just a deep breath. He is patient with you.",
+                    verse: "James 1:19-20 — 'Everyone should be quick to listen, slow to speak and slow to become angry, because human anger does not produce the righteousness that God desires.'"
+                }, {
+                    advice: "Your anger is valid, but it doesn't have to own you. Take a step back, breathe, and ask God to give you His perspective. He sees the bigger picture.",
+                    verse: "Proverbs 15:1 — 'A gentle answer turns away wrath, but a harsh word stirs up anger.'"
+                }]
             },
 
-            // ---- KEY TRUTHS / THEMES ----
-            truths: {
-                monotheism: {
-                    name: "One True God",
-                    description: "There is only one God, who is the Creator and Sustainer of all things. He is eternal, holy, just, loving, and sovereign. The Bible teaches that God is one, yet exists in three persons: Father, Son, and Holy Spirit.",
-                    reference: "Deuteronomy 6:4, Isaiah 43:10-11, Mark 12:29, John 17:3, 2 Corinthians 13:14"
-                },
-                sin: {
-                    name: "Sin and Its Consequences",
-                    description: "All have sinned and fallen short of God's glory. Sin is rebellion against God and brings death, judgment, and separation from Him. The Bible teaches that we are all in need of a Savior.",
-                    reference: "Genesis 3, Romans 3:23, 5:12, 6:23, Isaiah 59:2"
-                },
-                salvation: {
-                    name: "Salvation by Grace through Faith",
-                    description: "We are saved by God's grace, not by our works. Salvation is a free gift received through faith in Jesus Christ. He died for our sins and rose again, and whoever believes in Him will not perish but have eternal life.",
-                    reference: "John 3:16, Ephesians 2:8-9, Romans 10:9-10, Titus 3:5"
-                },
-                jesuscentrality: {
-                    name: "The Centrality of Christ",
-                    description: "Jesus is the Son of God, the promised Messiah, and the only way to the Father. All of Scripture points to Him. He is fully God and fully man, and His life, death, and resurrection are the foundation of the Christian faith.",
-                    reference: "John 14:6, Acts 4:12, Colossians 1:15-20, Hebrews 1:1-4"
-                },
-                love: {
-                    name: "Love of God",
-                    description: "God is love. His love is unconditional, covenantal, and sacrificial. He loved the world so much that He gave His Son. Believers are called to love God with all their heart and to love their neighbors as themselves.",
-                    reference: "1 John 4:8, 16, John 3:16, Deuteronomy 6:5, Leviticus 19:18, Matthew 22:37-40"
-                },
-                hope: {
-                    name: "The Hope of Eternal Life",
-                    description: "Those who trust in Christ have the hope of eternal life. This hope is not wishful thinking but a sure confidence in God's promises. Jesus rose from the dead, guaranteeing that believers will also rise to eternal life.",
-                    reference: "John 11:25-26, Romans 5:2-5, 8:24-25, 1 Peter 1:3-4"
-                },
-                holy: {
-                    name: "Holiness and Obedience",
-                    description: "God calls His people to be holy, as He is holy. Holiness is not about perfection but about living a life set apart for God, characterized by love, righteousness, and obedience to His commandments.",
-                    reference: "Leviticus 11:44, 1 Peter 1:15-16, Romans 12:1-2, 1 Thessalonians 4:3"
-                },
-                kingdom: {
-                    name: "The Kingdom of God",
-                    description: "The Kingdom of God is God's rule and reign over all creation. Jesus came preaching the kingdom and invites all to enter it through repentance and faith. It is present now in the hearts of believers and will be fully realized in the future.",
-                    reference: "Mark 1:15, Matthew 6:33, Luke 17:20-21, Romans 14:17, Revelation 21"
-                },
-                covenant: {
-                    name: "God's Faithfulness to His Covenant",
-                    description: "Throughout the Bible, God makes covenants with His people: with Noah, Abraham, Moses, David, and finally the New Covenant in Christ. God is faithful to His promises, and He never fails those who trust in Him.",
-                    reference: "Genesis 9:8-17, 17:1-14, Exodus 19:5-6, 2 Samuel 7:12-16, Jeremiah 31:31-34, Luke 22:20"
-                },
-                resurrectionhope: {
-                    name: "The Resurrection of the Dead",
-                    description: "Christ's resurrection is the guarantee of the future resurrection of all believers. Those who have died in Christ will be raised with new, glorified bodies to live with Him forever.",
-                    reference: "1 Corinthians 15:12-58, 1 Thessalonians 4:13-18, John 5:28-29, Revelation 20:4-6"
-                }
+            // ----- FEAR -----
+            fear: {
+                keywords: ['fear', 'terrified', 'scared', 'afraid', 'phobia', 'dread', 'frightened', 'panicked', 'horror',
+                    'trembling', 'petrified'
+                ],
+                responses: [{
+                    advice: "Fear can be paralyzing, but you don't have to face it alone. God says, 'Fear not, for I am with you.' He is holding your hand, and He won't let you go. Take a small step forward — He will meet you there.",
+                    verse: "Isaiah 41:10 — 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.'"
+                }, {
+                    advice: "Your fear is valid, but it doesn't have to have the last word. God has given you a spirit not of fear but of power. Speak to your fear and tell it that God is bigger.",
+                    verse: "Joshua 1:9 — 'Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.'"
+                }, {
+                    advice: "When you feel afraid, remember that you are in the palm of God's hand. Nothing can snatch you away. Let that truth settle in your heart, and let His perfect love drive out your fear.",
+                    verse: "1 John 4:18 — 'There is no fear in love. But perfect love drives out fear.'"
+                }, {
+                    advice: "Fear is a liar. God is with you, and He is greater than anything you face. Take courage — He has already won the victory.",
+                    verse: "Psalm 27:1 — 'The Lord is my light and my salvation— whom shall I fear? The Lord is the stronghold of my life— of whom shall I be afraid?'"
+                }]
+            },
+
+            // ----- LONELINESS -----
+            lonely: {
+                keywords: ['lonely', 'loneliness', 'alone', 'isolated', 'abandoned', 'forsaken', 'unwanted', 'rejected',
+                    'left out', 'desolate', 'neglected', 'solitary'
+                ],
+                responses: [{
+                    advice: "Loneliness can feel like a desert, but you are never truly alone. God promises never to leave you or forsake you. He is with you in the silence, and He sees your heart. You are deeply loved and valued.",
+                    verse: "Deuteronomy 31:8 — 'The Lord himself goes before you and will be with you; he will never leave you nor forsake you. Do not be afraid; do not be discouraged.'"
+                }, {
+                    advice: "Even when everyone else seems far away, God is closer than your breath. He knows your name, and He calls you His own. You are not invisible to Him — you are precious in His sight.",
+                    verse: "Isaiah 43:1 — 'Do not fear, for I have redeemed you; I have summoned you by name; you are mine.'"
+                }, {
+                    advice: "Loneliness is a heavy weight, but it can also be a time to draw closer to God. He is the friend who sticks closer than a brother. Talk to Him, pour out your heart, and let His presence fill the empty spaces.",
+                    verse: "Psalm 25:16 — 'Turn to me and be gracious to me, for I am lonely and afflicted.'"
+                }, {
+                    advice: "You are never unwanted. God created you with purpose and love. Even in the quiet moments, He is there, and He delights in you.",
+                    verse: "Psalm 68:6 — 'God sets the lonely in families, he leads out the prisoners with singing.'"
+                }]
+            },
+
+            // ----- JOY & HAPPINESS -----
+            joyful: {
+                keywords: ['joy', 'happy', 'joyful', 'glad', 'delight', 'cheerful', 'blessed', 'excited', 'elated',
+                    'ecstatic', 'thrilled', 'overjoyed'
+                ],
+                responses: [{
+                    advice: "I'm so glad you're feeling joyful! This is a gift from God, and it's a beautiful thing. Let your joy be a light to others, and thank the One who gives you every reason to smile. Rejoice in the Lord always — He is worthy!",
+                    verse: "Nehemiah 8:10 — 'Do not grieve, for the joy of the Lord is your strength.'"
+                }, {
+                    advice: "Joy is a fruit of the Spirit, and it's wonderful to see it in you! Let this happiness remind you of God's faithfulness. Share it with someone today, and watch it multiply.",
+                    verse: "Psalm 16:11 — 'You make known to me the path of life; you will fill me with joy in your presence, with eternal pleasures at your right hand.'"
+                }, {
+                    advice: "Your joy is contagious! Thank God for this season of gladness. Remember that joy is not dependent on circumstances — it's rooted in the unshakeable love of God. Let that joy keep you steady.",
+                    verse: "Philippians 4:4 — 'Rejoice in the Lord always. I will say it again: Rejoice!'"
+                }, {
+                    advice: "Joy is a gift — cherish it and let it overflow. God delights in your happiness, and He wants you to experience His joy in every season.",
+                    verse: "Psalm 30:5 — 'Weeping may stay for the night, but rejoicing comes in the morning.'"
+                }]
+            },
+
+            // ----- DISCOURAGEMENT & HOPELESSNESS -----
+            discouraged: {
+                keywords: ['discouraged', 'discouragement', 'hopeless', 'despair', 'defeated', 'downhearted',
+                    'disheartened', 'giving up', 'tired', 'weary', 'exhausted', 'faint', 'helpless', 'burnout'
+                ],
+                responses: [{
+                    advice: "I hear your weariness. It's so hard when hope feels far away. But God is the God of hope, and He promises to renew your strength. Don't give up — your breakthrough may be just around the corner.",
+                    verse: "Isaiah 40:31 — 'But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.'"
+                }, {
+                    advice: "When you feel like you can't go on, God carries you. His grace is sufficient, and His power is made perfect in your weakness. You are not a failure — you are a beloved child of God.",
+                    verse: "2 Corinthians 12:9 — 'My grace is sufficient for you, for my power is made perfect in weakness.'"
+                }, {
+                    advice: "It's okay to feel defeated sometimes. Even the prophets had moments of despair. But God never gave up on them, and He won't give up on you. Take a rest, and let Him fight for you.",
+                    verse: "Exodus 14:14 — 'The Lord will fight for you; you need only to be still.'"
+                }, {
+                    advice: "Hope is not lost. God is still working, even when you can't see it. Trust that He is moving in the shadows, and one day you will see His goodness.",
+                    verse: "Lamentations 3:22-23 — 'Because of the Lord's great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.'"
+                }]
+            },
+
+            // ----- GUILT, SHAME & CONFESSION -----
+            guilty: {
+                keywords: ['guilty', 'guilt', 'ashamed', 'shame', 'convicted', 'regret', 'remorse', 'sorry', 'unworthy',
+                    'condemned', 'blame', 'confess', 'confession', 'forgiveness', 'repent', 'sin'
+                ],
+                responses: [{
+                    advice: "Guilt can be a heavy burden, but God is the God of mercy. If you confess your sins, He is faithful to forgive and to cleanse you. You are not defined by your mistakes — you are defined by His grace.",
+                    verse: "1 John 1:9 — 'If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.'"
+                }, {
+                    advice: "Shame whispers that you are beyond repair, but God says you are redeemable. There is no condemnation for those who are in Christ Jesus. Let go of the shame and receive His forgiveness.",
+                    verse: "Romans 8:1 — 'Therefore, there is now no condemnation for those who are in Christ Jesus.'"
+                }, {
+                    advice: "Your past does not define you. God's mercy is new every morning. He removes your transgressions as far as the east is from the west. Let Him lift the weight of guilt and give you peace.",
+                    verse: "Psalm 103:12 — 'As far as the east is from the west, so far has he removed our transgressions from us.'"
+                }, {
+                    advice: "Confession is not about punishment — it's about freedom. When you bring your sins to God, He welcomes you with open arms. He already knows, and He still loves you.",
+                    verse: "Proverbs 28:13 — 'Whoever conceals their sins does not prosper, but the one who confesses and renounces them finds mercy.'"
+                }]
+            },
+
+            // ----- LOVED & CONTENT -----
+            loved: {
+                keywords: ['loved', 'love', 'cared for', 'valued', 'appreciated', 'cherished', 'beloved', 'accepted',
+                    'secure', 'content', 'grateful'
+                ],
+                responses: [{
+                    advice: "What a beautiful feeling! You are loved with an everlasting love. God has shown you His love through Jesus, and nothing can separate you from that love. Let that love overflow to others.",
+                    verse: "1 John 4:19 — 'We love because he first loved us.'"
+                }, {
+                    advice: "Being loved is a gift. Remember that God's love is not based on your performance — it's unconditional. Rest in that truth today, and let it give you confidence and peace.",
+                    verse: "Romans 8:38-39 — 'For I am convinced that neither death nor life... nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.'"
+                }, {
+                    advice: "You are not just loved — you are chosen, adopted, and cherished. Walk in that identity today, and let your heart be filled with gratitude.",
+                    verse: "Ephesians 1:4-5 — 'He chose us in him before the creation of the world to be holy and blameless in his sight. In love he predestined us for adoption to sonship through Jesus Christ.'"
+                }, {
+                    advice: "You are deeply loved — not because of what you do, but because of who you are. Rest in that truth today.",
+                    verse: "Zephaniah 3:17 — 'The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his quiet love he will rejoice over you with singing.'"
+                }]
+            },
+
+            // ----- CONFUSION & DOUBT -----
+            confused: {
+                keywords: ['confused', 'confusion', 'lost', 'uncertain', 'unsure', 'perplexed', 'doubting', 'doubt',
+                    'questioning', 'wondering', 'puzzled', 'unclear'
+                ],
+                responses: [{
+                    advice: "It's okay not to have all the answers. God is not afraid of your questions — He invites you to seek wisdom. Take a step back, pray, and trust that He will guide you one step at a time.",
+                    verse: "James 1:5 — 'If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.'"
+                }, {
+                    advice: "Confusion can be unsettling, but it can also be a sign that you're growing. God promises to direct your paths when you acknowledge Him. Keep seeking, and He will make the way clear.",
+                    verse: "Proverbs 3:5-6 — 'Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.'"
+                }, {
+                    advice: "Doubt is not the opposite of faith — it's part of faith. Even the disciples doubted. But Jesus never rejected them. Bring your doubts to Him, and let Him show you the truth.",
+                    verse: "Mark 9:24 — 'I do believe; help me overcome my unbelief!'"
+                }, {
+                    advice: "It's okay to be uncertain. God is not afraid of your doubts. He will show you the way, one step at a time.",
+                    verse: "Psalm 32:8 — 'I will instruct you and teach you in the way you should go; I will counsel you with my loving eye on you.'"
+                }]
+            },
+
+            // ----- BETRAYAL & HURT -----
+            betrayed: {
+                keywords: ['betrayed', 'betrayal', 'deceived', 'hurt', 'wounded', 'unfaithful', 'cheated', 'backstabbed',
+                    'mistreated', 'used', 'abused', 'broken'
+                ],
+                responses: [{
+                    advice: "I'm so sorry you've been hurt like this. Betrayal cuts deep, and it's hard to trust again. But God is a faithful refuge — He will never betray you. Let Him heal your wounds and show you how to forgive, even when it's hard.",
+                    verse: "Psalm 91:14 — 'Because he loves me, says the Lord, I will rescue him; I will protect him, for he acknowledges my name.'"
+                }, {
+                    advice: "It's okay to feel broken by someone's betrayal. God sees your pain, and He will bring justice and restoration in His time. Hold onto His faithfulness, and let Him mend your heart.",
+                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
+                }, {
+                    advice: "When people fail you, God never will. He is a friend who sticks closer than a brother. Pour out your hurt to Him, and let His love wash over you and bring healing.",
+                    verse: "Psalm 56:8 — 'You keep track of all my sorrows. You have collected all my tears in your bottle. You have recorded each one in your book.'"
+                }, {
+                    advice: "Healing from betrayal takes time. Be gentle with yourself. God is patient, and He will restore what was broken.",
+                    verse: "Joel 2:25 — 'I will repay you for the years the locusts have eaten.'"
+                }]
+            },
+
+            // ----- HATRED & BITTERNESS -----
+            hatred: {
+                keywords: ['hate', 'hatred', 'loathe', 'despise', 'detest', 'disgust', 'scorn', 'contempt', 'bitterness',
+                    'malice', 'vengeance'
+                ],
+                responses: [{
+                    advice: "I hear your hatred and bitterness — it's a heavy burden to carry. God understands your pain, but He also calls us to love our enemies and pray for those who hurt us. Not because it's easy, but because love breaks the chains of hatred. Let God help you release this weight so you can find peace.",
+                    verse: "Matthew 5:44 — 'But I tell you, love your enemies and pray for those who persecute you.'"
+                }, {
+                    advice: "Hatred can poison your own heart. God invites you to give Him your anger and receive His love in return. It may take time, but He can transform your bitterness into compassion.",
+                    verse: "Ephesians 4:31-32 — 'Get rid of all bitterness, rage and anger... Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.'"
+                }, {
+                    advice: "It's hard to let go of hatred, but God can help you. He doesn't ask you to do it alone. With His grace, you can begin to forgive, not because they deserve it, but because you deserve peace.",
+                    verse: "Colossians 3:13 — 'Bear with each other and forgive one another... Forgive as the Lord forgave you.'"
+                }, {
+                    advice: "Hatred is a prison — but forgiveness sets you free. Let God break the chains, one day at a time.",
+                    verse: "Romans 12:19 — 'Do not take revenge, my dear friends, but leave room for God's wrath, for it is written: It is mine to avenge; I will repay, says the Lord.'"
+                }]
+            },
+
+            // ----- PEACE & CALM -----
+            peaceful: {
+                keywords: ['peace', 'peaceful', 'calm', 'at rest', 'serene', 'content', 'centered', 'tranquil', 'still',
+                    'relaxed', 'unworried', 'rest'
+                ],
+                responses: [{
+                    advice: "I'm so glad you're feeling peaceful. That is a precious gift from God. The peace of Christ is not like the world's peace — it's a deep stillness that settles your soul. Rest in Him today, and let that peace overflow into your relationships and your day.",
+                    verse: "John 14:27 — 'Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.'"
+                }, {
+                    advice: "Peace is a fruit of the Spirit, and it's beautiful to see it in you! Let this calm remind you that God is in control. Breathe deeply and trust that He is working all things for your good.",
+                    verse: "Romans 15:13 — 'May the God of hope fill you with all joy and peace as you trust in him.'"
+                }, {
+                    advice: "When you are at peace, you are a safe place for others. Thank God for this season of rest. Let His peace guard your heart and mind, and carry it with you wherever you go.",
+                    verse: "Colossians 3:15 — 'Let the peace of Christ rule in your hearts... and be thankful.'"
+                }, {
+                    advice: "Peace is not the absence of chaos, but the presence of God. Rest in Him today.",
+                    verse: "Psalm 4:8 — 'In peace I will lie down and sleep, for you alone, Lord, make me dwell in safety.'"
+                }]
+            },
+
+            // ----- GRATITUDE -----
+            gratitude: {
+                keywords: ['grateful', 'thankful', 'gratitude', 'appreciative', 'blessed', 'thank you', 'appreciation',
+                    'thankfulness', 'blessing'
+                ],
+                responses: [{
+                    advice: "Gratitude is a powerful posture of the heart! Giving thanks shifts our focus from what we lack to what we have. It opens the door for God's peace and joy. Keep a heart of thanksgiving, and watch how it transforms your perspective.",
+                    verse: "1 Thessalonians 5:16-18 — 'Rejoice always, pray continually, give thanks in all circumstances; for this is God's will for you in Christ Jesus.'"
+                }, {
+                    advice: "A thankful heart is a magnet for miracles. When you focus on God's goodness, your problems begin to shrink. Thank Him for the small things — He delights in your gratitude.",
+                    verse: "Psalm 107:1 — 'Give thanks to the Lord, for he is good; his love endures forever.'"
+                }, {
+                    advice: "Gratitude unlocks the fullness of life. It turns what we have into enough, and more. Keep counting your blessings, and you'll find joy in the ordinary.",
+                    verse: "Colossians 3:17 — 'And whatever you do... do it all in the name of the Lord Jesus, giving thanks to God the Father through him.'"
+                }, {
+                    advice: "A grateful heart sees God's hand in everything. Thank Him today — He is worthy of all praise.",
+                    verse: "Psalm 136:26 — 'Give thanks to the God of heaven. His love endures forever.'"
+                }]
+            },
+
+            // ----- BOREDOM -----
+            bored: {
+                keywords: ['bored', 'boredom', 'uninterested', 'listless', 'dull', 'monotonous', 'tedious', 'uninspired',
+                    'restless', 'nothing to do', 'boring'
+                ],
+                responses: [{
+                    advice: "Boredom can feel like a void, but it can also be an invitation. God might be calling you to something new — a new passion, a new skill, or a deeper relationship with Him. Ask Him to spark curiosity in your heart.",
+                    verse: "Jeremiah 29:13 — 'You will seek me and find me when you seek me with all your heart.'"
+                }, {
+                    advice: "Sometimes boredom is a sign that you need to step out of your comfort zone. Try something new, serve someone else, or dive into God's Word with fresh eyes. He can turn a dull moment into an adventure.",
+                    verse: "Colossians 3:23 — 'Whatever you do, work at it with all your heart, as working for the Lord.'"
+                }, {
+                    advice: "Boredom can be a gift — it gives you space to think, dream, and pray. Use this time to connect with God in a new way. He is always waiting to meet with you.",
+                    verse: "Psalm 119:105 — 'Your word is a lamp for my feet, a light on my path.'"
+                }, {
+                    advice: "Every moment has purpose. Ask God to show you what He wants you to see in this quiet season.",
+                    verse: "Ecclesiastes 3:1 — 'There is a time for everything, and a season for every activity under the heavens.'"
+                }]
+            },
+
+            // ----- SUICIDAL THOUGHTS (extreme care) -----
+            suicidal: {
+                keywords: ['suicide', 'suicidal', 'kill myself', 'want to die', 'end it all', 'give up on life',
+                    'not worth living', 'better off dead', 'want to disappear'
+                ],
+                responses: [{
+                    advice: "I'm so sorry you're feeling this way. Please know that your life is precious — you are a child of God, created with purpose and value. You are not alone, and there is hope even in the darkest moments. Please reach out for help — talk to a trusted person, a counselor, or call a helpline. God loves you more than you can imagine, and He wants you to live.",
+                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
+                }, {
+                    advice: "I can't pretend to know exactly what you're going through, but I do know that God sees you and He cares. You are not a burden — you are a beloved child of God. Please don't give up. Reach out to someone who can help you right now. There is hope, and there is help.",
+                    verse: "Jeremiah 29:11 — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'"
+                }, {
+                    advice: "Please, I urge you — your life matters. God created you with a purpose, and He is not finished with you yet. Even if you can't see it now, He is working in the shadows. Talk to Him, talk to a friend, and get professional help. You are so loved.",
+                    verse: "Psalm 40:1-2 — 'I waited patiently for the Lord; he turned to me and heard my cry. He lifted me out of the slimy pit, out of the mud and mire; he set my feet on a rock and gave me a firm place to stand.'"
+                }, {
+                    advice: "You are not alone. There are people who care about you, and God is with you right now. Please reach out — you are worth fighting for.",
+                    verse: "Psalm 27:10 — 'Though my father and mother forsake me, the Lord will receive me.'"
+                }]
+            },
+
+            // ----- STRESS & OVERWHELM -----
+            stressed: {
+                keywords: ['stress', 'stressed', 'overwhelmed', 'burdened', 'pressed', 'stretched', 'too much', 'burnout',
+                    'frazzled', 'drowning'
+                ],
+                responses: [{
+                    advice: "Stress can make you feel like you're carrying the world on your shoulders. But God invites you to bring your burdens to Him. He gives rest to the weary. Take a moment to breathe and let Him carry your load.",
+                    verse: "Matthew 11:28 — 'Come to me, all you who are weary and burdened, and I will give you rest.'"
+                }, {
+                    advice: "When you're overwhelmed, remember that God is bigger than your problems. He promises to be your refuge and strength. Take small steps, one at a time, and trust that He will guide you through.",
+                    verse: "Psalm 46:1 — 'God is our refuge and strength, an ever-present help in trouble.'"
+                }, {
+                    advice: "You are not superhuman, and that's okay. God doesn't expect you to do everything on your own. Rest in His presence, and let His peace calm your anxious heart.",
+                    verse: "Psalm 55:22 — 'Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.'"
+                }, {
+                    advice: "You can only carry so much. Give God your burdens, and let Him carry the weight you were never meant to bear.",
+                    verse: "1 Peter 5:7 — 'Cast all your anxiety on him because he cares for you.'"
+                }]
+            },
+
+            // ----- INSECURITY & REJECTION -----
+            insecure: {
+                keywords: ['insecure', 'insecurity', 'rejected', 'rejection', 'unworthy', 'not good enough', 'inadequate',
+                    'worthless', 'self-doubt', 'low self-esteem', 'not enough'
+                ],
+                responses: [{
+                    advice: "I hear your insecurity. It's so easy to feel like you're not enough, but God says you are fearfully and wonderfully made. Your worth is not based on what others think — it's based on what God says about you. You are precious in His sight.",
+                    verse: "Psalm 139:14 — 'I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.'"
+                }, {
+                    advice: "Rejection hurts, but it doesn't define you. God accepts you completely in Christ. You are chosen, adopted, and loved. Let His acceptance heal your wounds and give you confidence.",
+                    verse: "Romans 15:7 — 'Accept one another, then, just as Christ accepted you, in order to bring praise to God.'"
+                }, {
+                    advice: "When you feel insecure, remember that God's opinion is the only one that ultimately matters. He sees you as His masterpiece. Let that truth sink deep into your heart.",
+                    verse: "Ephesians 2:10 — 'For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.'"
+                }, {
+                    advice: "You are enough because God says you are. You don't have to prove anything to anyone — you are already loved completely.",
+                    verse: "2 Corinthians 12:9 — 'My grace is sufficient for you, for my power is made perfect in weakness.'"
+                }]
+            },
+
+            // ----- JEALOUSY -----
+            jealous: {
+                keywords: ['jealous', 'jealousy', 'envy', 'envious', 'covet', 'coveting', 'green with envy', 'comparison',
+                    'comparing'
+                ],
+                responses: [{
+                    advice: "Jealousy can creep in and steal your joy, but God's love for you is unique and personal. He has given you gifts that no one else has. Instead of comparing, let God show you how special you are to Him.",
+                    verse: "Proverbs 14:30 — 'A heart at peace gives life to the body, but envy rots the bones.'"
+                }, {
+                    advice: "When jealousy arises, it's often because we feel inadequate. But God says you are enough in Christ. He will supply all your needs. Trust Him with your insecurities.",
+                    verse: "Philippians 4:19 — 'And my God will meet all your needs according to the riches of his glory in Christ Jesus.'"
+                }, {
+                    advice: "Jealousy is a sign that you're focusing on what others have instead of what God has given you. Shift your gaze to His faithfulness, and you'll find peace in your own journey.",
+                    verse: "Psalm 37:7 — 'Be still before the Lord and wait patiently for him; do not fret when people succeed in their ways.'"
+                }, {
+                    advice: "Your path is uniquely yours. God has a plan for you that no one else can fulfill. Celebrate others, and trust God with your own journey.",
+                    verse: "Galatians 6:4 — 'Each one should test their own actions. Then they can take pride in themselves alone, without comparing themselves to someone else.'"
+                }]
+            },
+
+            // ----- PRIDE -----
+            pride: {
+                keywords: ['pride', 'proud', 'arrogant', 'haughty', 'conceited', 'superior', 'self-righteous', 'boastful',
+                    'selfish'
+                ],
+                responses: [{
+                    advice: "Pride can feel good, but it can also separate us from God and others. Humility opens the door for grace. Remember that everything you have is a gift from God, and He gives grace to the humble.",
+                    verse: "James 4:6 — 'But he gives us more grace. That is why Scripture says: God opposes the proud but shows favor to the humble.'"
+                }, {
+                    advice: "It's okay to feel proud of your achievements, but don't forget that God is the source of your strength. Stay humble, stay teachable, and let God guide your steps.",
+                    verse: "Proverbs 16:18 — 'Pride goes before destruction, a haughty spirit before a fall.'"
+                }, {
+                    advice: "True greatness comes from serving others. Jesus humbled Himself and became a servant. Let His example keep you grounded.",
+                    verse: "Philippians 2:3-4 — 'Do nothing out of selfish ambition or vain conceit. Rather, in humility value others above yourselves.'"
+                }, {
+                    advice: "Humility is not thinking less of yourself — it's thinking of yourself less. Let God lift you up in His time.",
+                    verse: "1 Peter 5:6 — 'Humble yourselves, therefore, under God's mighty hand, that he may lift you up in due time.'"
+                }]
+            },
+
+            // ----- HOPEFUL (wanting to encourage) -----
+            hopeful: {
+                keywords: ['hopeful', 'optimistic', 'expectant', 'looking forward', 'anticipating', 'trusting',
+                    'faithful', 'confident'
+                ],
+                responses: [{
+                    advice: "I love that you're feeling hopeful! Hope is not just wishful thinking — it's a confident expectation in God's promises. He has plans to prosper you and give you a future. Hold onto that hope, because it anchors your soul.",
+                    verse: "Romans 15:13 — 'May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit.'"
+                }, {
+                    advice: "Hope is a powerful force — it keeps you going even when you can't see the way. God is the author of hope, and He is faithful to complete what He started in you.",
+                    verse: "Jeremiah 29:11 — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'"
+                }, {
+                    advice: "Your hope is a testimony to others. Keep shining, keep believing, and keep trusting. God is working behind the scenes.",
+                    verse: "Psalm 130:5 — 'I wait for the Lord, my whole being waits, and in his word I put my hope.'"
+                }, {
+                    advice: "Hope is the anchor of the soul. Let it keep you steady, even in the storms.",
+                    verse: "Hebrews 6:19 — 'We have this hope as an anchor for the soul, firm and secure.'"
+                }]
+            },
+
+            // ----- "I DON'T KNOW" / NOT SURE -----
+            idontknow: {
+                keywords: ['i don\'t know', 'idk', 'not sure', 'don\'t know', 'unsure', 'no idea', 'don\'t know what to feel',
+                    'confused about my feelings'
+                ],
+                responses: [{
+                    advice: "It's okay not to know. Feelings can be complicated, and sometimes we don't have the words to describe what's happening inside. God understands your heart even when you can't find the words. Just be still with Him — He knows.",
+                    verse: "Romans 8:26 — 'In the same way, the Spirit helps us in our weakness. We do not know what we ought to pray for, but the Spirit himself intercedes for us through wordless groans.'"
+                }, {
+                    advice: "Not having a name for what you feel doesn't make it any less real. You don't have to figure it all out today. Just bring yourself — all of you — to God. He can handle the confusion.",
+                    verse: "Proverbs 3:5-6 — 'Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.'"
+                }, {
+                    advice: "It's okay to be in between feelings. You don't have to have it all figured out. God meets you right where you are — in the mystery, in the silence, in the unknown.",
+                    verse: "Psalm 46:10 — 'Be still, and know that I am God.'"
+                }, {
+                    advice: "Sometimes the most honest prayer is 'I don't know.' That's enough. God is listening, and He knows what you need before you ask.",
+                    verse: "Matthew 6:8 — 'Your Father knows what you need before you ask him.'"
+                }]
+            },
+
+            // ----- "I'M NOT OKAY" / STRUGGLING -----
+            notokay: {
+                keywords: ['not okay', 'not fine', 'struggling', 'falling apart', 'losing it', 'can\'t cope',
+                    'i need help', 'i\'m lost', 'i\'m broken', 'i\'m empty', 'i\'m tired', 'i give up', 'i can\'t do this',
+                    'help me', 'broken'
+                ],
+                responses: [{
+                    advice: "It's okay not to be okay. You don't have to have it all together. God meets you right where you are — in the mess, in the confusion, in the pain. Just breathe, and know that He is with you.",
+                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
+                }, {
+                    advice: "When you don't have words, God still hears your heart. You can come to Him just as you are — tired, confused, and hurting. He will give you rest.",
+                    verse: "Matthew 11:28 — 'Come to me, all you who are weary and burdened, and I will give you rest.'"
+                }, {
+                    advice: "I'm here for you. It's okay if you don't know exactly what you're feeling right now. God understands. He will hold you steady even when everything feels shaky.",
+                    verse: "Psalm 46:5 — 'God is within her, she will not fall; God will help her at break of day.'"
+                }, {
+                    advice: "You don't have to pretend. Bring your broken pieces to God — He is the master of making beautiful things out of dust.",
+                    verse: "Isaiah 61:3 — 'To bestow on them a crown of beauty instead of ashes, the oil of joy instead of mourning, and a garment of praise instead of a spirit of despair.'"
+                }]
+            },
+
+            // ----- MOCKING / SCORN -----
+            mocking: {
+                keywords: ['mock', 'mocking', 'scorn', 'sarcasm', 'cynical', 'ridicule', 'tease', 'insult', 'bad words',
+                    'curse', 'swear', 'cursing', 'foul language', 'profanity', 'insults'
+                ],
+                responses: [{
+                    advice: "I hear that you're feeling angry or hurt enough to use strong words. That's okay — God can handle your raw emotions. He already knows your heart. But remember, words have power. Let God help you find a way to express what's inside without hurting yourself or others.",
+                    verse: "Ephesians 4:29 — 'Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up according to their needs, that it may benefit those who listen.'"
+                }, {
+                    advice: "Sometimes we lash out when we're hurting inside. God sees beyond your words to the pain beneath. He wants to heal that pain. Let Him show you a better way to let it out.",
+                    verse: "Proverbs 15:1 — 'A gentle answer turns away wrath, but a harsh word stirs up anger.'"
+                }, {
+                    advice: "You don't have to hide your frustration — bring it to God. He can handle your rawest emotions. And He can help you find words that bring life instead of hurt.",
+                    verse: "Psalm 141:3 — 'Set a guard over my mouth, Lord; keep watch over the door of my lips.'"
+                }, {
+                    advice: "It's okay to be angry or frustrated. But let God help you speak with grace. Your words can either build up or tear down — and He wants to use you to build.",
+                    verse: "Colossians 4:6 — 'Let your conversation be always full of grace, seasoned with salt, so that you may know how to answer everyone.'"
+                }]
+            },
+
+            // ----- GREED / MATERIALISM -----
+            greedy: {
+                keywords: ['greedy', 'greed', 'materialism', 'money', 'wealth', 'possessions', 'covetous', 'hoarding',
+                    'want more'
+                ],
+                responses: [{
+                    advice: "It's easy to get caught up in wanting more — more money, more things, more status. But true contentment comes from knowing that God is enough. He has given you everything you need for today.",
+                    verse: "1 Timothy 6:6-7 — 'But godliness with contentment is great gain. For we brought nothing into the world, and we can take nothing out of it.'"
+                }, {
+                    advice: "Your worth is not measured by what you own. God sees your heart, not your bank account. Ask Him to fill you with a sense of purpose that money can't buy.",
+                    verse: "Luke 12:15 — 'Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.'"
+                }, {
+                    advice: "The things of this world are temporary, but God's love is eternal. Invest your heart in what lasts forever — relationships, kindness, and faith.",
+                    verse: "Matthew 6:19-20 — 'Do not store up for yourselves treasures on earth... But store up for yourselves treasures in heaven.'"
+                }]
+            },
+
+            // ----- JEALOUSY (already covered above, but adding more) -----
+            // ----- ADDICTION / RELIANCE -----
+            addicted: {
+                keywords: ['addict', 'addiction', 'dependent', 'craving', 'can\'t stop', 'obsessed', 'hooked',
+                    'substance', 'alcohol', 'drugs'
+                ],
+                responses: [{
+                    advice: "Addiction can feel like a prison, but there is freedom in Christ. You are not defined by your struggle. God sees you, and He wants to set you free. Seek help, and know that His grace is greater than any addiction.",
+                    verse: "2 Corinthians 5:17 — 'Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!'"
+                }, {
+                    advice: "You are not alone in this fight. God is with you, and He can break every chain. Reach out to someone you trust, and let God's strength carry you through.",
+                    verse: "Romans 6:14 — 'For sin shall no longer be your master, because you are not under the law, but under grace.'"
+                }, {
+                    advice: "Freedom is possible. One step at a time, with God's help, you can overcome. He has not given up on you, and He never will.",
+                    verse: "John 8:36 — 'So if the Son sets you free, you will be free indeed.'"
+                }]
             }
         };
 
@@ -1576,12 +1151,10 @@
         const sendBtn = document.getElementById('sendBtn');
         const typingIndicator = document.getElementById('typingIndicator');
 
-        // Back button
         document.getElementById('backBtn').addEventListener('click', function() {
             window.location.href = 'index.html';
         });
 
-        // Send message
         function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
@@ -1590,189 +1163,194 @@
             userInput.value = '';
             userInput.focus();
 
-            // Show typing
             typingIndicator.classList.add('show');
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Simulate thinking + respond
             setTimeout(() => {
                 const reply = generateReply(text);
                 typingIndicator.classList.remove('show');
                 addMessage('bot', reply);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 500 + Math.random() * 400);
+            }, 400 + Math.random() * 300);
         }
 
-        // Add message to chat
         function addMessage(type, text) {
-            const div = document.createElement('div');
-            div.className = `message ${type}`;
+            const wrapper = document.createElement('div');
+            wrapper.className = `message-wrapper ${type}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            if (type === 'bot') {
+                avatar.innerHTML = '<i class="fas fa-robot"></i>';
+            } else {
+                avatar.innerHTML = '<i class="fas fa-user"></i>';
+            }
+            wrapper.appendChild(avatar);
+
+            const bubble = document.createElement('div');
+            bubble.className = 'message';
 
             const textSpan = document.createElement('div');
             textSpan.textContent = text;
-            div.appendChild(textSpan);
+            bubble.appendChild(textSpan);
 
             const meta = document.createElement('div');
             meta.className = 'msg-meta';
             const now = new Date();
             const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             if (type === 'bot') {
-                meta.innerHTML = `<i class="fas fa-robot"></i> Bible AI · ${timeStr}`;
+                meta.innerHTML = `Breezy · ${timeStr}`;
             } else {
-                meta.innerHTML = `${timeStr} <i class="fas fa-user"></i>`;
+                meta.innerHTML = `${timeStr} · You`;
             }
-            div.appendChild(meta);
+            bubble.appendChild(meta);
 
-            chatMessages.appendChild(div);
+            wrapper.appendChild(bubble);
+            chatMessages.appendChild(wrapper);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
         // ============================================================
-        // GENERATE REPLY — smart search across knowledge base
+        // GENERATE REPLY — ONLY FEELINGS
         // ============================================================
 
         function generateReply(query) {
-            const q = query.toLowerCase().trim();
+            const lower = query.toLowerCase().trim();
 
-            // Check for greetings
-            if (/^(hi|hello|hey|greetings|good morning|good afternoon|good evening|howdy|sup|yo)/i.test(q) && q.length < 30) {
-                return "👋 Hello! I'm your Bible AI assistant. Ask me anything about the Bible — books, characters, events, or truths. I'll respond based on Scripture. What would you like to know?";
-            }
+            // 1) DETECT FEELING
+            let detectedEmotion = null;
+            let bestScore = 0;
 
-            // Check for thanks
-            if (/thank|thanks|appreciate|grateful/i.test(q)) {
-                return "🙏 You're welcome! It's a joy to share God's Word with you. Let me know if you have more questions about the Bible!";
-            }
-
-            // Collect all matching entries
-            let matches = [];
-
-            // Search books
-            for (const [key, book] of Object.entries(bibleKnowledge.books)) {
-                const score = getMatchScore(q, book.name + ' ' + book.summary + ' ' + book.key_verses + ' ' + book.characters +
-                    ' ' + book.events);
-                if (score > 0) {
-                    matches.push({ type: '📖 Book', name: book.name, data: book, score: score, key: key });
-                }
-            }
-
-            // Search characters
-            for (const [key, char] of Object.entries(bibleKnowledge.characters)) {
-                const score = getMatchScore(q, char.name + ' ' + char.description + ' ' + char.reference);
-                if (score > 0) {
-                    matches.push({ type: '👤 Character', name: char.name, data: char, score: score, key: key });
-                }
-            }
-
-            // Search events
-            for (const [key, ev] of Object.entries(bibleKnowledge.events)) {
-                const score = getMatchScore(q, ev.name + ' ' + ev.description + ' ' + ev.reference);
-                if (score > 0) {
-                    matches.push({ type: '⚡ Event', name: ev.name, data: ev, score: score, key: key });
-                }
-            }
-
-            // Search truths
-            for (const [key, truth] of Object.entries(bibleKnowledge.truths)) {
-                const score = getMatchScore(q, truth.name + ' ' + truth.description + ' ' + truth.reference);
-                if (score > 0) {
-                    matches.push({ type: '💡 Truth', name: truth.name, data: truth, score: score, key: key });
-                }
-            }
-
-            // Sort by score (highest first)
-            matches.sort((a, b) => b.score - a.score);
-
-            // Take top matches (limit to avoid too long)
-            const topMatches = matches.slice(0, 3);
-
-            if (topMatches.length === 0) {
-                return "I couldn't find a direct match for your question in my Bible knowledge base. 😔\n\nCould you rephrase or ask about a specific book, character, event, or truth? I cover Genesis through Revelation.\n\nTry asking: 'Who was Moses?', 'Tell me about the Exodus', or 'What does the Bible say about love?'";
-            }
-
-            // Build response
-            let response = '';
-            for (let i = 0; i < topMatches.length; i++) {
-                const m = topMatches[i];
-                if (i === 0) {
-                    // Main response
-                    if (m.type === '📖 Book') {
-                        const b = m.data;
-                        response += `📖 **${b.name}**\n${b.summary}\n\n`;
-                        if (b.characters) response += `👤 Key characters: ${b.characters}\n`;
-                        if (b.events) response += `⚡ Key events: ${b.events}\n`;
-                        if (b.key_verses) response += `📜 Key verses: ${b.key_verses}\n`;
-                    } else if (m.type === '👤 Character') {
-                        const c = m.data;
-                        response += `👤 **${c.name}**\n${c.description}\n\n📖 ${c.reference}\n`;
-                    } else if (m.type === '⚡ Event') {
-                        const e = m.data;
-                        response += `⚡ **${e.name}**\n${e.description}\n\n📖 ${e.reference}\n`;
-                    } else if (m.type === '💡 Truth') {
-                        const t = m.data;
-                        response += `💡 **${t.name}**\n${t.description}\n\n📖 ${t.reference}\n`;
-                    }
-                } else {
-                    // Additional related matches
-                    if (m.type === '📖 Book') {
-                        response += `\n📖 Related book: **${m.name}** — ${m.data.summary.substring(0, 100)}...`;
-                    } else if (m.type === '👤 Character') {
-                        response += `\n👤 Related character: **${m.name}** — ${m.data.description.substring(0, 100)}...`;
-                    } else if (m.type === '⚡ Event') {
-                        response += `\n⚡ Related event: **${m.name}** — ${m.data.description.substring(0, 100)}...`;
-                    } else if (m.type === '💡 Truth') {
-                        response += `\n💡 Related truth: **${m.name}** — ${m.data.description.substring(0, 100)}...`;
-                    }
-                }
-            }
-
-            // Add a note about Scripture
-            response += '\n\n📖 *“All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness” — 2 Timothy 3:16*';
-
-            return response;
-        }
-
-        // Helper: get match score between query and text
-        function getMatchScore(query, text) {
-            const qWords = query.split(/\s+/).filter(w => w.length > 2);
-            const tLower = text.toLowerCase();
-
-            let score = 0;
-            let exactMatch = false;
-
-            // Check if query appears as a phrase in text
-            if (tLower.includes(query)) {
-                score += 50;
-                exactMatch = true;
-            }
-
-            for (const word of qWords) {
-                if (tLower.includes(word)) {
-                    score += 10;
-                }
-                // Check for partial matches
-                for (const tWord of tLower.split(/\s+/)) {
-                    if (tWord.length > 3 && word.length > 3) {
-                        if (tWord.includes(word) || word.includes(tWord)) {
-                            score += 5;
+            for (const [key, emotion] of Object.entries(feelingsData)) {
+                let score = 0;
+                for (const kw of emotion.keywords) {
+                    if (lower.includes(kw)) {
+                        const regex = new RegExp('\\b' + kw + '\\b', 'i');
+                        if (regex.test(lower)) {
+                            score += 12;
+                        } else if (lower.includes(kw)) {
+                            score += 6;
                         }
                     }
                 }
-            }
-
-            // Boost score for key terms
-            const keyTerms = ['bible', 'god', 'jesus', 'lord', 'christ', 'spirit', 'kingdom', 'salvation', 'grace', 'faith',
-                'love', 'hope', 'covenant', 'testament', 'gospel', 'prophet', 'apostle', 'disciple', 'temple', 'exile',
-                'redemption', 'resurrection', 'cross', 'blood', 'sacrifice', 'miracle', 'parable', 'prayer', 'worship',
-                'praise', 'glory', 'truth', 'wisdom', 'righteous', 'holy', 'sin', 'repent'
-            ];
-            for (const term of keyTerms) {
-                if (query.includes(term) && tLower.includes(term)) {
-                    score += 15;
+                // Check "I feel", "feeling", "so", "very" patterns
+                for (const kw of emotion.keywords) {
+                    const patterns = ['feel ' + kw, 'feeling ' + kw, 'felt ' + kw, 'am ' + kw, 'so ' + kw, 'very ' + kw,
+                        'feel like ' + kw, 'feeling like ' + kw
+                    ];
+                    for (const p of patterns) {
+                        if (lower.includes(p)) {
+                            score += 20;
+                        }
+                    }
+                }
+                if (score > bestScore) {
+                    bestScore = score;
+                    detectedEmotion = key;
                 }
             }
 
-            return score;
+            // If we have a strong detection (score >= 4), give emotional response
+            if (detectedEmotion && bestScore >= 4) {
+                const emotion = feelingsData[detectedEmotion];
+                const responses = emotion.responses;
+                const randomIndex = Math.floor(Math.random() * responses.length);
+                const chosen = responses[randomIndex];
+
+                const emojiMap = {
+                    sad: '😢',
+                    anxious: '😰',
+                    angry: '😤',
+                    fear: '😨',
+                    lonely: '😔',
+                    joyful: '😊',
+                    discouraged: '😞',
+                    guilty: '😣',
+                    loved: '🥰',
+                    confused: '🤔',
+                    betrayed: '💔',
+                    hatred: '🤬',
+                    peaceful: '😌',
+                    gratitude: '🙏',
+                    bored: '😑',
+                    suicidal: '💔',
+                    stressed: '😩',
+                    insecure: '😥',
+                    notokay: '🫂',
+                    jealous: '😒',
+                    pride: '😏',
+                    hopeful: '🌟',
+                    idontknow: '🤷',
+                    mocking: '😕',
+                    greedy: '💰',
+                    addicted: '🔄'
+                };
+                const emoji = emojiMap[detectedEmotion] || '❤️';
+
+                let response =
+                    `${emoji} I hear that you're feeling **${detectedEmotion}**.\n\n${chosen.advice}\n\n📖 ${chosen.verse}`;
+                const closings = [
+                    "You are loved, and you are never alone. 🙏",
+                    "God is with you, and He will never let you go. 🌟",
+                    "Hold on — hope is on the way. 💪",
+                    "You are precious in His sight. Let that sink in. 💖",
+                    "Take a deep breath. He's got this. 🕊️",
+                    "Don't give up — God is fighting for you. ⚔️",
+                    "You are stronger than you think, because He is with you. 💪",
+                    "Rest in His love today. ❤️"
+                ];
+                response += `\n\n${closings[Math.floor(Math.random() * closings.length)]}`;
+                return response;
+            }
+
+            // 2) Check for general "not okay" or "I don't know" even without strong keyword match
+            if (/not okay|not fine|struggling|falling apart|losing it|can't cope|i don't know what to do|i need help|i'm lost|i'm broken|i'm empty|i'm tired|i'm exhausted|i give up|i can't do this|help me/i
+                .test(lower)) {
+                const responses = feelingsData.notokay.responses;
+                const chosen = responses[Math.floor(Math.random() * responses.length)];
+                return `🫂 I'm here for you. ${chosen.advice}\n\n📖 ${chosen.verse}\n\nYou are not alone. 🙏`;
+            }
+
+            // 3) If user is asking about something else, gently guide back to feelings
+            if (/what is|who is|tell me about|explain|define|what does|what are|what's|how many/i.test(lower)) {
+                return "I'm here to listen to your heart, not just to give information. 😊 Tell me how you're feeling — sad, anxious, angry, lonely, joyful, or anything else — and I'll share encouragement and a Bible verse just for you. What's on your heart today? ❤️";
+            }
+
+            // 4) Quick greeting
+            if (/^(hi|hello|hey|greetings|good morning|good afternoon|good evening|howdy|sup|yo)/i.test(lower) && lower
+                .length < 30) {
+                return "Hello! I'm Breezy 🤖❤️. I'm here to listen to your heart. Tell me how you're feeling — sad, anxious, angry, lonely, joyful, bored, stressed, or anything else — and I'll share encouragement and a Bible verse just for you. What's on your mind today?";
+            }
+
+            // 5) Thanks
+            if (/thank|thanks|appreciate|grateful/i.test(lower)) {
+                const thanks = [
+                    "You're so welcome! ❤️ I'm glad I could encourage you. If you ever need to talk again, I'll be right here. God bless you! 🙏",
+                    "It's my joy to help! Remember, God is always with you. 🌟",
+                    "I'm here anytime you need a listening ear. You are loved! 💖"
+                ];
+                return thanks[Math.floor(Math.random() * thanks.length)];
+            }
+
+            // 6) If the user asks for encouragement directly
+            if (/encourage|motivate|uplift|give me hope|need strength|need peace|need joy|lift me up|cheer me up|give me a word/i
+                .test(lower)) {
+                const encouragements = [
+                    "🌟 You are stronger than you think, because God's strength is made perfect in weakness.\n\n📖 **Philippians 4:13** — 'I can do all this through him who gives me strength.'\n\nKeep going — God is with you every step of the way. 🙏",
+                    "💪 You are not alone in this fight. God is your refuge and strength.\n\n📖 **Isaiah 41:10** — 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.'",
+                    "🌅 Hope is not lost. God has plans to prosper you and give you a future.\n\n📖 **Jeremiah 29:11** — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'",
+                    "🕊️ Peace I leave with you. Not as the world gives, but as Christ gives.\n\n📖 **John 14:27** — 'Peace I leave with you; my peace I give you. Do not let your hearts be troubled and do not be afraid.'"
+                ];
+                return encouragements[Math.floor(Math.random() * encouragements.length)];
+            }
+
+            // 7) If user asks "How are you?" or "What do you do?"
+            if (/how are you|what do you do|who are you|tell me about yourself/i.test(lower)) {
+                return "I'm Breezy 🤖❤️ — your emotional support companion. My only purpose is to listen to your heart and help you find hope and encouragement in God's Word. Tell me how you're feeling, and I'll share a verse and advice just for you. That's all I'm here for — to be a friend who listens. 💕";
+            }
+
+            // 8) If no feeling detected at all
+            return "I'm here to listen to your heart. ❤️ Tell me how you're feeling — sad, anxious, angry, lonely, joyful, bored, stressed, confused, or anything else — and I'll share encouragement and a Bible verse just for you. What's on your mind today? 🙏";
         }
 
         // ============================================================
@@ -1790,21 +1368,30 @@
 
         function showWelcome() {
             const welcomeText =
-                "👋 Welcome! I'm your Bible AI assistant.\n\nI can answer questions about any book of the Bible (Genesis to Revelation), characters, events, and truths according to Scripture.\n\nTry asking:\n• 'Tell me about the book of Romans'\n• 'Who was David?'\n• 'What happened at the Exodus?'\n• 'What does the Bible say about love?'\n• 'Explain the resurrection'\n\nI'm here to help you explore God's Word! 🙏";
+                "Hi, I'm Breezy 🤖❤️. I'm here to listen to your heart — no matter what you're feeling.\n\nJust tell me what's on your mind: sadness, anger, joy, boredom, stress, confusion, fear, loneliness, or anything else. I'll share encouragement and a Bible verse to help you through.\n\nYou don't have to be okay. I'm here for you. What's going on today?";
 
-            const div = document.createElement('div');
-            div.className = 'message bot welcome-msg';
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-wrapper bot';
+
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            avatar.innerHTML = '<i class="fas fa-robot"></i>';
+            wrapper.appendChild(avatar);
+
+            const bubble = document.createElement('div');
+            bubble.className = 'message';
 
             const textSpan = document.createElement('div');
             textSpan.textContent = welcomeText;
-            div.appendChild(textSpan);
+            bubble.appendChild(textSpan);
 
             const meta = document.createElement('div');
             meta.className = 'msg-meta';
-            meta.innerHTML = `<i class="fas fa-robot"></i> Bible AI · now`;
-            div.appendChild(meta);
+            meta.innerHTML = `Breezy · now`;
+            bubble.appendChild(meta);
 
-            chatMessages.appendChild(div);
+            wrapper.appendChild(bubble);
+            chatMessages.appendChild(wrapper);
         }
 
         // ============================================================
@@ -1814,11 +1401,8 @@
         showWelcome();
         userInput.focus();
 
-        console.log('📖 Bible Chat initialized');
-        console.log('📚 Books loaded:', Object.keys(bibleKnowledge.books).length);
-        console.log('👤 Characters loaded:', Object.keys(bibleKnowledge.characters).length);
-        console.log('⚡ Events loaded:', Object.keys(bibleKnowledge.events).length);
-        console.log('💡 Truths loaded:', Object.keys(bibleKnowledge.truths).length);
+        console.log('❤️ Breezy Emotional Support loaded!');
+        console.log('😊 Emotions covered:', Object.keys(feelingsData).length);
     </script>
 </body>
 </html>
