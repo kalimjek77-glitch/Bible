@@ -133,7 +133,7 @@
             margin-right: auto;
         }
 
-        /* --- BUTTON ROW: Devotion + Breezy --- */
+        /* --- BUTTON ROW: Devotion + Breezy + Relax --- */
         .button-row {
             display: flex;
             flex-wrap: wrap;
@@ -186,6 +186,15 @@
         }
 
         .action-btn.breezy:active i {
+            color: #2b211b;
+        }
+
+        /* Relax button specific style */
+        .action-btn.relax i {
+            color: #7a6a8a;
+        }
+
+        .action-btn.relax:active i {
             color: #2b211b;
         }
 
@@ -654,7 +663,7 @@
             </h1>
             <p>Let your emotions find rest in His word</p>
 
-            <!-- BUTTON ROW: Devotion + Breezy -->
+            <!-- BUTTON ROW: Devotion + Breezy + Relax -->
             <div class="button-row">
                 <a href="devotion.html" class="action-btn">
                     <i class="fas fa-book-open"></i> Daily Devotion
@@ -662,6 +671,9 @@
                 <button class="action-btn breezy" id="breezyBtn">
                     <i class="fas fa-robot"></i> Breezy
                 </button>
+                <a href="music.html" class="action-btn relax">
+                    <i class="fas fa-music"></i> Relax
+                </a>
             </div>
 
             <div class="sub-loading"><i class="fas fa-circle"></i> choose a feeling below</div>
