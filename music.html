@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Breezy · Relaxing Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: #f2ede8;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #2c241e;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .fullscreen {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 1.5rem 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(160deg, #f7f2ec 0%, #e8e0d8 100%);
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+        .fullscreen::-webkit-scrollbar {
+            width: 4px;
+        }
+        .fullscreen::-webkit-scrollbar-track {
+            background: #e4dad2;
+            border-radius: 20px;
+        }
+        .fullscreen::-webkit-scrollbar-thumb {
+            background: #b8a69a;
+            border-radius: 20px;
+        }
+        .fullscreen {
+            scrollbar-width: thin;
+            scrollbar-color: #b8a69a #e4dad2;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(218, 207, 196, 0.4);
+            margin-bottom: 1.2rem;
+            flex-shrink: 0;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 250, 245, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid #d6c8bc;
+            border-radius: 60px;
+            padding: 0.6rem 1.4rem 0.6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 470;
+            color: #332a23;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .back-btn:active {
+            transform: scale(0.94);
+            background: #d6c7bb;
+        }
+        .back-btn i {
+            font-size: 1.1rem;
+            color: #5e4d3f;
+        }
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            justify-content: center;
+        }
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .header-icons .icon-music {
+            font-size: 2rem;
+            color: #6d8f7a;
+        }
+        .header-icons .icon-feather {
+            font-size: 1.8rem;
+            color: #8a7566;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: #2b211b;
+            white-space: nowrap;
+        }
+        .header h1 span {
+            font-weight: 300;
+            font-size: 0.7rem;
+            background: rgba(210, 195, 182, 0.5);
+            color: #2b211b;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            margin-left: 0.3rem;
+        }
+        .header-spacer {
+            width: 80px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 480px) {
+            .header {
+                flex-wrap: nowrap;
+                gap: 6px;
+            }
+            .back-btn {
+                padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+                font-size: 0.8rem;
+            }
+            .back-btn i {
+                font-size: 0.85rem;
+            }
+            .back-btn span {
+                display: none;
+            }
+            .header-icons .icon-music {
+                font-size: 1.5rem;
+            }
+            .header-icons .icon-feather {
+                font-size: 1.3rem;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            .header h1 span {
+                font-size: 0.55rem;
+                padding: 0.05rem 0.5rem;
+            }
+            .header-spacer {
+                width: 30px;
+            }
+        }
+        @media (max-width: 380px) {
+            .back-btn {
+                padding: 0.3rem 0.6rem;
+            }
+            .header h1 {
+                font-size: 1.1rem;
+            }
+            .header-icons .icon-music {
+                font-size: 1.2rem;
+            }
+            .header-icons .icon-feather {
+                font-size: 1rem;
+            }
+            .header-spacer {
+                width: 20px;
+            }
+        }
+        @media (min-width: 600px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header-icons .icon-music {
+                font-size: 2.4rem;
+            }
+            .header-icons .icon-feather {
+                font-size: 2.2rem;
+            }
+        }
+        .subtitle {
+            color: #5f5146;
+            font-size: 0.95rem;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 1.2rem;
+            flex-shrink: 0;
+            opacity: 0.8;
+            padding: 0 0.5rem;
+        }
+
+        .player-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            min-height: 0;
+        }
+
+        .now-playing {
+            background: rgba(255, 250, 245, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid rgba(214, 200, 188, 0.3);
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .now-playing .track-number {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8f7c6e;
+            opacity: 0.7;
+        }
+        .now-playing .track-name {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #2b211b;
+            margin: 0.1rem 0 0.05rem;
+        }
+        .now-playing .track-mood {
+            font-size: 0.85rem;
+            color: #5f5146;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            padding: 0 0.2rem;
+        }
+        .progress-section .time {
+            font-size: 0.75rem;
+            font-weight: 450;
+            color: #5f5146;
+            min-width: 40px;
+            font-variant-numeric: tabular-nums;
+        }
+        .progress-track {
+            flex: 1;
+            height: 4px;
+            background: rgba(214, 200, 188, 0.4);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: height 0.2s;
+        }
+        .progress-track:hover {
+            height: 6px;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8a7566, #6d8f7a);
+            border-radius: 4px;
+            transition: width 0.1s linear;
+        }
+
+        .controls-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-shrink: 0;
+            padding: 0.2rem 0;
+            flex-wrap: wrap;
+        }
+        .controls-section .ctrl-btn {
+            background: rgba(255, 250, 245, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(214, 200, 188, 0.4);
+            border-radius: 60px;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #332a23;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .controls-section .ctrl-btn:active {
+            transform: scale(0.92);
+            background: rgba(214, 200, 188, 0.4);
+        }
+        .controls-section .ctrl-btn.play-btn {
+            width: 64px;
+            height: 64px;
+            background: rgba(176, 154, 139, 0.5);
+            border-color: rgba(138, 117, 102, 0.3);
+            color: #fcf7f2;
+            font-size: 1.6rem;
+        }
+        .controls-section .ctrl-btn.play-btn:active {
+            background: rgba(138, 117, 102, 0.5);
+        }
+        .controls-section .ctrl-btn.active-mode {
+            background: rgba(109, 143, 122, 0.35);
+            border-color: rgba(109, 143, 122, 0.4);
+            color: #4a6b5c;
+        }
+        .controls-section .ctrl-btn i {
+            pointer-events: none;
+        }
+
+        .volume-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .volume-wrap i {
+            color: #5f5146;
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+        .volume-slider {
+            width: 60px;
+            height: 3px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(214, 200, 188, 0.4);
+            border-radius: 4px;
+            outline: none;
+            transition: height 0.2s;
+        }
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #6d8f7a;
+            cursor: pointer;
+            border: none;
+        }
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #6d8f7a;
+            cursor: pointer;
+            border: none;
+        }
+        @media (max-width: 480px) {
+            .volume-slider {
+                width: 40px;
+            }
+            .controls-section .ctrl-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+            }
+            .controls-section .ctrl-btn.play-btn {
+                width: 56px;
+                height: 56px;
+                font-size: 1.4rem;
+            }
+            .controls-section {
+                gap: 12px;
+            }
+            .now-playing .track-name {
+                font-size: 1.1rem;
+            }
+        }
+        @media (min-width: 600px) {
+            .controls-section .ctrl-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            .controls-section .ctrl-btn.play-btn {
+                width: 74px;
+                height: 74px;
+                font-size: 1.8rem;
+            }
+            .now-playing .track-name {
+                font-size: 1.8rem;
+            }
+        }
+        @media (min-width: 900px) {
+            .fullscreen {
+                padding: 2.5rem 4rem 3rem;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+        }
+
+        .track-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.2rem 0.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-height: 200px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .track-list::-webkit-scrollbar {
+            width: 3px;
+        }
+        .track-list::-webkit-scrollbar-track {
+            background: #e4dad2;
+            border-radius: 20px;
+        }
+        .track-list::-webkit-scrollbar-thumb {
+            background: #b8a69a;
+            border-radius: 20px;
+        }
+        .track-list {
+            scrollbar-width: thin;
+            scrollbar-color: #b8a69a #e4dad2;
+        }
+        .track-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.7rem 1rem;
+            border-radius: 16px;
+            background: rgba(255, 250, 245, 0.25);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(214, 200, 188, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .track-item:active {
+            transform: scale(0.97);
+            background: rgba(214, 200, 188, 0.2);
+        }
+        .track-item.active {
+            background: rgba(176, 154, 139, 0.2);
+            border-color: rgba(176, 154, 139, 0.3);
+        }
+        .track-item .track-idx {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #8f7c6e;
+            min-width: 24px;
+            text-align: center;
+        }
+        .track-item .track-icon {
+            font-size: 1.1rem;
+            color: #6d8f7a;
+            width: 24px;
+            text-align: center;
+        }
+        .track-item .track-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .track-item .track-info .t-name {
+            font-size: 0.92rem;
+            font-weight: 470;
+            color: #2b211b;
+        }
+        .track-item .track-info .t-mood {
+            font-size: 0.7rem;
+            color: #5f5146;
+            opacity: 0.6;
+            font-style: italic;
+        }
+        .track-item .track-duration {
+            font-size: 0.75rem;
+            color: #8f7c6e;
+            opacity: 0.6;
+            font-variant-numeric: tabular-nums;
+        }
+        .track-item .track-play-icon {
+            color: #6d8f7a;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+        .track-item.active .track-play-icon {
+            opacity: 1;
+            color: #4a6b5c;
+        }
+
+        .footer {
+            flex-shrink: 0;
+            text-align: center;
+            font-size: 0.65rem;
+            color: rgba(160, 143, 128, 0.6);
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid rgba(220, 207, 196, 0.2);
+        }
+        .footer i {
+            margin: 0 3px;
+        }
+
+        .loading-indicator {
+            display: none;
+            font-size: 0.8rem;
+            color: #5f5146;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+            animation: pulse 1s ease-in-out infinite;
+        }
+        .loading-indicator.show {
+            display: inline-block;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fullscreen" id="app">
+        <div class="header">
+            <button class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i> <span>Back</span>
+            </button>
+            <div class="header-center">
+                <div class="header-icons">
+                    <i class="fas fa-music icon-music"></i>
+                    <i class="fas fa-feather-alt icon-feather"></i>
+                </div>
+                <h1>Breezy <span>Music</span></h1>
+            </div>
+            <div class="header-spacer"></div>
+        </div>
+
+        <div class="subtitle">5 relaxing tracks · 3 minutes each 🎵</div>
+
+        <div class="player-container">
+            <div class="now-playing">
+                <div class="track-number" id="trackNumber">Track 1 of 5</div>
+                <div class="track-name" id="trackName">Gentle Rain</div>
+                <div class="track-mood" id="trackMood">Calm · Sleep</div>
+                <div class="loading-indicator" id="loadingIndicator"><i class="fas fa-spinner fa-spin"></i> Loading…</div>
+            </div>
+
+            <div class="progress-section">
+                <span class="time" id="currentTime">0:00</span>
+                <div class="progress-track" id="progressTrack">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="time" id="totalTime">3:00</span>
+            </div>
+
+            <div class="controls-section">
+                <button class="ctrl-btn" id="modeBtn" title="Play mode: repeat / random">
+                    <i class="fas fa-repeat"></i>
+                </button>
+                <button class="ctrl-btn" id="prevBtn" title="Previous">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="ctrl-btn play-btn" id="playBtn" title="Play / Pause">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="ctrl-btn" id="nextBtn" title="Next">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <div class="volume-wrap">
+                    <i class="fas fa-volume-low"></i>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" />
+                </div>
+            </div>
+
+            <div class="track-list" id="trackList"></div>
+        </div>
+
+        <div class="footer">
+            <i class="fas fa-feather-alt"></i> Close your eyes · Breathe · Relax <i class="fas fa-feather-alt"></i>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // TRACK DEFINITIONS — 5 relaxing tracks with MP3 files
+        // ============================================================
+
+        const trackDefs = [{
+            id: 0,
+            name: "Gentle Rain",
+            mood: "Calm · Sleep",
+            icon: "fa-cloud-rain",
+            file: "m1.mp3"
+        }, {
+            id: 1,
+            name: "Mountain Stream",
+            mood: "Flow · Peace",
+            icon: "fa-water",
+            file: "m2.mp3"
+        }, {
+            id: 2,
+            name: "Forest Wind",
+            mood: "Soft · Breeze",
+            icon: "fa-wind",
+            file: "m3.mp3"
+        }, {
+            id: 3,
+            name: "Bamboo Flute",
+            mood: "Serene · Prayer",
+            icon: "fa-music",
+            file: "m4.mp3"
+        }, {
+            id: 4,
+            name: "Ocean Waves",
+            mood: "Calm · Tides",
+            icon: "fa-water",
+            file: "m5.mp3"
+        }];
+
+        // ============================================================
+        // MUSIC PLAYER — uses HTML5 Audio with MP3s
+        // ============================================================
+
+        class MusicPlayer {
+            constructor() {
+                this.currentTrack = 0;
+                this.isPlaying = false;
+                this.isPaused = false;
+                this.volume = 0.7;
+                this.mode = 'repeat';
+                this.audio = new Audio();
+                this.audio.preload = 'metadata';
+                this.audio.volume = this.volume;
+                this.updateInterval = null;
+                this.totalTracks = trackDefs.length;
+
+                // DOM refs
+                this.trackNameEl = document.getElementById('trackName');
+                this.trackMoodEl = document.getElementById('trackMood');
+                this.trackNumberEl = document.getElementById('trackNumber');
+                this.progressFill = document.getElementById('progressFill');
+                this.currentTimeEl = document.getElementById('currentTime');
+                this.totalTimeEl = document.getElementById('totalTime');
+                this.playBtn = document.getElementById('playBtn');
+                this.playIcon = this.playBtn.querySelector('i');
+                this.progressTrack = document.getElementById('progressTrack');
+                this.volumeSlider = document.getElementById('volumeSlider');
+                this.modeBtn = document.getElementById('modeBtn');
+                this.trackListEl = document.getElementById('trackList');
+                this.loadingIndicator = document.getElementById('loadingIndicator');
+
+                this.setupUI();
+                this.setupControls();
+                this.renderTrackList();
+                this.updateNowPlaying(0);
+
+                // Audio event listeners
+                this.audio.addEventListener('timeupdate', () => this.updateProgress());
+                this.audio.addEventListener('ended', () => this.onTrackEnded());
+                this.audio.addEventListener('loadedmetadata', () => {
+                    this.loadingIndicator.classList.remove('show');
+                    this.totalTimeEl.textContent = this.formatTime(this.audio.duration);
+                });
+                this.audio.addEventListener('waiting', () => this.loadingIndicator.classList.add('show'));
+                this.audio.addEventListener('canplay', () => this.loadingIndicator.classList.remove('show'));
+
+                this.totalTimeEl.textContent = '3:00';
+            }
+
+            setupUI() {
+                this.volumeSlider.addEventListener('input', () => {
+                    this.volume = parseInt(this.volumeSlider.value) / 100;
+                    this.audio.volume = this.volume;
+                });
+
+                this.progressTrack.addEventListener('click', (e) => {
+                    if (!this.audio.src) return;
+                    const rect = this.progressTrack.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width;
+                    const duration = this.audio.duration || 180;
+                    this.audio.currentTime = x * duration;
+                });
+
+                this.modeBtn.addEventListener('click', () => {
+                    if (this.mode === 'repeat') {
+                        this.mode = 'random';
+                        this.modeBtn.innerHTML = '<i class="fas fa-random"></i>';
+                        this.modeBtn.classList.add('active-mode');
+                    } else {
+                        this.mode = 'repeat';
+                        this.modeBtn.innerHTML = '<i class="fas fa-repeat"></i>';
+                        this.modeBtn.classList.remove('active-mode');
+                    }
+                });
+            }
+
+            setupControls() {
+                document.getElementById('playBtn').addEventListener('click', () => this.togglePlay());
+                document.getElementById('prevBtn').addEventListener('click', () => this.prevTrack());
+                document.getElementById('nextBtn').addEventListener('click', () => this.nextTrack());
+                document.getElementById('backBtn').addEventListener('click', () => {
+                    this.pause();
+                    window.location.href = 'index.html';
+                });
+            }
+
+            renderTrackList() {
+                let html = '';
+                trackDefs.forEach((t, i) => {
+                    const isActive = i === this.currentTrack;
+                    html += `
+                            <div class="track-item ${isActive ? 'active' : ''}" data-index="${i}">
+                                <span class="track-idx">${String(i+1).padStart(2,'0')}</span>
+                                <span class="track-icon"><i class="fas ${t.icon}"></i></span>
+                                <div class="track-info">
+                                    <div class="t-name">${t.name}</div>
+                                    <div class="t-mood">${t.mood}</div>
+                                </div>
+                                <span class="track-duration">${this.totalTimeEl.textContent}</span>
+                                <span class="track-play-icon"><i class="fas fa-${isActive && this.isPlaying ? 'play' : 'music'}"></i></span>
+                            </div>
+                        `;
+                });
+                this.trackListEl.innerHTML = html;
+
+                this.trackListEl.querySelectorAll('.track-item').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const idx = parseInt(el.dataset.index);
+                        if (idx === this.currentTrack && this.isPlaying) return;
+                        this.playTrack(idx);
+                    });
+                });
+            }
+
+            updateTrackList() {
+                const items = this.trackListEl.querySelectorAll('.track-item');
+                items.forEach((el, i) => {
+                    el.classList.toggle('active', i === this.currentTrack);
+                    const icon = el.querySelector('.track-play-icon i');
+                    if (i === this.currentTrack && this.isPlaying) {
+                        icon.className = 'fas fa-play';
+                    } else if (i === this.currentTrack) {
+                        icon.className = 'fas fa-pause';
+                    } else {
+                        icon.className = 'fas fa-music';
+                    }
+                });
+            }
+
+            // ============================================================
+            // PLAYBACK CONTROL
+            // ============================================================
+
+            playTrack(index) {
+                if (index === this.currentTrack && this.isPlaying) return;
+
+                this.stop();
+
+                this.currentTrack = index;
+                const track = trackDefs[index];
+                this.audio.src = track.file;
+                this.audio.load();
+                this.loadingIndicator.classList.add('show');
+
+                this.audio.play().then(() => {
+                    this.isPlaying = true;
+                    this.isPaused = false;
+                    this.playIcon.className = 'fas fa-pause';
+                    this.updateNowPlaying(index);
+                    this.updateTrackList();
+                    this.startProgressUpdate();
+                    this.loadingIndicator.classList.remove('show');
+                }).catch(err => {
+                    console.error('Playback error:', err);
+                    this.loadingIndicator.classList.remove('show');
+                });
+            }
+
+            stop() {
+                this.audio.pause();
+                this.audio.currentTime = 0;
+                this.isPlaying = false;
+                this.isPaused = false;
+                this.playIcon.className = 'fas fa-play';
+                this.progressFill.style.width = '0%';
+                this.currentTimeEl.textContent = '0:00';
+                if (this.updateInterval) {
+                    clearInterval(this.updateInterval);
+                    this.updateInterval = null;
+                }
+            }
+
+            pause() {
+                if (!this.isPlaying) return;
+                this.audio.pause();
+                this.isPlaying = false;
+                this.isPaused = true;
+                this.playIcon.className = 'fas fa-play';
+                if (this.updateInterval) {
+                    clearInterval(this.updateInterval);
+                    this.updateInterval = null;
+                }
+            }
+
+            resume() {
+                if (!this.isPaused) return;
+                this.audio.play().then(() => {
+                    this.isPlaying = true;
+                    this.isPaused = false;
+                    this.playIcon.className = 'fas fa-pause';
+                    this.startProgressUpdate();
+                }).catch(err => console.error('Resume error:', err));
+            }
+
+            togglePlay() {
+                if (!this.audio.src) {
+                    this.playTrack(this.currentTrack);
+                    return;
+                }
+
+                if (this.isPlaying) {
+                    this.pause();
+                } else if (this.isPaused) {
+                    this.resume();
+                } else {
+                    this.playTrack(this.currentTrack);
+                }
+            }
+
+            // ============================================================
+            // PROGRESS UPDATE
+            // ============================================================
+
+            startProgressUpdate() {
+                if (this.updateInterval) clearInterval(this.updateInterval);
+                this.updateProgress();
+                this.updateInterval = setInterval(() => this.updateProgress(), 200);
+            }
+
+            updateProgress() {
+                if (!this.audio.duration || isNaN(this.audio.duration)) return;
+                const current = this.audio.currentTime;
+                const duration = this.audio.duration;
+                const progress = current / duration;
+                this.progressFill.style.width = `${Math.min(1, progress) * 100}%`;
+                this.currentTimeEl.textContent = this.formatTime(current);
+                this.totalTimeEl.textContent = this.formatTime(duration);
+            }
+
+            formatTime(seconds) {
+                if (!seconds || isNaN(seconds)) return '0:00';
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${String(secs).padStart(2, '0')}`;
+            }
+
+            // ============================================================
+            // NAVIGATION
+            // ============================================================
+
+            onTrackEnded() {
+                if (this.isPaused) return;
+                this.isPlaying = false;
+                this.playIcon.className = 'fas fa-play';
+                if (this.mode === 'random') {
+                    this.playRandomTrack();
+                } else {
+                    const next = (this.currentTrack + 1) % this.totalTracks;
+                    this.playTrack(next);
+                }
+            }
+
+            playRandomTrack() {
+                let idx;
+                do {
+                    idx = Math.floor(Math.random() * this.totalTracks);
+                } while (idx === this.currentTrack && this.totalTracks > 1);
+                this.playTrack(idx);
+            }
+
+            nextTrack() {
+                if (this.mode === 'random') {
+                    this.playRandomTrack();
+                } else {
+                    const next = (this.currentTrack + 1) % this.totalTracks;
+                    this.playTrack(next);
+                }
+            }
+
+            prevTrack() {
+                if (this.mode === 'random') {
+                    this.playRandomTrack();
+                } else {
+                    const prev = (this.currentTrack - 1 + this.totalTracks) % this.totalTracks;
+                    this.playTrack(prev);
+                }
+            }
+
+            // ============================================================
+            // UI UPDATES
+            // ============================================================
+
+            updateNowPlaying(index) {
+                const track = trackDefs[index];
+                this.trackNameEl.textContent = track.name;
+                this.trackMoodEl.textContent = track.mood;
+                this.trackNumberEl.textContent = `Track ${index + 1} of ${this.totalTracks}`;
+            }
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+
+        const player = new MusicPlayer();
+        console.log('🎵 Breezy Music Player — 5 tracks (m1.mp3 to m5.mp3)');
+    </script>
+</body>
+</html>
