@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Breezy · Bible Reader</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: #f2ede8;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #2c241e;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.fullscreen {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 1.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg, #f7f2ec 0%, #e8e0d8 100%);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.fullscreen::-webkit-scrollbar {
+    width: 4px;
+}
+.fullscreen::-webkit-scrollbar-track {
+    background: #e4dad2;
+    border-radius: 20px;
+}
+.fullscreen::-webkit-scrollbar-thumb {
+    background: #b8a69a;
+    border-radius: 20px;
+}
+.fullscreen {
+    scrollbar-width: thin;
+    scrollbar-color: #b8a69a #e4dad2;
+}
+
+/* === HEADER === */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid rgba(218, 207, 196, 0.4);
+    margin-bottom: 1.2rem;
+    flex-shrink: 0;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 250, 245, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid #d6c8bc;
+    border-radius: 60px;
+    padding: 0.6rem 1.4rem 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 470;
+    color: #332a23;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.back-btn:active {
+    transform: scale(0.94);
+    background: #d6c7bb;
+}
+
+.back-btn i {
+    font-size: 1.1rem;
+    color: #5e4d3f;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    justify-content: center;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-icons .icon-bible {
+    font-size: 2rem;
+    color: #6d8f7a;
+}
+.header-icons .icon-feather {
+    font-size: 1.8rem;
+    color: #8a7566;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    color: #2b211b;
+    white-space: nowrap;
+}
+
+.header h1 span {
+    font-weight: 300;
+    font-size: 0.7rem;
+    background: rgba(210, 195, 182, 0.5);
+    color: #2b211b;
+    padding: 0.1rem 0.8rem;
+    border-radius: 40px;
+    margin-left: 0.3rem;
+}
+
+.header-spacer {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+    .back-btn {
+        padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+        font-size: 0.8rem;
+    }
+    .back-btn i {
+        font-size: 0.85rem;
+    }
+    .back-btn span {
+        display: none;
+    }
+    .header-icons .icon-bible {
+        font-size: 1.5rem;
+    }
+    .header-icons .icon-feather {
+        font-size: 1.3rem;
+    }
+    .header h1 {
+        font-size: 1.3rem;
+    }
+    .header h1 span {
+        font-size: 0.55rem;
+        padding: 0.05rem 0.5rem;
+    }
+    .header-spacer {
+        width: 30px;
+    }
+}
+
+@media (max-width: 380px) {
+    .back-btn {
+        padding: 0.3rem 0.6rem;
+    }
+    .header h1 {
+        font-size: 1.1rem;
+    }
+    .header-icons .icon-bible {
+        font-size: 1.2rem;
+    }
+    .header-icons .icon-feather {
+        font-size: 1rem;
+    }
+    .header-spacer {
+        width: 20px;
+    }
+}
+
+@media (min-width: 600px) {
+    .header h1 {
+        font-size: 2.2rem;
+    }
+    .header-icons .icon-bible {
+        font-size: 2.4rem;
+    }
+    .header-icons .icon-feather {
+        font-size: 2.2rem;
+    }
+}
+
+.subtitle {
+    color: #5f5146;
+    font-size: 0.95rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    flex-shrink: 0;
+    opacity: 0.8;
+    padding: 0 0.5rem;
+    display: none;
+}
+
+/* === MAIN === */
+.bible-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    min-height: 0;
+}
+
+/* --- INPUT SECTION --- */
+.input-section {
+    background: rgba(255, 250, 245, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 1.5rem 1.8rem;
+    border: 1px solid rgba(214, 200, 188, 0.3);
+    flex-shrink: 0;
+}
+
+.input-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.input-row .field-group {
+    flex: 1;
+    min-width: 100px;
+}
+
+.input-row .field-group label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8f7c6e;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.input-row .field-group label i {
+    margin-right: 4px;
+    font-size: 0.6rem;
+}
+
+.input-row select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(214, 200, 188, 0.4);
+    border-radius: 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #2b211b;
+    background: rgba(255, 250, 245, 0.5);
+    backdrop-filter: blur(4px);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238f7c6e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.input-row select:focus {
+    border-color: #b09a8b;
+    box-shadow: 0 0 0 4px rgba(176, 154, 139, 0.15);
+}
+
+.input-row select optgroup {
+    font-weight: 600;
+    color: #4f3d31;
+}
+
+.input-row select option {
+    font-weight: 400;
+    padding: 4px 0;
+}
+
+.input-row input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(214, 200, 188, 0.4);
+    border-radius: 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #2b211b;
+    background: rgba(255, 250, 245, 0.5);
+    backdrop-filter: blur(4px);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-row input:focus {
+    border-color: #b09a8b;
+    box-shadow: 0 0 0 4px rgba(176, 154, 139, 0.15);
+}
+
+.input-row input::placeholder {
+    color: #8f7c6e;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.input-row .field-group.book-field {
+    flex: 1.4;
+    min-width: 140px;
+}
+
+.input-row .field-group.chapter-field {
+    flex: 0.6;
+    min-width: 80px;
+}
+
+.input-row .field-group.verse-field {
+    flex: 0.5;
+    min-width: 80px;
+}
+
+.input-row .read-btn {
+    background: rgba(176, 154, 139, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(138, 117, 102, 0.3);
+    border-radius: 60px;
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    font-weight: 470;
+    color: #fcf7f2;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    min-height: 50px;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.input-row .read-btn:active {
+    transform: scale(0.94);
+    background: rgba(138, 117, 102, 0.6);
+}
+
+.input-row .read-btn i {
+    font-size: 1rem;
+}
+
+@media (max-width: 650px) {
+    .input-section {
+        padding: 1rem 1.2rem;
+        border-radius: 20px;
+    }
+    .input-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .input-row .field-group {
+        width: 100%;
+        min-width: unset;
+    }
+    .input-row .field-group.book-field {
+        flex: 1;
+    }
+    .input-row .field-group.chapter-field {
+        flex: 1;
+    }
+    .input-row .field-group.verse-field {
+        flex: 1;
+    }
+    .input-row input,
+    .input-row select {
+        font-size: 0.92rem;
+        padding: 0.7rem 0.9rem;
+        border-radius: 12px;
+    }
+    .input-row .read-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;
+        min-height: 46px;
+    }
+}
+
+/* --- QUICK LINKS & HIGHLIGHT CONTROLS --- */
+.controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0.7rem;
+    flex-shrink: 0;
+}
+
+.quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+}
+
+.quick-link {
+    background: rgba(255, 250, 245, 0.4);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(214, 200, 188, 0.3);
+    border-radius: 40px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    color: #4f3d31;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.quick-link:active {
+    transform: scale(0.94);
+    background: rgba(176, 154, 139, 0.2);
+}
+
+.quick-link i {
+    font-size: 0.6rem;
+    margin-right: 3px;
+    color: #8a7566;
+    opacity: 0.6;
+}
+
+.highlight-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 250, 245, 0.3);
+    padding: 4px 12px 4px 16px;
+    border-radius: 40px;
+    border: 1px solid rgba(214, 200, 188, 0.2);
+}
+
+.highlight-controls label {
+    font-size: 0.7rem;
+    color: #5f5146;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.highlight-controls input[type="color"] {
+    width: 32px;
+    height: 32px;
+    border: 2px solid rgba(214, 200, 188, 0.4);
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.highlight-controls input[type="color"]:hover {
+    border-color: #8a7566;
+}
+
+.highlight-controls input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.highlight-controls input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+.highlight-controls .clear-highlights-btn {
+    background: none;
+    border: none;
+    color: #8f7c6e;
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.highlight-controls .clear-highlights-btn:active {
+    transform: scale(0.94);
+    background: rgba(176, 154, 139, 0.2);
+}
+
+@media (max-width: 480px) {
+    .quick-links {
+        gap: 4px;
+    }
+    .quick-link {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.6rem;
+    }
+    .controls-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .highlight-controls {
+        justify-content: center;
+    }
+}
+
+/* --- OUTPUT SECTION --- */
+.output-section {
+    flex: 1;
+    background: rgba(255, 250, 245, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 28px;
+    padding: 1.5rem 1.8rem;
+    border: 1px solid rgba(214, 200, 188, 0.2);
+    min-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.output-section::-webkit-scrollbar {
+    width: 4px;
+}
+.output-section::-webkit-scrollbar-track {
+    background: #e4dad2;
+    border-radius: 20px;
+}
+.output-section::-webkit-scrollbar-thumb {
+    background: #b8a69a;
+    border-radius: 20px;
+}
+.output-section {
+    scrollbar-width: thin;
+    scrollbar-color: #b8a69a #e4dad2;
+}
+
+.reference-display {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #2b211b;
+    border-bottom: 2px solid rgba(218, 207, 196, 0.3);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.reference-display i {
+    color: #8a7566;
+    font-size: 1.4rem;
+    opacity: 0.6;
+}
+
+.reference-display .ref-text {
+    flex: 1;
+}
+
+.reference-display .translation-badge {
+    font-size: 0.6rem;
+    font-weight: 400;
+    background: rgba(176, 154, 139, 0.25);
+    padding: 0.2rem 0.8rem;
+    border-radius: 40px;
+    color: #5f5146;
+    letter-spacing: 0.5px;
+}
+
+.text-display {
+    font-size: 1.15rem;
+    line-height: 2.2;
+    color: #281f1a;
+    flex: 1;
+}
+
+.text-display .verse-line {
+    display: block;
+    padding: 2px 8px;
+    margin: 1px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.text-display .verse-line:hover {
+    background-color: rgba(176, 154, 139, 0.15);
+}
+
+.text-display .verse-line.highlighted {
+    background-color: var(--highlight-color, #ffeb3b);
+}
+
+.text-display .verse-number {
+    font-weight: 700;
+    color: #0066cc;
+    margin-right: 6px;
+    font-size: 0.95rem;
+}
+
+.loading-text {
+    color: #8f7c6e;
+    font-style: italic;
+    font-size: 1.05rem;
+    opacity: 0.7;
+}
+
+.error-text {
+    color: #c47a7a;
+    font-style: italic;
+    font-size: 1.05rem;
+}
+
+@media (max-width: 480px) {
+    .output-section {
+        padding: 1rem 1.2rem;
+        border-radius: 20px;
+        min-height: 220px;
+    }
+    .reference-display {
+        font-size: 1.3rem;
+        flex-wrap: wrap;
+    }
+    .reference-display i {
+        font-size: 1rem;
+    }
+    .text-display {
+        font-size: 0.98rem;
+        line-height: 2;
+    }
+    .text-display .verse-number {
+        font-size: 0.85rem;
+    }
+}
+
+@media (min-width: 600px) {
+    .text-display {
+        font-size: 1.25rem;
+        line-height: 2.4;
+    }
+    .reference-display {
+        font-size: 2rem;
+    }
+}
+
+/* --- FOOTER --- */
+.footer {
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 0.65rem;
+    color: rgba(160, 143, 128, 0.6);
+    padding-top: 0.8rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(220, 207, 196, 0.2);
+}
+
+.footer i {
+    margin: 0 3px;
+}
+
+:root {
+    --highlight-color: #ffeb3b;
+}
+</style>
+</head>
+<body>
+
+<div class="fullscreen" id="app">
+
+    <!-- Header -->
+    <div class="header">
+        <button class="back-btn" id="backBtn">
+            <i class="fas fa-arrow-left"></i> <span>Back</span>
+        </button>
+        <div class="header-center">
+            <div class="header-icons">
+                <i class="fas fa-bible icon-bible"></i>
+                <i class="fas fa-feather-alt icon-feather"></i>
+            </div>
+            <h1>Breezy <span>Bible</span></h1>
+        </div>
+        <div class="header-spacer"></div>
+    </div>
+
+    <div class="subtitle"></div>
+
+    <!-- Main -->
+    <div class="bible-container">
+
+        <!-- Input -->
+        <div class="input-section">
+            <div class="input-row">
+                <div class="field-group book-field">
+                    <label><i class="fas fa-book"></i> Book</label>
+                    <select id="bookSelect">
+                        <optgroup label="📜 Old Testament">
+                            <option value="Genesis">Genesis</option>
+                            <option value="Exodus">Exodus</option>
+                            <option value="Leviticus">Leviticus</option>
+                            <option value="Numbers">Numbers</option>
+                            <option value="Deuteronomy">Deuteronomy</option>
+                            <option value="Joshua">Joshua</option>
+                            <option value="Judges">Judges</option>
+                            <option value="Ruth">Ruth</option>
+                            <option value="1 Samuel">1 Samuel</option>
+                            <option value="2 Samuel">2 Samuel</option>
+                            <option value="1 Kings">1 Kings</option>
+                            <option value="2 Kings">2 Kings</option>
+                            <option value="1 Chronicles">1 Chronicles</option>
+                            <option value="2 Chronicles">2 Chronicles</option>
+                            <option value="Ezra">Ezra</option>
+                            <option value="Nehemiah">Nehemiah</option>
+                            <option value="Esther">Esther</option>
+                            <option value="Job">Job</option>
+                            <option value="Psalm">Psalm</option>
+                            <option value="Proverbs">Proverbs</option>
+                            <option value="Ecclesiastes">Ecclesiastes</option>
+                            <option value="Song of Solomon">Song of Solomon</option>
+                            <option value="Isaiah">Isaiah</option>
+                            <option value="Jeremiah">Jeremiah</option>
+                            <option value="Lamentations">Lamentations</option>
+                            <option value="Ezekiel">Ezekiel</option>
+                            <option value="Daniel">Daniel</option>
+                            <option value="Hosea">Hosea</option>
+                            <option value="Joel">Joel</option>
+                            <option value="Amos">Amos</option>
+                            <option value="Obadiah">Obadiah</option>
+                            <option value="Jonah">Jonah</option>
+                            <option value="Micah">Micah</option>
+                            <option value="Nahum">Nahum</option>
+                            <option value="Habakkuk">Habakkuk</option>
+                            <option value="Zephaniah">Zephaniah</option>
+                            <option value="Haggai">Haggai</option>
+                            <option value="Zechariah">Zechariah</option>
+                            <option value="Malachi">Malachi</option>
+                        </optgroup>
+                        <optgroup label="✝️ New Testament">
+                            <option value="Matthew">Matthew</option>
+                            <option value="Mark">Mark</option>
+                            <option value="Luke">Luke</option>
+                            <option value="John">John</option>
+                            <option value="Acts">Acts</option>
+                            <option value="Romans" selected>Romans</option>
+                            <option value="1 Corinthians">1 Corinthians</option>
+                            <option value="2 Corinthians">2 Corinthians</option>
+                            <option value="Galatians">Galatians</option>
+                            <option value="Ephesians">Ephesians</option>
+                            <option value="Philippians">Philippians</option>
+                            <option value="Colossians">Colossians</option>
+                            <option value="1 Thessalonians">1 Thessalonians</option>
+                            <option value="2 Thessalonians">2 Thessalonians</option>
+                            <option value="1 Timothy">1 Timothy</option>
+                            <option value="2 Timothy">2 Timothy</option>
+                            <option value="Titus">Titus</option>
+                            <option value="Philemon">Philemon</option>
+                            <option value="Hebrews">Hebrews</option>
+                            <option value="James">James</option>
+                            <option value="1 Peter">1 Peter</option>
+                            <option value="2 Peter">2 Peter</option>
+                            <option value="1 John">1 John</option>
+                            <option value="2 John">2 John</option>
+                            <option value="3 John">3 John</option>
+                            <option value="Jude">Jude</option>
+                            <option value="Revelation">Revelation</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="field-group chapter-field">
+                    <label><i class="fas fa-hashtag"></i> Chapter</label>
+                    <input id="chapterInput" type="number" placeholder="e.g. 8" value="8" min="1" />
+                </div>
+                <div class="field-group verse-field">
+                    <label><i class="fas fa-asterisk"></i> Verse <span style="font-weight:300;font-size:0.55rem;color:#8f7c6e;">(opt)</span></label>
+                    <input id="verseInput" type="text" placeholder="e.g. 16 or 5-6" />
+                </div>
+                <button class="read-btn" id="readBtn"><i class="fas fa-search"></i> Read</button>
+            </div>
+
+            <!-- Quick Links & Highlight Controls -->
+            <div class="controls-row">
+                <div class="quick-links">
+                    <span class="quick-link" data-book="Romans" data-chapter="8"><i class="fas fa-bolt"></i> Romans 8</span>
+                    <span class="quick-link" data-book="John" data-chapter="3" data-verse="16"><i class="fas fa-bolt"></i> John 3:16</span>
+                    <span class="quick-link" data-book="Psalm" data-chapter="23"><i class="fas fa-bolt"></i> Psalm 23</span>
+                    <span class="quick-link" data-book="Genesis" data-chapter="1"><i class="fas fa-bolt"></i> Genesis 1</span>
+                    <span class="quick-link" data-book="Matthew" data-chapter="5"><i class="fas fa-bolt"></i> Matthew 5</span>
+                    <span class="quick-link" data-book="Job" data-chapter="1"><i class="fas fa-bolt"></i> Job 1</span>
+                </div>
+                <div class="highlight-controls">
+                    <label for="highlightColor"><i class="fas fa-highlighter"></i> Highlight</label>
+                    <input type="color" id="highlightColor" value="#ffeb3b" />
+                    <button class="clear-highlights-btn" id="clearHighlightsBtn" title="Clear all highlights"><i class="fas fa-eraser"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Output -->
+        <div class="output-section" id="outputSection">
+            <div class="reference-display">
+                <i class="fas fa-bible"></i>
+                <span class="ref-text" id="referenceDisplay">Romans 8</span>
+                <span class="translation-badge">KJV</span>
+            </div>
+            <div class="text-display" id="textDisplay">
+                <span class="loading-text"><i class="fas fa-spinner fa-pulse"></i> Loading...</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-bible"></i> King James Version · Free Bible API · No API key required <i class="fas fa-feather-alt"></i>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// BIBLE READER — All 66 books dropdown, highlight on click
+// ============================================================
+
+const bookSelect = document.getElementById('bookSelect');
+const chapterInput = document.getElementById('chapterInput');
+const verseInput = document.getElementById('verseInput');
+const readBtn = document.getElementById('readBtn');
+const referenceDisplay = document.getElementById('referenceDisplay');
+const textDisplay = document.getElementById('textDisplay');
+const backBtn = document.getElementById('backBtn');
+const highlightColorInput = document.getElementById('highlightColor');
+const clearHighlightsBtn = document.getElementById('clearHighlightsBtn');
+
+// --- Back button ---
+backBtn.addEventListener('click', function() {
+    window.location.href = 'index.html';
+});
+
+// --- Highlight color change ---
+highlightColorInput.addEventListener('input', function(e) {
+    document.documentElement.style.setProperty('--highlight-color', e.target.value);
+});
+
+// --- Clear highlights ---
+clearHighlightsBtn.addEventListener('click', function() {
+    document.querySelectorAll('.verse-line.highlighted').forEach(el => {
+        el.classList.remove('highlighted');
+    });
+});
+
+// --- Quick links ---
+document.querySelectorAll('.quick-link').forEach(link => {
+    link.addEventListener('click', function() {
+        const book = this.dataset.book;
+        const chapter = this.dataset.chapter;
+        const verse = this.dataset.verse || '';
+        for (let opt of bookSelect.options) {
+            if (opt.value === book) {
+                bookSelect.value = book;
+                break;
+            }
+        }
+        chapterInput.value = chapter;
+        verseInput.value = verse;
+        loadBible();
+    });
+});
+
+// --- Read button ---
+readBtn.addEventListener('click', function() {
+    loadBible();
+});
+
+// --- Enter key ---
+[chapterInput, verseInput].forEach(input => {
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            loadBible();
+        }
+    });
+});
+
+// --- Load Bible ---
+function loadBible() {
+    const book = bookSelect.value;
+    const chapter = chapterInput.value.trim();
+    const verse = verseInput.value.trim();
+
+    if (!book || !chapter) {
+        referenceDisplay.textContent = '—';
+        textDisplay.innerHTML = '<span class="error-text">⚠️ Please select a Book and enter a Chapter.</span>';
+        return;
+    }
+
+    let reference = book + ' ' + chapter;
+    if (verse) {
+        reference += ':' + verse;
+    }
+
+    referenceDisplay.textContent = reference + ' ...';
+    textDisplay.innerHTML = '<span class="loading-text"><i class="fas fa-spinner fa-pulse"></i> Loading...</span>';
+
+    const url = 'https://bible-api.com/' + encodeURIComponent(reference) + '?translation=kjv';
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error('Network error');
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                referenceDisplay.textContent = 'Not Found';
+                textDisplay.innerHTML =
+                    `<span class="error-text">🙁 No verses found for "${reference}".<br>Check the book name, chapter, and verse(s).</span>`;
+                return;
+            }
+
+            referenceDisplay.textContent = data.reference || reference;
+
+            let html = '';
+
+            if (data.verses && data.verses.length > 0) {
+                data.verses.forEach(function(v) {
+                    html += `<span class="verse-line" data-verse="${v.verse}">
+                        <span class="verse-number">${v.verse}</span> ${v.text}
+                    </span>`;
+                });
+            } else if (data.text) {
+                const lines = data.text.split('\n');
+                lines.forEach(function(line) {
+                    const trimmed = line.trim();
+                    if (!trimmed) return;
+                    const match = trimmed.match(/^(\d+)\s+(.*)/);
+                    if (match) {
+                        html += `<span class="verse-line" data-verse="${match[1]}">
+                            <span class="verse-number">${match[1]}</span> ${match[2]}
+                        </span>`;
+                    } else {
+                        html += `<span class="verse-line">${trimmed}</span>`;
+                    }
+                });
+            }
+
+            if (html === '') {
+                html = data.text || '';
+            }
+
+            textDisplay.innerHTML = html;
+
+            document.querySelectorAll('.verse-line').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.toggle('highlighted');
+                });
+            });
+
+        })
+        .catch(function() {
+            referenceDisplay.textContent = 'Connection Error';
+            textDisplay.innerHTML =
+                '<span class="error-text">🔌 Unable to connect to the Bible API. Please check your internet connection.</span>';
+        });
+}
+
+// --- Auto-load ---
+window.addEventListener('DOMContentLoaded', function() {
+    bookSelect.value = 'Romans';
+    chapterInput.value = '8';
+    verseInput.value = '';
+    loadBible();
+});
+
+console.log('📖 Bible Reader loaded.');
+</script>
+</body>
+</html>
