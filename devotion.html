@@ -519,7 +519,14 @@
             color: #c4b5a8;
             font-size: 1.1rem;
             font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .alarm-overlay .alarm-auto-dismiss {
+            color: rgba(196, 181, 168, 0.7);
+            font-size: 0.9rem;
             margin-bottom: 1.8rem;
+            font-style: italic;
         }
 
         .alarm-overlay .btn-dismiss {
@@ -818,6 +825,7 @@
         <h2><i class="fas fa-pray"></i> Devotion Time</h2>
         <div class="alarm-verse" id="alarmVerse">The Lord is my shepherd; I shall not want.</div>
         <div class="alarm-ref" id="alarmRef">Psalm 23:1</div>
+        <div class="alarm-auto-dismiss"><i class="fas fa-clock"></i> Alarm will stop automatically after 3 minutes</div>
         <button class="btn-dismiss" id="dismissAlarmBtn"><i class="fas fa-check"></i> Dismiss</button>
     </div>
 
@@ -1321,8 +1329,10 @@
         });
 
         // ============================================================
-        // ALARM TRIGGER
+        // ALARM TRIGGER (with auto-dismiss after 3 minutes)
         // ============================================================
+        let autoDismissTimer = null;
+
         function triggerAlarm(slotName) {
             const labels = { morning: 'Morning', afternoon: 'Afternoon', evening: 'Evening' };
             const icons = { morning: '🌅', afternoon: '☀️', evening: '🌙' };
@@ -1353,13 +1363,23 @@
                 state.alarmSlot = slotName;
                 saveState();
                 updateUI();
+
+                // --- Auto-dismiss after 3 minutes (180000 ms) ---
+                if (autoDismissTimer) clearTimeout(autoDismissTimer);
+                autoDismissTimer = setTimeout(function() {
+                    dismissAlarm();
+                }, 180000);
             }
         }
 
         // ============================================================
-        // DISMISS ALARM
+        // DISMISS ALARM (clears auto-dismiss timer)
         // ============================================================
         function dismissAlarm() {
+            if (autoDismissTimer) {
+                clearTimeout(autoDismissTimer);
+                autoDismissTimer = null;
+            }
             stopLongAlarm();
             document.getElementById('alarmOverlay').classList.remove('active');
             document.getElementById('alarmIndicator').style.display = 'none';
@@ -1484,7 +1504,7 @@
         });
 
         // ============================================================
-        // TEST ALARM
+        // TEST ALARM (also auto-dismiss after 3 min)
         // ============================================================
         document.getElementById('testAlarmBtn').addEventListener('click', function() {
             const idx = getUniqueVerse();
@@ -1496,6 +1516,12 @@
                 startLongAlarm();
                 document.getElementById('alarmIndicator').style.display = 'block';
                 sendNotification('🔔 Test Alarm', 'Your devotion alarm is working!', verse.ref);
+
+                // Auto-dismiss after 3 min
+                if (autoDismissTimer) clearTimeout(autoDismissTimer);
+                autoDismissTimer = setTimeout(function() {
+                    dismissAlarm();
+                }, 180000);
             }
         });
 
@@ -1570,6 +1596,11 @@
                         document.getElementById('alarmOverlay').classList.add('active');
                         startLongAlarm();
                         document.getElementById('alarmIndicator').style.display = 'block';
+                        // Re-set auto-dismiss timer if alarm was ongoing
+                        if (autoDismissTimer) clearTimeout(autoDismissTimer);
+                        autoDismissTimer = setTimeout(function() {
+                            dismissAlarm();
+                        }, 180000);
                     }
                 }
             }
@@ -1592,6 +1623,11 @@
                                 document.getElementById('alarmOverlay').classList.add('active');
                                 startLongAlarm();
                                 document.getElementById('alarmIndicator').style.display = 'block';
+                                // Re-set auto-dismiss timer
+                                if (autoDismissTimer) clearTimeout(autoDismissTimer);
+                                autoDismissTimer = setTimeout(function() {
+                                    dismissAlarm();
+                                }, 180000);
                             }
                         }
                     }
@@ -1604,7 +1640,7 @@
             console.log('⏰ Times:', minutesToTimeStr(state.times.morning),
                 minutesToTimeStr(state.times.afternoon),
                 minutesToTimeStr(state.times.evening));
-            console.log('🔔 Click "Background" for offline alarms');
+            console.log('🔔 Alarm will auto-dismiss after 3 minutes.');
         }
 
         document.addEventListener('DOMContentLoaded', init);
