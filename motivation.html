@@ -243,7 +243,7 @@
             }
         }
 
-        /* === VIDEO GRID — SPACIOUS === */
+        /* === VIDEO GRID === */
         .video-grid {
             flex: 1;
             display: grid;
@@ -288,7 +288,7 @@
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: #1a1512;
+            background: #0d0b0a;
             overflow: hidden;
             border-radius: 0;
         }
@@ -298,14 +298,13 @@
             height: 100%;
             display: block;
             object-fit: cover;
-            transition: transform 0.4s ease;
         }
 
         .video-card:hover .video-wrapper video {
             transform: scale(1.02);
         }
 
-        /* Play overlay */
+        /* === Play button overlay (subtle, shows on hover) === */
         .video-card .play-overlay {
             position: absolute;
             top: 0;
@@ -315,54 +314,54 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            transition: all 0.4s ease;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.4s ease;
             pointer-events: none;
         }
 
+        .video-card:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
         .video-card .play-overlay .play-circle {
-            width: 76px;
-            height: 76px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-        }
-
-        .video-card .play-overlay .play-circle i {
-            font-size: 2.2rem;
-            color: #ffffff;
-            margin-left: 5px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: scale(0.8);
         }
 
         .video-card:hover .play-overlay .play-circle {
-            transform: scale(1.08);
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.4);
+            opacity: 1;
+            transform: scale(1);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .video-card:hover .play-overlay .play-circle i {
-            transform: scale(1.05);
+        .video-card .play-overlay .play-circle i {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-left: 4px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Shimmer */
+        /* Shimmer effect while loading */
         .video-card .shimmer {
             position: absolute;
             top: 0;
             left: -100%;
             width: 60%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
             animation: shimmer 2.5s infinite;
             pointer-events: none;
         }
@@ -372,14 +371,7 @@
             100% { left: 120%; }
         }
 
-        /* Playing state hides overlay */
-        .video-card.playing .play-overlay {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        /* Fade-in animations */
+        /* Fade-in */
         .video-card {
             animation: cardFadeIn 0.6s ease forwards;
             opacity: 0;
@@ -401,18 +393,18 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive grid */
+        /* Responsive */
         @media (max-width: 480px) {
             .video-grid {
                 grid-template-columns: 1fr;
                 gap: 18px;
             }
             .video-card .play-overlay .play-circle {
-                width: 60px;
-                height: 60px;
+                width: 52px;
+                height: 52px;
             }
             .video-card .play-overlay .play-circle i {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
             .video-card {
                 border-radius: 20px;
@@ -436,15 +428,15 @@
                 margin: 0 auto;
             }
             .video-card .play-overlay .play-circle {
-                width: 88px;
-                height: 88px;
+                width: 80px;
+                height: 80px;
             }
             .video-card .play-overlay .play-circle i {
-                font-size: 2.6rem;
+                font-size: 2.2rem;
             }
         }
 
-        /* === VIDEO OVERLAY (Fullscreen modal) === */
+        /* === VIDEO OVERLAY === */
         .video-overlay {
             position: fixed;
             top: 0;
@@ -576,7 +568,8 @@
 
         <!-- Credit -->
         <div class="credit-bar">
-            <i class="fas fa-video"></i> Credit to the owner of
+            <i class="fas fa-video"></i>
+            <strong style="color:#5f5146;">Credit to the owner:</strong>
             <span class="owner">Rietro C</span> —
             <span class="owner">Magnify The Love</span> on YouTube
             <i class="fas fa-heart heart"></i>
@@ -601,7 +594,7 @@
 
     <script>
         // ============================================================
-        // VIDEO LIST — Matches the filenames in the screenshot
+        // VIDEO LIST
         // ============================================================
 
         const videoFiles = [
@@ -629,7 +622,7 @@
         const backBtn = document.getElementById('backBtn');
 
         // ============================================================
-        // RENDER VIDEOS
+        // RENDER VIDEOS — Autoplay muted as cover
         // ============================================================
 
         function renderVideos() {
@@ -643,6 +636,8 @@
                                     src="${video.file}" 
                                     preload="metadata"
                                     muted
+                                    autoplay
+                                    loop
                                     playsinline
                                     webkit-playsinline
                                 ></video>
@@ -659,7 +654,7 @@
 
             videoGrid.innerHTML = html;
 
-            // Attach click events to cards
+            // Click on card → open overlay
             document.querySelectorAll('.video-card').forEach((card) => {
                 card.addEventListener('click', function() {
                     const index = parseInt(this.dataset.index);
@@ -668,7 +663,23 @@
                 });
             });
 
-            // Also pause all videos when overlay opens (we'll handle in openOverlay)
+            // Autoplay videos that are visible (they autoplay already, but sometimes browsers block)
+            // We'll also handle visibility change to autoplay when visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target.querySelector('video');
+                    if (!video) return;
+                    if (entry.isIntersecting) {
+                        video.play().catch(() => {});
+                    } else {
+                        // Don't pause, let them keep playing muted
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.video-card').forEach(card => {
+                observer.observe(card);
+            });
         }
 
         // ============================================================
@@ -676,22 +687,16 @@
         // ============================================================
 
         function openOverlay(src, label) {
+            // Pause all grid videos
+            document.querySelectorAll('.video-card video').forEach(v => {
+                v.pause();
+            });
+
             overlayVideo.src = src;
             overlayVideo.load();
             overlayVideo.play();
             overlayLabel.textContent = label || 'Now Playing';
             overlay.classList.add('active');
-
-            // Pause any playing videos in the grid
-            document.querySelectorAll('.video-card video').forEach(v => {
-                if (!v.paused) {
-                    v.pause();
-                    const card = v.closest('.video-card');
-                    if (card) card.classList.remove('playing');
-                }
-            });
-
-            // Prevent body scroll
             document.body.style.overflow = 'hidden';
         }
 
@@ -700,15 +705,18 @@
             overlayVideo.src = '';
             overlay.classList.remove('active');
             document.body.style.overflow = '';
+
+            // Resume muted autoplay on grid videos that are visible
+            document.querySelectorAll('.video-card video').forEach(v => {
+                v.play().catch(() => {});
+            });
         }
 
-        // Close overlay events
         closeOverlayBtn.addEventListener('click', closeOverlay);
         overlay.addEventListener('click', function(e) {
             if (e.target === this) closeOverlay();
         });
 
-        // Also close with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && overlay.classList.contains('active')) {
                 closeOverlay();
@@ -729,7 +737,7 @@
 
         renderVideos();
 
-        console.log('📽️ Breezy Videos loaded — tap any video to watch in fullscreen overlay.');
+        console.log('📽️ Breezy Videos loaded — Videos autoplay muted as their own covers.');
     </script>
 </body>
 </html>
