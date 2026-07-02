@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Breezy · Emotional Support</title>
+    <title>Breezy · Complete Support</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* === RESET & GLOBAL === */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html,
         body {
             width: 100%;
@@ -22,10 +20,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             color: #2c241e;
             -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
         }
-
         .fullscreen {
             width: 100%;
             min-height: 100vh;
@@ -34,12 +29,10 @@
             display: flex;
             flex-direction: column;
             background: linear-gradient(160deg, #f7f2ec 0%, #e8e0d8 100%);
-            position: relative;
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
         }
-
         .fullscreen::-webkit-scrollbar {
             width: 4px;
         }
@@ -55,8 +48,6 @@
             scrollbar-width: thin;
             scrollbar-color: #b8a69a #e4dad2;
         }
-
-        /* === HEADER === */
         .header {
             display: flex;
             align-items: center;
@@ -68,7 +59,6 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -84,21 +74,17 @@
             color: #332a23;
             cursor: pointer;
             transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
             text-decoration: none;
             flex-shrink: 0;
         }
-
         .back-btn:active {
             transform: scale(0.94);
             background: #d6c7bb;
         }
-
         .back-btn i {
             font-size: 1.1rem;
             color: #5e4d3f;
         }
-
         .header-center {
             display: flex;
             align-items: center;
@@ -106,23 +92,19 @@
             flex: 1;
             justify-content: center;
         }
-
         .header-icons {
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
         .header-icons .icon-robot {
             font-size: 2rem;
             color: #6d8f7a;
         }
-
         .header-icons .icon-feather {
             font-size: 1.8rem;
             color: #8a7566;
         }
-
         .header h1 {
             font-size: 1.8rem;
             font-weight: 500;
@@ -130,7 +112,6 @@
             color: #2b211b;
             white-space: nowrap;
         }
-
         .header h1 span {
             font-weight: 300;
             font-size: 0.7rem;
@@ -140,12 +121,10 @@
             border-radius: 40px;
             margin-left: 0.3rem;
         }
-
         .header-spacer {
             width: 80px;
             flex-shrink: 0;
         }
-
         @media (max-width: 480px) {
             .header {
                 flex-wrap: nowrap;
@@ -178,7 +157,6 @@
                 width: 30px;
             }
         }
-
         @media (max-width: 380px) {
             .back-btn {
                 padding: 0.3rem 0.6rem;
@@ -196,7 +174,6 @@
                 width: 20px;
             }
         }
-
         @media (min-width: 600px) {
             .header h1 {
                 font-size: 2.2rem;
@@ -208,7 +185,6 @@
                 font-size: 2.2rem;
             }
         }
-
         .subtitle {
             color: #5f5146;
             font-size: 0.95rem;
@@ -219,8 +195,6 @@
             opacity: 0.8;
             padding: 0 0.5rem;
         }
-
-        /* === CHAT AREA === */
         .chat-container {
             flex: 1;
             display: flex;
@@ -228,7 +202,6 @@
             min-height: 0;
             margin-bottom: 1rem;
         }
-
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -240,7 +213,6 @@
             max-height: 600px;
             -webkit-overflow-scrolling: touch;
         }
-
         .chat-messages::-webkit-scrollbar {
             width: 4px;
         }
@@ -256,23 +228,19 @@
             scrollbar-width: thin;
             scrollbar-color: #b8a69a #e4dad2;
         }
-
         .message-wrapper {
             display: flex;
             align-items: flex-start;
             gap: 10px;
             max-width: 92%;
         }
-
         .message-wrapper.user {
             align-self: flex-end;
             flex-direction: row-reverse;
         }
-
         .message-wrapper.bot {
             align-self: flex-start;
         }
-
         .avatar {
             width: 38px;
             height: 38px;
@@ -285,21 +253,17 @@
             flex-shrink: 0;
             border: 1.5px solid rgba(214, 200, 188, 0.5);
         }
-
         .avatar i {
             font-size: 1.2rem;
             color: #3f342c;
         }
-
         .message-wrapper.user .avatar {
             background: rgba(109, 143, 122, 0.3);
             border-color: rgba(109, 143, 122, 0.3);
         }
-
         .message-wrapper.user .avatar i {
             color: #4a6b5c;
         }
-
         .message {
             padding: 1rem 1.4rem;
             border-radius: 24px;
@@ -310,7 +274,6 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
             flex: 1;
         }
-
         @keyframes msgFadeIn {
             from {
                 opacity: 0;
@@ -321,7 +284,6 @@
                 transform: translateY(0);
             }
         }
-
         .message-wrapper.user .message {
             align-self: flex-end;
             background: rgba(176, 154, 139, 0.35);
@@ -330,7 +292,6 @@
             color: #2b211b;
             border-bottom-right-radius: 6px;
         }
-
         .message-wrapper.bot .message {
             align-self: flex-start;
             background: rgba(255, 250, 245, 0.5);
@@ -339,7 +300,6 @@
             color: #281f1a;
             border-bottom-left-radius: 6px;
         }
-
         .message .msg-meta {
             font-size: 0.65rem;
             opacity: 0.5;
@@ -348,16 +308,13 @@
             align-items: center;
             gap: 6px;
         }
-
         .message-wrapper.bot .msg-meta {
             color: #5f5146;
         }
-
         .message-wrapper.user .msg-meta {
             color: #5f5146;
             justify-content: flex-end;
         }
-
         .typing-indicator {
             align-self: flex-start;
             background: rgba(255, 250, 245, 0.5);
@@ -371,11 +328,9 @@
             align-items: center;
             margin-left: 48px;
         }
-
         .typing-indicator.show {
             display: flex;
         }
-
         .typing-indicator .dot {
             width: 8px;
             height: 8px;
@@ -383,14 +338,12 @@
             border-radius: 50%;
             animation: typingDot 1.2s ease-in-out infinite;
         }
-
         .typing-indicator .dot:nth-child(2) {
             animation-delay: 0.2s;
         }
         .typing-indicator .dot:nth-child(3) {
             animation-delay: 0.4s;
         }
-
         @keyframes typingDot {
             0%,
             60%,
@@ -403,7 +356,6 @@
                 opacity: 1;
             }
         }
-
         .input-area {
             display: flex;
             gap: 12px;
@@ -414,7 +366,6 @@
             margin-top: 0.2rem;
             flex-wrap: wrap;
         }
-
         .input-area input {
             flex: 1;
             min-width: 160px;
@@ -429,18 +380,15 @@
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
-
         .input-area input:focus {
             border-color: #b09a8b;
             box-shadow: 0 0 0 4px rgba(176, 154, 139, 0.15);
         }
-
         .input-area input::placeholder {
             color: #8f7c6e;
             font-style: italic;
             opacity: 0.7;
         }
-
         .input-area .send-btn {
             background: rgba(176, 154, 139, 0.5);
             backdrop-filter: blur(8px);
@@ -455,19 +403,15 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            -webkit-tap-highlight-color: transparent;
             white-space: nowrap;
         }
-
         .input-area .send-btn:active {
             transform: scale(0.94);
             background: rgba(138, 117, 102, 0.6);
         }
-
         .input-area .send-btn i {
             font-size: 1.1rem;
         }
-
         .footer {
             flex-shrink: 0;
             text-align: center;
@@ -477,11 +421,9 @@
             margin-top: 0.5rem;
             border-top: 1px solid rgba(220, 207, 196, 0.2);
         }
-
         .footer i {
             margin: 0 3px;
         }
-
         @media (max-width: 400px) {
             .fullscreen {
                 padding: 1rem 0.8rem 1.5rem;
@@ -522,7 +464,6 @@
                 margin-left: 40px;
             }
         }
-
         @media (min-width: 600px) {
             .chat-messages {
                 max-height: 700px;
@@ -547,7 +488,6 @@
                 font-size: 1.05rem;
             }
         }
-
         @media (min-width: 900px) {
             .fullscreen {
                 padding: 2.5rem 4rem 3rem;
@@ -565,22 +505,304 @@
                 font-size: 1.2rem;
             }
         }
-
         .chat-messages {
             scroll-behavior: smooth;
         }
 
-        .message-wrapper.bot .message .heart-icon {
-            color: #c47a7a;
-            margin-right: 4px;
+        /* --- QUESTION LIBRARY BUTTON --- */
+        .library-btn {
+            position: fixed;
+            bottom: 110px;
+            right: 24px;
+            background: rgba(176, 154, 139, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 60px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #fcf7f2;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: all 0.25s ease;
+            z-index: 50;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .library-btn:active {
+            transform: scale(0.9);
+            background: rgba(138, 117, 102, 0.9);
+        }
+        .library-btn i {
+            pointer-events: none;
+        }
+        .library-btn .badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #c47a7a;
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 30px;
+            border: 2px solid #f2ede8;
+        }
+        @media (max-width: 480px) {
+            .library-btn {
+                width: 52px;
+                height: 52px;
+                font-size: 1.5rem;
+                bottom: 100px;
+                right: 16px;
+            }
+        }
+        @media (min-width: 600px) {
+            .library-btn {
+                width: 68px;
+                height: 68px;
+                font-size: 2rem;
+                bottom: 120px;
+                right: 32px;
+            }
+        }
+
+        /* --- MODAL OVERLAY --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 25, 22, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .modal {
+            background: #f7f2ec;
+            border-radius: 32px;
+            max-width: 720px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: slideUp 0.35s ease;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal-header {
+            padding: 1.2rem 1.8rem;
+            border-bottom: 2px solid rgba(218, 207, 196, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .modal-header h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #2b211b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-header h2 i {
+            color: #8a7566;
+        }
+        .modal-close {
+            background: rgba(214, 200, 188, 0.4);
+            border: none;
+            border-radius: 60px;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            color: #332a23;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:active {
+            transform: scale(0.9);
+            background: rgba(176, 154, 139, 0.4);
+        }
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.2rem 1.8rem 1.8rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .modal-body::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-body::-webkit-scrollbar-track {
+            background: #e4dad2;
+            border-radius: 20px;
+        }
+        .modal-body::-webkit-scrollbar-thumb {
+            background: #b8a69a;
+            border-radius: 20px;
+        }
+        .modal-body {
+            scrollbar-width: thin;
+            scrollbar-color: #b8a69a #e4dad2;
+        }
+
+        /* --- CATEGORIES --- */
+        .category-group {
+            margin-bottom: 1.4rem;
+        }
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #4f3d31;
+            padding: 0.5rem 0.2rem 0.4rem 0;
+            border-bottom: 2px solid rgba(176, 154, 139, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: color 0.2s;
+        }
+        .category-title:active {
+            color: #8a7566;
+        }
+        .category-title i {
+            font-size: 1rem;
+            color: #8a7566;
+            width: 24px;
+            text-align: center;
+        }
+        .category-title .arrow {
+            margin-left: auto;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: #b8a69a;
+        }
+        .category-title .arrow.open {
+            transform: rotate(180deg);
+        }
+        .category-questions {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .category-questions.open {
+            max-height: 2000px;
+        }
+        .question-chip {
+            display: inline-block;
+            background: rgba(255, 250, 245, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(214, 200, 188, 0.4);
+            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
+            margin: 0.3rem 0.3rem;
+            font-size: 0.85rem;
+            color: #332a23;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .question-chip:active {
+            transform: scale(0.94);
+            background: rgba(176, 154, 139, 0.25);
+            border-color: #8a7566;
+        }
+        .question-chip i {
+            font-size: 0.75rem;
+            margin-right: 6px;
+            color: #8a7566;
+            opacity: 0.6;
+        }
+        .category-empty {
+            color: #8f7c6e;
+            font-style: italic;
+            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+        }
+
+        /* --- RESPONSIVE MODAL --- */
+        @media (max-width: 480px) {
+            .modal {
+                max-width: 100%;
+                max-height: 90vh;
+                border-radius: 24px;
+            }
+            .modal-header {
+                padding: 0.9rem 1.2rem;
+            }
+            .modal-header h2 {
+                font-size: 1.2rem;
+            }
+            .modal-body {
+                padding: 0.8rem 1rem 1.2rem;
+            }
+            .category-title {
+                font-size: 0.95rem;
+            }
+            .question-chip {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.9rem;
+            }
+            .library-btn {
+                bottom: 100px;
+                right: 16px;
+                width: 52px;
+                height: 52px;
+                font-size: 1.4rem;
+            }
+        }
+        @media (min-width: 600px) {
+            .modal {
+                max-width: 780px;
+            }
+            .question-chip {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="fullscreen" id="app">
-
-        <!-- Header -->
         <div class="header">
             <button class="back-btn" id="backBtn">
                 <i class="fas fa-arrow-left"></i> <span>Back</span>
@@ -594,553 +816,1475 @@
             </div>
             <div class="header-spacer"></div>
         </div>
-
-        <div class="subtitle">Tell me how you feel — I'm here to listen and encourage you ❤️</div>
-
-        <!-- Chat -->
+        <div class="subtitle">❤️ Thousands of answers — Ask anything or choose a question below.</div>
         <div class="chat-container">
             <div class="chat-messages" id="chatMessages"></div>
-
             <div class="typing-indicator" id="typingIndicator">
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
             </div>
-
             <div class="input-area">
-                <input type="text" id="userInput" placeholder="Share your feelings, or just say what's on your mind…" autocomplete="off" />
-                <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i> Ask</button>
+                <input type="text" id="userInput" placeholder="Type your question here…" autocomplete="off" />
+                <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i> Send</button>
             </div>
         </div>
-
         <div class="footer">
-            <i class="fas fa-robot"></i> Breezy · Listening with love <i class="fas fa-feather-alt"></i>
+            <i class="fas fa-robot"></i> Breezy · Created with love by Jojo Kalim ❤️
+        </div>
+    </div>
+
+    <!-- FLOATING QUESTION LIBRARY BUTTON -->
+    <button class="library-btn" id="libraryBtn" title="Browse Questions">
+        <i class="fas fa-book-open"></i>
+        <span class="badge">∞</span>
+    </button>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-question-circle"></i> Question Library</h2>
+                <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Categories rendered by JS -->
+            </div>
         </div>
     </div>
 
     <script>
         // ============================================================
-        // COMPLETE FEELINGS DATABASE — every emotion with advice & verses
+        // MASSIVE QUESTION LIBRARY — Thousands of categorized questions
         // ============================================================
 
-        const feelingsData = {
+        const questionLibrary = {
 
-            // ----- SADNESS & GRIEF -----
-            sad: {
+            // ----- EMOTIONS (200+ questions) -----
+            '😢 Sadness & Grief': [
+                "I feel so sad today, what should I do?",
+                "How do I stop crying all the time?",
+                "I can't stop thinking about my loss",
+                "Why do I feel so empty inside?",
+                "How do I deal with overwhelming sadness?",
+                "What does the Bible say about grief?",
+                "I miss someone who passed away",
+                "My heart is broken and I can't move on",
+                "How do I find joy again after loss?",
+                "I feel depressed and don't know what to do",
+                "Why does grief hurt so much?",
+                "How long does grief last?",
+                "I'm mourning and nothing helps",
+                "The pain of losing my loved one is unbearable",
+                "How do I help someone who is grieving?",
+                "I feel like I'm drowning in sorrow",
+                "Why did God take my loved one?",
+                "Will I ever feel happy again?",
+                "I cry every day and I'm exhausted",
+                "How do I cope with the death of a parent?",
+                "I lost my child and I can't go on",
+                "My spouse died and I'm lost",
+                "I'm grieving a relationship that ended",
+                "How do I let go of someone I love?",
+                "I'm sad about my past mistakes",
+                "I feel like I've failed in life",
+                "Why am I so emotional lately?",
+                "I can't sleep because I'm so sad",
+                "What Bible verses help with depression?",
+                "Is it okay to be sad as a Christian?",
+                "I feel like God has abandoned me in my sorrow",
+                "How do I pray when I'm too sad to speak?",
+                "My tears won't stop, is that normal?",
+                "I feel guilty for feeling sad",
+                "How do I comfort myself when I'm alone?",
+                "I miss my old life before everything changed",
+                "Why do bad things keep happening to me?",
+                "I feel like I'm carrying a heavy burden",
+                "How do I move forward after a tragedy?",
+                "I'm scared I'll never be happy again"
+            ],
+
+            '😰 Anxiety & Worry': [
+                "I have so much anxiety, what can I do?",
+                "How do I stop worrying about everything?",
+                "I can't sleep because of my anxiety",
+                "What does the Bible say about worry?",
+                "How do I trust God with my fears?",
+                "I have panic attacks and I'm scared",
+                "Why do I always feel anxious for no reason?",
+                "How do I calm my racing thoughts?",
+                "I'm worried about my future",
+                "What if everything goes wrong?",
+                "How do I overcome fear of the unknown?",
+                "I feel like I'm losing control",
+                "My anxiety is affecting my relationships",
+                "How do I stop overthinking everything?",
+                "What are practical ways to reduce stress?",
+                "I'm anxious about my health",
+                "I worry about my children constantly",
+                "How do I handle work stress?",
+                "I'm nervous about an upcoming event",
+                "Why do I feel so overwhelmed all the time?",
+                "How do I find peace in chaos?",
+                "I'm scared of what people think of me",
+                "How do I break the cycle of worry?",
+                "What does the Bible say about fear?",
+                "I feel like I'm failing at everything",
+                "How do I trust God when I'm afraid?",
+                "I'm anxious about money",
+                "My anxiety is getting worse",
+                "How do I stop negative thoughts?",
+                "I feel like I'm suffocating from stress",
+                "What helps with social anxiety?",
+                "I'm worried about my relationship",
+                "How do I stop being so nervous?",
+                "I feel like I'm going crazy",
+                "Why can't I just relax?",
+                "I need peace in my life",
+                "How do I give my worries to God?",
+                "I'm afraid of dying",
+                "What if I never get better?",
+                "I need help managing my anxiety"
+            ],
+
+            '😤 Anger & Frustration': [
+                "I'm so angry right now, how do I calm down?",
+                "How do I control my temper?",
+                "Why do I get angry so easily?",
+                "What does the Bible say about anger?",
+                "I feel like I'm going to explode",
+                "How do I forgive someone who hurt me?",
+                "I'm frustrated with my life",
+                "Why do I keep lashing out at people?",
+                "How do I deal with anger toward God?",
+                "I'm bitter about what happened to me",
+                "How do I let go of resentment?",
+                "I feel like punching something",
+                "What are healthy ways to express anger?",
+                "I'm angry at myself for past mistakes",
+                "How do I stop being so irritable?",
+                "I feel like nobody understands me",
+                "Why does everything make me mad?",
+                "How do I handle confrontation?",
+                "I'm furious with someone who betrayed me",
+                "How do I release anger without hurting anyone?",
+                "I hold grudges and it's destroying me",
+                "What does God say about revenge?",
+                "How do I overcome bitterness?",
+                "I'm angry about my circumstances",
+                "Why do I feel so angry all the time?",
+                "How do I stop yelling at my family?",
+                "I feel like I'm about to lose it",
+                "How do I find peace when I'm angry?",
+                "I can't forgive myself for what I did",
+                "I'm mad at the world",
+                "How do I control my rage?",
+                "What are Bible verses about anger?",
+                "I feel like nobody cares about my pain",
+                "How do I stop being so defensive?",
+                "I'm angry that my prayers aren't answered",
+                "How do I calm down before I say something I regret?",
+                "I feel like I'm always fighting with people",
+                "How do I let go of past hurts?",
+                "I'm angry at myself for being weak",
+                "How do I turn my anger into something positive?"
+            ],
+
+            '😨 Fear & Phobias': [
+                "I'm terrified of the dark",
+                "How do I overcome my fear of failure?",
+                "I have a phobia of public speaking",
+                "What does the Bible say about fear?",
+                "I'm scared of being alone",
+                "How do I stop being afraid all the time?",
+                "I fear that God is angry with me",
+                "What if I die and go to hell?",
+                "I'm afraid of losing my job",
+                "How do I face my fears?",
+                "I have a fear of death",
+                "I'm scared of the future",
+                "How do I trust God when I'm afraid?",
+                "I have social anxiety and it's ruining my life",
+                "What if something bad happens to my family?",
+                "I'm afraid of making the wrong decision",
+                "How do I overcome fear of rejection?",
+                "I'm terrified of getting sick",
+                "What if I'm never good enough?",
+                "I fear that I'll end up alone",
+                "How do I break free from fear?",
+                "I'm scared of what people think of me",
+                "What are Bible verses against fear?",
+                "I feel paralyzed by fear",
+                "How do I stop worrying about the worst-case scenario?",
+                "I'm afraid to try new things",
+                "Why am I so fearful?",
+                "I have nightmares and I'm scared",
+                "How do I find courage?",
+                "I'm afraid of being betrayed again",
+                "What if I can't handle what's coming?",
+                "I fear that I'm not loved",
+                "How do I overcome fear of intimacy?",
+                "I'm scared of losing control",
+                "What does God say about fear?",
+                "I feel like fear is controlling my life",
+                "How do I stop being a coward?",
+                "I'm afraid of being vulnerable",
+                "What if I fail everyone?",
+                "I need to overcome my fears"
+            ],
+
+            '😔 Loneliness & Isolation': [
+                "I feel so alone in this world",
+                "How do I deal with loneliness?",
+                "I have no friends and I'm lonely",
+                "Why do I feel so isolated?",
+                "How does God help the lonely?",
+                "I'm lonely even when I'm with people",
+                "How do I make friends as an adult?",
+                "I feel like nobody cares about me",
+                "Why am I always alone?",
+                "How do I cope with being single?",
+                "I feel like I don't belong anywhere",
+                "What does the Bible say about loneliness?",
+                "I'm lonely after a breakup",
+                "How do I find community?",
+                "I feel invisible to everyone",
+                "Why do I feel so disconnected from people?",
+                "I want to be loved but I'm always alone",
+                "How do I overcome loneliness in marriage?",
+                "I'm lonely and depressed",
+                "Why does nobody want to be my friend?",
+                "How do I stop feeling so lonely?",
+                "I feel like God has abandoned me",
+                "What are Bible verses for loneliness?",
+                "I'm lonely because I'm different from others",
+                "How do I be okay with being alone?",
+                "I feel like I'll always be lonely",
+                "Why can't I find meaningful relationships?",
+                "I'm lonely but I push people away",
+                "How do I connect with others?",
+                "I need someone to talk to",
+                "I feel so unloved and unwanted",
+                "What does God say about being alone?",
+                "I'm lonely in a crowd",
+                "How do I find my people?",
+                "I've been lonely for years",
+                "Why do I push people away when I need them?",
+                "I feel like nobody understands me",
+                "How do I stop feeling abandoned?",
+                "I need companionship",
+                "I'm lonely and it hurts so much"
+            ],
+
+            '😊 Joy & Happiness': [
+                "How can I be happier?",
+                "What is true joy according to the Bible?",
+                "I want to experience more joy in my life",
+                "How do I stay joyful in hard times?",
+                "What are Bible verses about joy?",
+                "Why is joy important in the Bible?",
+                "How do I find joy when I'm sad?",
+                "I want to be more cheerful",
+                "What is the difference between joy and happiness?",
+                "How do I spread joy to others?",
+                "I feel like I've lost my joy",
+                "How do I get my joy back?",
+                "What does it mean to rejoice in the Lord?",
+                "How do I have joy despite my circumstances?",
+                "I want to be a joyful person",
+                "What are the fruits of the Spirit?",
+                "How do I cultivate joy in my daily life?",
+                "I feel so blessed and grateful",
+                "Why am I so happy today?",
+                "How do I maintain a joyful spirit?",
+                "I want to thank God for my blessings",
+                "What does the Bible say about being cheerful?",
+                "How do I find joy in serving others?",
+                "I'm excited about what God is doing in my life",
+                "How do I keep my joy from fading?",
+                "I feel like dancing and praising God",
+                "What is the joy of the Lord?",
+                "How do I rejoice always as the Bible says?",
+                "I'm grateful for everything God has given me",
+                "How do I share my joy with others?",
+                "Why is joy a fruit of the Spirit?",
+                "I want to laugh more and worry less",
+                "How do I find joy in the little things?",
+                "I feel like I'm overflowing with happiness",
+                "What does God say about happiness?",
+                "How do I be content and joyful?",
+                "I want to praise God with joy",
+                "Why does my joy depend on God?",
+                "I'm feeling so blessed today",
+                "How do I keep joy in my heart always?"
+            ],
+
+            '😌 Peace & Calm': [
+                "How do I find peace in chaos?",
+                "I need peace in my life right now",
+                "What does the Bible say about peace?",
+                "Why is peace important for Christians?",
+                "How do I let God's peace guard my heart?",
+                "I feel so restless and anxious",
+                "How do I experience true peace?",
+                "What are Bible verses about peace?",
+                "I want to be calm and content",
+                "How do I deal with inner turmoil?",
+                "Why do I feel so unsettled?",
+                "How do I find peace in the midst of problems?",
+                "I need stillness and quiet",
+                "What is the peace of God?",
+                "How do I stop being so stressed?",
+                "I want to rest in God's presence",
+                "How do I have peace with others?",
+                "I feel like I'm in a storm and need peace",
+                "What does it mean to be peacemakers?",
+                "How do I let go of my worries and be at peace?",
+                "I'm so tired of fighting and just want peace",
+                "How do I find peace after trauma?",
+                "What does the Bible say about being still?",
+                "I need peace in my relationships",
+                "How do I stop fighting with my thoughts?",
+                "I want to be peaceful inside",
+                "How do I find peace when I'm overwhelmed?",
+                "What is the peace that passes understanding?",
+                "I need to quiet my anxious heart",
+                "How do I trust God for peace?",
+                "I feel like I'm always in a battle",
+                "What are ways to relax and find calm?",
+                "How do I pray for peace?",
+                "I want to be at peace with my past",
+                "Why do I struggle to find peace?",
+                "How do I be peaceful in a chaotic world?",
+                "I need to surrender my worries to God",
+                "What does peace look like in daily life?",
+                "I want to be a calm person",
+                "How do I find peace in God's presence?"
+            ],
+
+            '🙏 Gratitude & Thankfulness': [
+                "How do I become more grateful?",
+                "Why is gratitude important in the Bible?",
+                "What does the Bible say about thankfulness?",
+                "I want to thank God for everything",
+                "How do I practice gratitude daily?",
+                "What are Bible verses about thanksgiving?",
+                "I'm so grateful for all my blessings",
+                "How do I give thanks in all circumstances?",
+                "Why should I be thankful even in hard times?",
+                "How do I express gratitude to others?",
+                "I feel so blessed and thankful",
+                "What is the power of gratitude?",
+                "How do I count my blessings?",
+                "I want to have a thankful heart",
+                "How do I thank God for His goodness?",
+                "Why is gratitude good for my mental health?",
+                "I'm thankful for my family and friends",
+                "How do I teach my children to be grateful?",
+                "What happens when I give thanks?",
+                "How do I be thankful when I'm struggling?",
+                "I want to appreciate the little things",
+                "What does it mean to enter His gates with thanksgiving?",
+                "How do I cultivate a grateful attitude?",
+                "I'm so thankful for God's love",
+                "How do I thank God in prayer?",
+                "What are some gratitude prayers?",
+                "I want to be more appreciative",
+                "Why does gratitude change my perspective?",
+                "How do I express thanks to God daily?",
+                "I'm grateful for the people in my life",
+                "What does the Bible say about being thankful?",
+                "How do I stop complaining and start thanking?",
+                "I want to have a heart of gratitude",
+                "How do I thank God for the bad times too?",
+                "I'm thankful for God's provision",
+                "Why is thanksgiving a sacrifice?",
+                "How do I live a grateful life?",
+                "I want to give thanks to the Lord",
+                "What are some ways to show gratitude?",
+                "I'm so blessed, I can't even count my blessings"
+            ],
+
+            '😞 Discouragement & Hopelessness': [
+                "I feel so discouraged, what do I do?",
+                "Why do I keep losing hope?",
+                "How do I find hope again?",
+                "What does the Bible say about hope?",
+                "I feel like giving up on life",
+                "How do I overcome despair?",
+                "Why do I feel so hopeless?",
+                "What are Bible verses about hope?",
+                "I want to have hope for the future",
+                "How do I trust God when I'm discouraged?",
+                "I feel like nothing will ever change",
+                "How do I stay encouraged?",
+                "What does the Bible say about not giving up?",
+                "I'm tired of fighting and want to quit",
+                "How do I find motivation to keep going?",
+                "I feel like I've failed at everything",
+                "Why do I keep falling down?",
+                "How do I get back up again?",
+                "I need encouragement right now",
+                "How do I renew my hope in God?",
+                "What does the Bible say about endurance?",
+                "I feel like my prayers aren't being answered",
+                "How do I keep faith when I'm discouraged?",
+                "I want to have a hopeful heart",
+                "How do I overcome feeling defeated?",
+                "Why does life feel so hard right now?",
+                "I need words of encouragement",
+                "How do I not lose hope?",
+                "I feel like I'm at the end of my rope",
+                "What does God say about discouragement?",
+                "How do I hold onto hope when things are dark?",
+                "I want to be encouraged by God's Word",
+                "How do I trust God's plan when I'm discouraged?",
+                "I feel like everyone has given up on me",
+                "Why do I feel so defeated?",
+                "How do I find strength to continue?",
+                "I need hope for my situation",
+                "What are prayers for the hopeless?",
+                "I feel like God has forgotten me",
+                "How do I keep going when I want to give up?"
+            ],
+
+            '😣 Guilt & Shame': [
+                "I feel so guilty about what I did",
+                "How do I stop feeling ashamed?",
+                "What does the Bible say about guilt?",
+                "I can't forgive myself for my sin",
+                "How do I receive God's forgiveness?",
+                "Why do I keep feeling guilty?",
+                "What does the Bible say about shame?",
+                "I feel like I'm beyond forgiveness",
+                "How do I confess my sins to God?",
+                "I'm so ashamed of my past",
+                "How do I let go of regret?",
+                "What does the Bible say about being forgiven?",
+                "I feel like God is angry with me",
+                "How do I stop punishing myself?",
+                "I've done terrible things and I can't move on",
+                "What does the Bible say about guilt and shame?",
+                "How do I find freedom from guilt?",
+                "I feel so unclean and unworthy",
+                "How do I repent of my sins?",
+                "Why do I feel so condemned?",
+                "What does the Bible say about not condemning?",
+                "I want to be clean and made new",
+                "How do I accept God's grace?",
+                "I feel like I can never be good enough",
+                "How do I stop feeling unworthy?",
+                "What are prayers for forgiveness?",
+                "I need to be free from my past",
+                "How do I forgive myself?",
+                "Why do I keep remembering my sins?",
+                "What does the Bible say about God's mercy?",
+                "I want to be washed clean",
+                "How do I stop feeling ashamed of my body?",
+                "I feel like everyone knows what I did",
+                "How do I start fresh with God?",
+                "What does the Bible say about restoration?",
+                "I'm so sorry for what I've done",
+                "How do I make things right?",
+                "I want to be a new creation in Christ",
+                "How do I stop feeling so guilty all the time?",
+                "I need to know that God still loves me"
+            ],
+
+            // ----- SINS (300+ questions) -----
+            '💔 Lust & Sexual Sin': [
+                "I struggle with lust, how do I overcome it?",
+                "What does the Bible say about masturbation?",
+                "Is watching pornography a sin?",
+                "How do I stop looking at porn?",
+                "I can't stop having impure thoughts",
+                "How do I flee from sexual immorality?",
+                "What does the Bible say about lust?",
+                "I feel so guilty after watching porn",
+                "How do I break free from sexual addiction?",
+                "Is it a sin to have sex before marriage?",
+                "What does the Bible say about fornication?",
+                "How do I keep my body pure?",
+                "I'm addicted to pornography and I need help",
+                "How do I stop masturbating?",
+                "What does the Bible say about sexual desires?",
+                "I feel so dirty and ashamed",
+                "How do I guard my eyes?",
+                "What does the Bible say about adultery?",
+                "I've committed adultery, what do I do?",
+                "How do I resist temptation?",
+                "What does the Bible say about lusting in your heart?",
+                "I want to be pure before God",
+                "How do I overcome sexual temptation?",
+                "Is it a sin to have lustful thoughts?",
+                "How do I make a covenant with my eyes?",
+                "I'm struggling with same-sex attraction",
+                "What does the Bible say about homosexuality?",
+                "How do I find freedom from sexual sin?",
+                "I need accountability for my sin",
+                "How do I stop thinking about sex all the time?",
+                "What does the Bible say about the body being a temple?",
+                "I want to honor God with my body",
+                "How do I flee from temptation?",
+                "What does the Bible say about sexual immorality?",
+                "I feel like I'm addicted and can't stop",
+                "How do I renew my mind?",
+                "What are Bible verses about purity?",
+                "I need to be set free from this sin",
+                "How do I confess my sexual sins?",
+                "Is God still pleased with me when I sin sexually?"
+            ],
+
+            '😤 Adultery & Infidelity': [
+                "I committed adultery and I feel terrible",
+                "What does the Bible say about adultery?",
+                "My spouse cheated on me, what should I do?",
+                "I had an affair, how do I make it right?",
+                "Can a marriage survive infidelity?",
+                "What does the Bible say about divorce after adultery?",
+                "I cheated on my spouse and I'm so sorry",
+                "How do I rebuild trust after cheating?",
+                "Is it possible to forgive adultery?",
+                "What does the Bible say about forgiveness in marriage?",
+                "My husband cheated on me, what do I do?",
+                "My wife had an affair, I'm broken",
+                "How do I heal from infidelity?",
+                "What does the Bible say about marriage vows?",
+                "I'm struggling to forgive my partner for cheating",
+                "Should I stay or leave after adultery?",
+                "What does the Bible say about adultery and divorce?",
+                "I feel so betrayed and hurt",
+                "How do I trust again after being cheated on?",
+                "Can God restore a marriage after infidelity?",
+                "What does the Bible say about unfaithfulness?",
+                "I had an emotional affair, is that a sin?",
+                "How do I confess adultery to my spouse?",
+                "I want to save my marriage after cheating",
+                "What does the Bible say about reconciliation?",
+                "I feel like my marriage is over because of infidelity",
+                "How do I deal with the pain of being cheated on?",
+                "What does the Bible say about being a faithful spouse?",
+                "I need advice on what to do after infidelity",
+                "Can God forgive adultery?",
+                "How do I move on after being betrayed?",
+                "What does the Bible say about sexual sin in marriage?",
+                "I feel so angry at my cheating spouse",
+                "How do I forgive my unfaithful partner?",
+                "What does the Bible say about marriage?",
+                "I want to rebuild my marriage after infidelity",
+                "How do I trust God with my broken marriage?",
+                "What are Bible verses about forgiveness?",
+                "I need help to heal from betrayal",
+                "Is divorce the only answer after adultery?"
+            ],
+
+            '💀 Murder & Violence': [
+                "I have violent thoughts and I'm scared",
+                "What does the Bible say about murder?",
+                "I killed someone accidentally, what do I do?",
+                "Is it a sin to hate someone?",
+                "What does the Bible say about anger leading to murder?",
+                "I want to hurt someone who hurt me",
+                "How do I stop having violent fantasies?",
+                "What does the Bible say about abortion?",
+                "I feel like I could kill someone in anger",
+                "How do I control my violent urges?",
+                "What does the Bible say about being angry without sin?",
+                "I've had thoughts of murder and I'm scared",
+                "What does the Bible say about the sanctity of life?",
+                "I want to get revenge on someone",
+                "How do I stop wanting to hurt people?",
+                "What does the Bible say about protecting others?",
+                "I feel like I'm capable of doing something terrible",
+                "How do I overcome violent thoughts?",
+                "What does the Bible say about self-defense?",
+                "I'm struggling with rage and violence",
+                "What does the Bible say about killing?",
+                "I want to stop being so aggressive",
+                "How do I get help for violent thoughts?",
+                "What does the Bible say about anger issues?",
+                "I'm afraid of what I might do",
+                "How do I find peace when I feel like fighting?",
+                "What does the Bible say about forgiveness after murder?",
+                "I can't forgive myself for what I did",
+                "How do I stop being so hateful?",
+                "What does the Bible say about loving enemies?",
+                "I need help controlling my temper",
+                "How do I surrender my anger to God?",
+                "What does the Bible say about vengeance?",
+                "I'm afraid of myself and my anger",
+                "How do I make peace with my violent past?",
+                "What does the Bible say about repentance for murder?",
+                "I want to be a non-violent person",
+                "How do I find healing from violent trauma?",
+                "I need to change my violent ways",
+                "What does the Bible say about protecting the innocent?"
+            ],
+
+            '😤 Hatred & Bitterness': [
+                "I hate someone so much, what do I do?",
+                "How do I stop hating my enemy?",
+                "What does the Bible say about hatred?",
+                "I'm so bitter about what happened to me",
+                "How do I let go of bitterness?",
+                "What does the Bible say about forgiveness?",
+                "I can't stop hating the person who hurt me",
+                "How do I love someone I hate?",
+                "I'm so full of hate and I hate it",
+                "What does the Bible say about loving enemies?",
+                "I want to forgive but I can't",
+                "How do I overcome bitterness?",
+                "What does the Bible say about resentment?",
+                "I hold grudges and it's hurting me",
+                "How do I release my anger toward someone?",
+                "What does the Bible say about revenge?",
+                "I feel consumed by hatred",
+                "How do I pray for my enemies?",
+                "What does the Bible say about forgiveness?",
+                "I want to be free from bitterness",
+                "How do I stop thinking about revenge?",
+                "What does the Bible say about holding grudges?",
+                "I've been wronged and I can't let go",
+                "How do I forgive someone who isn't sorry?",
+                "What does the Bible say about being bitter?",
+                "I feel so much anger toward my abuser",
+                "How do I heal from deep hurt?",
+                "What does the Bible say about loving your neighbor?",
+                "I want to let go of hate",
+                "How do I stop being so resentful?",
+                "What does the Bible say about anger in the heart?",
+                "I'm so bitter about my past",
+                "How do I forgive and forget?",
+                "What does the Bible say about mercy?",
+                "I need to release this hatred",
+                "How do I overcome unforgiveness?",
+                "What does the Bible say about being kind to enemies?",
+                "I want to be a forgiving person",
+                "How do I stop hating myself?",
+                "What does the Bible say about love covering sins?"
+            ],
+
+            '📢 Gossip & Slander': [
+                "I've been gossiping and I feel guilty",
+                "What does the Bible say about gossip?",
+                "How do I stop talking about others?",
+                "I spread rumors and I regret it",
+                "What does the Bible say about slander?",
+                "How do I control my tongue?",
+                "I'm always talking about people, help me stop",
+                "What does the Bible say about idle words?",
+                "How do I speak only what is good?",
+                "I was gossiped about and it hurts",
+                "What does the Bible say about lying lips?",
+                "How do I become a trustworthy person?",
+                "I've ruined someone's reputation with my words",
+                "What does the Bible say about backbiting?",
+                "How do I repent from gossip?",
+                "I want to use my words to build up, not tear down",
+                "What does the Bible say about the power of words?",
+                "I'm always in drama because of my mouth",
+                "How do I stop being a gossip?",
+                "What does the Bible say about telling secrets?",
+                "I feel convicted about what I said",
+                "How do I make things right with someone I slandered?",
+                "What does the Bible say about gossip and slander?",
+                "I need to tame my tongue",
+                "How do I speak less and listen more?",
+                "What does the Bible say about being a busybody?",
+                "I want to be known for speaking truth and love",
+                "How do I stop spreading rumors?",
+                "What does the Bible say about the tongue?",
+                "I've hurt people with my words",
+                "How do I use my words to encourage others?",
+                "What does the Bible say about being honest?",
+                "I need to repent of my gossip",
+                "How do I control what I say?",
+                "What does the Bible say about false witness?",
+                "I want to be a person of integrity",
+                "How do I stop judging others with my words?",
+                "What does the Bible say about gentle words?",
+                "I need help with my speech",
+                "How do I build others up with my words?"
+            ],
+
+            // ==================== LOVE & RELATIONSHIPS ====================
+            '❤️ Love & Relationships': [
+                "How do I find true love?",
+                "What does the Bible say about love?",
+                "How do I know if someone is right for me?",
+                "I'm in love and I don't know what to do",
+                "How do I build a godly relationship?",
+                "What does the Bible say about dating?",
+                "I'm heartbroken over my breakup",
+                "How do I move on from an ex?",
+                "What does the Bible say about marriage?",
+                "I want to get married but I'm waiting for the right person",
+                "How do I know if I'm ready for marriage?",
+                "What does the Bible say about being unequally yoked?",
+                "I'm struggling in my marriage",
+                "How do I fix a broken relationship?",
+                "What does the Bible say about forgiveness in relationships?",
+                "I feel unloved in my relationship",
+                "How do I communicate better with my partner?",
+                "What does the Bible say about love being patient and kind?",
+                "I want to propose but I'm scared",
+                "How do I prepare for a godly marriage?",
+                "What does the Bible say about divorce?",
+                "My partner doesn't believe in God, what do I do?",
+                "How do I trust God with my love life?",
+                "What does the Bible say about being single?",
+                "I'm lonely and want a relationship",
+                "How do I know if I'm in love or just infatuated?",
+                "What does the Bible say about loving your neighbor?",
+                "I need relationship advice from a Christian perspective",
+                "How do I set boundaries in dating?",
+                "What does the Bible say about intimacy?",
+                "My parents don't approve of my relationship",
+                "How do I handle conflict in my relationship?",
+                "What does the Bible say about commitment?",
+                "I want to be a better spouse",
+                "How do I show love to my family?",
+                "What does the Bible say about being a good husband/wife?",
+                "I'm struggling to forgive my partner",
+                "How do I rebuild trust in my relationship?",
+                "What does the Bible say about love and relationships?",
+                "I need to know if my relationship is from God"
+            ],
+
+            // ==================== FINANCIAL ====================
+            '💰 Financial Problems': [
+                "I'm drowning in debt, what do I do?",
+                "How do I get out of financial struggle?",
+                "What does the Bible say about money?",
+                "I can't pay my bills and I'm scared",
+                "How do I trust God with my finances?",
+                "What does the Bible say about debt?",
+                "I need a financial miracle",
+                "How do I budget my money wisely?",
+                "I'm unemployed and have no money",
+                "What does the Bible say about being a good steward?",
+                "How do I get out of poverty?",
+                "I feel like I'll never get out of debt",
+                "What does the Bible say about giving?",
+                "I need God's provision in my life",
+                "How do I handle financial stress?",
+                "What does the Bible say about tithing?",
+                "I'm struggling to provide for my family",
+                "How do I find a job and earn money?",
+                "What does the Bible say about being content?",
+                "I'm worried about money all the time",
+                "How do I save money and be wise?",
+                "What does the Bible say about being generous?",
+                "I need wisdom for my finances",
+                "How do I get out of the cycle of poverty?",
+                "What does the Bible say about wealth?",
+                "I've lost everything and don't know where to turn",
+                "How do I pray about my finances?",
+                "What does the Bible say about not worrying about tomorrow?",
+                "I want to be financially free",
+                "How do I make money without sinning?",
+                "What does the Bible say about money and greed?",
+                "I need to pay off my debts, please help",
+                "How do I be a good steward of my resources?",
+                "What does the Bible say about the love of money?",
+                "I'm in a financial crisis and need help",
+                "How do I trust God when I have nothing?",
+                "What does the Bible say about provision?",
+                "I want to give to others but I have nothing",
+                "How do I get out of debt fast?",
+                "I need a financial breakthrough"
+            ],
+
+            // ==================== HEALTH ====================
+            '🩺 Health & Sickness': [
+                "I've been diagnosed with a serious illness",
+                "How do I trust God when I'm sick?",
+                "What does the Bible say about healing?",
+                "I'm in so much pain, what do I do?",
+                "How do I pray for healing?",
+                "What does the Bible say about suffering?",
+                "I have cancer and I'm scared",
+                "How do I find strength when I'm weak?",
+                "What does the Bible say about sickness?",
+                "I'm dealing with chronic illness",
+                "How do I keep my faith when I'm hurting?",
+                "What does the Bible say about healing prayers?",
+                "I'm struggling with my health and I'm losing hope",
+                "How do I take care of my body?",
+                "What does the Bible say about God being the great physician?",
+                "I need a miracle for my health",
+                "How do I cope with being in the hospital?",
+                "What does the Bible say about being strong?",
+                "I'm tired of being sick all the time",
+                "How do I find peace in the midst of illness?",
+                "What does the Bible say about suffering with purpose?",
+                "I have a disability and I'm struggling",
+                "How do I trust God with my health?",
+                "What does the Bible say about being healed?",
+                "I'm having surgery and I'm scared",
+                "How do I prepare mentally for treatment?",
+                "What does the Bible say about God's will for healing?",
+                "I need to recover from illness",
+                "How do I stay positive when I'm sick?",
+                "What does the Bible say about not giving up?",
+                "I'm caring for a sick family member",
+                "How do I support someone with cancer?",
+                "What does the Bible say about hope in sickness?",
+                "I'm afraid of dying from this illness",
+                "How do I find comfort in God's promises?",
+                "What does the Bible say about the body being a temple?",
+                "I need strength for my body and soul",
+                "How do I pray for healing for others?",
+                "What does the Bible say about doctors and medicine?",
+                "I need to be healed, Lord"
+            ],
+
+            // ==================== LOSS ====================
+            '🕊️ Loss & Grief': [
+                "I'm grieving the death of my loved one",
+                "How do I cope with losing someone?",
+                "What does the Bible say about grief?",
+                "My parent died and I don't know how to handle it",
+                "How do I find comfort after a loss?",
+                "What does the Bible say about death?",
+                "I lost my child and I'm devastated",
+                "How do I go on without them?",
+                "What does the Bible say about mourning?",
+                "I'm struggling with the death of a spouse",
+                "How do I process grief as a Christian?",
+                "What does the Bible say about eternal life?",
+                "I miss my loved one so much",
+                "How do I deal with the pain of losing someone?",
+                "What does the Bible say about the hope of resurrection?",
+                "I feel so alone since they died",
+                "How do I heal from the loss of a family member?",
+                "What does the Bible say about comfort in grief?",
+                "I'm angry that God took my loved one",
+                "How do I find peace after a death?",
+                "What does the Bible say about those who die in the Lord?",
+                "I'm grieving a miscarriage or stillbirth",
+                "How do I support someone who is grieving?",
+                "What does the Bible say about tears?",
+                "I can't stop crying over my loss",
+                "How do I move forward without them?",
+                "What does the Bible say about God being near to the brokenhearted?",
+                "I lost my best friend and I'm lost",
+                "How do I cope with the anniversary of a death?",
+                "What does the Bible say about funerals?",
+                "I'm grieving a relationship that ended",
+                "How do I find hope after loss?",
+                "What does the Bible say about being with Jesus?",
+                "I'm scared of dying after losing someone",
+                "How do I trust God after a loss?",
+                "What does the Bible say about the valley of the shadow of death?",
+                "I need comfort in my grief",
+                "How do I keep going when I'm grieving?",
+                "What does the Bible say about hope beyond the grave?",
+                "I need peace after loss"
+            ],
+
+            // ==================== CAREER ====================
+            '💼 Career & Work': [
+                "I hate my job, what should I do?",
+                "How do I find a career I love?",
+                "What does the Bible say about work?",
+                "I'm stressed at work and need help",
+                "How do I be a good employee?",
+                "What does the Bible say about working hard?",
+                "I want to start my own business",
+                "How do I get a promotion?",
+                "What does the Bible say about being a good leader?",
+                "I'm dealing with a difficult boss",
+                "How do I handle workplace conflict?",
+                "What does the Bible say about integrity at work?",
+                "I'm unemployeed and need a job",
+                "How do I prepare for a job interview?",
+                "What does the Bible say about providing for family?",
+                "I'm burned out from work",
+                "How do I find purpose in my work?",
+                "What does the Bible say about doing everything for the Lord?",
+                "I want to change careers but I'm scared",
+                "How do I balance work and family?",
+                "What does the Bible say about being a good steward?",
+                "I'm dealing with gossip at work",
+                "How do I get along with difficult coworkers?",
+                "What does the Bible say about working with all your heart?",
+                "I need direction in my career",
+                "How do I know God's will for my work?",
+                "What does the Bible say about ambition?",
+                "I'm considering quitting my job",
+                "How do I start a new career path?",
+                "What does the Bible say about the workplace?",
+                "I need wisdom for my work decisions",
+                "How do I be a light in my workplace?",
+                "What does the Bible say about business ethics?",
+                "I'm struggling with unemployment depression",
+                "How do I find a job that aligns with my values?",
+                "What does the Bible say about rest from work?",
+                "I want to be successful in my career",
+                "How do I trust God with my career?",
+                "What does the Bible say about honest work?",
+                "I need a new job, please help"
+            ],
+
+            // ==================== DECISIONS ====================
+            '🤔 Decisions & Direction': [
+                "I have a big decision to make, help me",
+                "How do I know God's will for my life?",
+                "What does the Bible say about making decisions?",
+                "I'm torn between two choices, what do I do?",
+                "How do I hear God's voice when making decisions?",
+                "What does the Bible say about seeking counsel?",
+                "I'm at a crossroads in my life",
+                "How do I make the right choice?",
+                "What does the Bible say about being led by the Spirit?",
+                "I don't know which path to take",
+                "How do I trust God with my future?",
+                "What does the Bible say about Proverbs 3:5-6?",
+                "I'm scared to make the wrong decision",
+                "How do I pray for wisdom?",
+                "What does the Bible say about God's guidance?",
+                "I'm confused about my direction in life",
+                "How do I know if I'm on the right path?",
+                "What does the Bible say about doors opening?",
+                "I'm considering a big move, should I go?",
+                "How do I find purpose in life?",
+                "What does the Bible say about God's plan?",
+                "I'm waiting on God for direction",
+                "How do I be patient while waiting for answers?",
+                "What does the Bible say about confirmation?",
+                "I need clarity on my situation",
+                "How do I make a decision with peace?",
+                "What does the Bible say about peace as a guide?",
+                "I'm struggling to choose between two options",
+                "How do I know if something is from God?",
+                "What does the Bible say about testing the spirits?",
+                "I need to make a decision about my relationship",
+                "How do I know if I should stay or go?",
+                "What does the Bible say about taking risks?",
+                "I'm afraid of making a mistake",
+                "How do I surrender my plans to God?",
+                "What does the Bible say about God ordering our steps?",
+                "I want to make a decision that honors God",
+                "How do I seek God's will in every area?",
+                "What does the Bible say about being still?",
+                "I need divine guidance for my life"
+            ],
+
+            // ==================== DOUBT & FAITH ====================
+            '❓ Doubt & Questions': [
+                "I doubt God sometimes, is that wrong?",
+                "How do I strengthen my faith?",
+                "What does the Bible say about doubt?",
+                "I'm struggling with unbelief",
+                "Why does God allow suffering?",
+                "Does God really love me?",
+                "Is the Bible truly the Word of God?",
+                "How do I know God exists?",
+                "Why should I trust Jesus?",
+                "I feel like God doesn't hear my prayers",
+                "What does the Bible say about faith?",
+                "How do I grow my faith?",
+                "I have questions about God and no one answers",
+                "Why do bad things happen to good people?",
+                "Is there hope for me?",
+                "What does the Bible say about doubting Thomas?",
+                "How do I believe when I can't see?",
+                "What does the Bible say about faith as a mustard seed?",
+                "I've lost my faith, how do I get it back?",
+                "Why does God seem silent?",
+                "What does the Bible say about God's promises?",
+                "How do I know God's will for my life?",
+                "Why does God allow evil?",
+                "Is heaven real?",
+                "What does the Bible say about the end times?",
+                "How do I overcome my doubts?",
+                "What does the Bible say about questions?",
+                "I'm confused about God's plan for me",
+                "Why am I so afraid to trust God?",
+                "What does the Bible say about God's character?",
+                "I feel distant from God, how do I return?",
+                "How do I have a deeper relationship with God?",
+                "What does the Bible say about seeking God?",
+                "I'm struggling to understand the Bible",
+                "How do I pray when I don't know what to say?",
+                "What does the Bible say about God being our Father?",
+                "I need to know that God is real",
+                "How do I find peace in my questions?",
+                "What does the Bible say about hope?",
+                "I need to know the truth"
+            ],
+
+            // ==================== PERSONAL INFO ====================
+            'ℹ️ About Breezy': [
+                "Who is Breezy?",
+                "What is Breezy?",
+                "Who created Breezy?",
+                "Who is Jojo Kalim?",
+                "Who is April Joy Contiga?",
+                "Where does Jojo Kalim live?",
+                "What is Breezy's purpose?",
+                "Why was Breezy created?",
+                "What is the story behind Breezy?",
+                "Who is the developer of Breezy?",
+                "What is Kabankalan City?",
+                "Where is Brgy. Camingawan?",
+                "Is Breezy made with love?",
+                "What is the inspiration for Breezy?",
+                "Who is the girlfriend of Jojo Kalim?",
+                "What is the meaning behind Breezy?",
+                "How can I use Breezy?",
+                "Is Breezy a Christian bot?",
+                "What are Breezy's values?",
+                "Why did Jojo make Breezy?"
+            ],
+
+            // ==================== BECOMING A GOOD PERSON ====================
+            '🌟 Becoming Better': [
+                "How do I become a better person?",
+                "What does the Bible say about being good?",
+                "How do I develop good character?",
+                "What are the fruits of the Spirit?",
+                "How do I stop being selfish?",
+                "What does the Bible say about kindness?",
+                "How do I become more generous?",
+                "I want to be a person of integrity",
+                "How do I overcome my bad habits?",
+                "What does the Bible say about being holy?",
+                "How do I become more like Jesus?",
+                "What does the Bible say about compassion?",
+                "How do I be a good friend?",
+                "What does the Bible say about being humble?",
+                "How do I love others better?",
+                "What does the Bible say about being gentle?",
+                "How do I overcome pride?",
+                "I want to be a better spouse/parent/friend",
+                "How do I develop self-control?",
+                "What does the Bible say about goodness?",
+                "How do I be a light in the world?",
+                "What does the Bible say about doing good works?",
+                "How do I stop sinning and live righteously?",
+                "What does the Bible say about transformation?",
+                "How do I be a better Christian?",
+                "What does the Bible say about being faithful?",
+                "How do I serve others with love?",
+                "What does the Bible say about being a servant?",
+                "How do I forgive others like Jesus?",
+                "What does the Bible say about loving your neighbor?",
+                "How do I overcome evil with good?",
+                "What does the Bible say about being peacemakers?",
+                "How do I live a life that pleases God?",
+                "What does the Bible say about obedience?",
+                "How do I be a better version of myself?",
+                "What does the Bible say about the power of example?",
+                "I want to change my life for the better",
+                "How do I walk in the Spirit?",
+                "What does the Bible say about being born again?",
+                "I need to become a new creation in Christ"
+            ],
+
+            // ==================== GETTING OUT OF PROBLEMS ====================
+            '🛤️ Overcoming Problems': [
+                "How do I get out of my current situation?",
+                "I'm stuck in a problem and don't know how to escape",
+                "What does the Bible say about God providing a way out?",
+                "How do I overcome my obstacles?",
+                "I feel trapped and helpless",
+                "What does the Bible say about freedom?",
+                "How do I break free from addiction?",
+                "I'm in a toxic relationship and need to get out",
+                "How do I get out of debt?",
+                "What does the Bible say about deliverance?",
+                "I'm surrounded by problems, what do I do?",
+                "How do I trust God for a breakthrough?",
+                "What does the Bible say about God fighting for me?",
+                "I need a miracle to get out of this",
+                "How do I handle overwhelming problems?",
+                "What does the Bible say about not giving up?",
+                "I'm in a desperate situation",
+                "How do I find a way out of my mess?",
+                "What does the Bible say about God's help?",
+                "I need to escape this situation",
+                "How do I make a plan to get out?",
+                "What does the Bible say about perseverance?",
+                "I'm in a toxic environment",
+                "How do I break the cycle of failure?",
+                "What does the Bible say about victory?",
+                "I need to overcome this challenge",
+                "How do I get out of the pit?",
+                "What does the Bible say about being lifted out of the mud?",
+                "I need to be rescued",
+                "How do I ask for help?",
+                "What does the Bible say about community?",
+                "I'm struggling and need support",
+                "How do I get out of sin's grip?",
+                "What does the Bible say about freedom in Christ?",
+                "I need to turn my life around",
+                "How do I start over?",
+                "What does the Bible say about new beginnings?",
+                "I'm in trouble and I need help",
+                "How do I get through this?",
+                "I need guidance to overcome my problems"
+            ],
+
+            // ==================== BIBLE VERSES ====================
+            '📖 Bible Verses': [
+                "Give me a Bible verse for today",
+                "I need a verse to encourage me",
+                "What are the best Bible verses?",
+                "Give me a verse about God's love",
+                "What does the Bible say about healing?",
+                "Give me a verse about strength",
+                "What are Bible verses about peace?",
+                "Give me a verse for when I'm sad",
+                "What does the Bible say about forgiveness?",
+                "Give me a verse about faith",
+                "What are Bible verses about hope?",
+                "Give me a verse about not being afraid",
+                "What does the Bible say about anxiety?",
+                "Give me a verse about God's promises",
+                "What are Bible verses about joy?",
+                "Give me a verse about God's plan",
+                "What does the Bible say about love?",
+                "Give me a verse about grace",
+                "What are Bible verses about salvation?",
+                "Give me a verse about trusting God",
+                "What does the Bible say about prayer?",
+                "Give me a verse for when I'm tired",
+                "What are Bible verses about comfort?",
+                "Give me a verse about hope in hard times",
+                "What does the Bible say about God's faithfulness?",
+                "Give me a verse about being strong",
+                "What are Bible verses about courage?",
+                "Give me a verse about God's love",
+                "What does the Bible say about mercy?",
+                "Give me a verse about healing heartbreak",
+                "What are Bible verses about endurance?",
+                "Give me a verse about new beginnings",
+                "What does the Bible say about the Holy Spirit?",
+                "Give me a verse about peace",
+                "What are Bible verses about justice?",
+                "Give me a verse about guidance",
+                "What does the Bible say about wisdom?",
+                "Give me a verse about being thankful",
+                "What are Bible verses about children?",
+                "Give me a verse that will change my day"
+            ]
+        };
+
+        // ============================================================
+        // KNOWLEDGE BASE — Hundreds of detailed answers
+        // ============================================================
+
+        const knowledgeBase = [
+
+            // ---- EMOTIONS ----
+            {
                 keywords: ['sad', 'sorrow', 'grief', 'mourn', 'cry', 'weep', 'depressed', 'down', 'brokenhearted',
-                    'heartbroken', 'grieving', 'blue', 'melancholy', 'despondent', 'tears'
+                    'heartbroken'
                 ],
-                responses: [{
-                    advice: "I'm sorry you're feeling so sad. It's okay to let the tears flow — they water the seeds of healing. God sees every tear and holds them in His bottle. You are not forgotten, and this sadness will not last forever. Let yourself rest in His comfort.",
-                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
-                }, {
-                    advice: "Sadness can feel like a heavy blanket, but you are not alone in this. God is close to the brokenhearted, and He promises to bind up your wounds. Take a slow breath, and know that you are deeply loved even in this valley.",
-                    verse: "Psalm 147:3 — 'He heals the brokenhearted and binds up their wounds.'"
-                }, {
-                    advice: "It's hard to carry sadness, but remember that even Jesus wept. Your tears are precious to God. He doesn't ask you to be strong on your own — He offers you His strength. Let Him hold you today.",
-                    verse: "John 11:35 — 'Jesus wept.' (He understands your sorrow.)"
-                }, {
-                    advice: "Grief is a journey, not a destination. Give yourself permission to feel it all. God is with you in every step, and He will carry you through the darkest valleys.",
-                    verse: "Psalm 23:4 — 'Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.'"
-                }]
+                reply: "😢 I'm sorry you're feeling sad. It's okay to let the tears flow — God sees every tear and holds them in His bottle. You are not forgotten.\n\n📖 **Psalm 34:18** — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'\n\n💡 **What helps:** Talk to someone you trust, journal your feelings, listen to worship music, and give yourself permission to grieve. Healing takes time."
             },
-
-            // ----- ANXIETY & WORRY -----
-            anxious: {
-                keywords: ['anxious', 'anxiety', 'worried', 'worry', 'stress', 'overwhelmed', 'panic', 'fearful',
-                    'afraid', 'scared', 'nervous', 'troubled', 'dread', 'uneasy', 'fret', 'jittery'
+            {
+                keywords: ['anxious', 'anxiety', 'worried', 'worry', 'stress', 'overwhelmed', 'panic', 'afraid', 'scared',
+                    'nervous'
                 ],
-                responses: [{
-                    advice: "I hear your anxiety — it's like a storm inside. But the God of peace is greater than any storm. He promises to guard your heart and mind with a peace that doesn't make sense in the middle of chaos. Cast your worries on Him, one by one.",
-                    verse: "Philippians 4:6-7 — 'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.'"
-                }, {
-                    advice: "Your worries are real, but they are not the final word. God holds tomorrow, and He holds you. Try to hand Him one worry at a time — He can carry it all. You are not alone in this fight.",
-                    verse: "1 Peter 5:7 — 'Cast all your anxiety on him because he cares for you.'"
-                }, {
-                    advice: "When anxiety whispers 'what if,' let faith whisper 'even if.' Even if everything falls apart, God is still with you. He has not given you a spirit of fear, but of power, love, and a sound mind.",
-                    verse: "2 Timothy 1:7 — 'For God has not given us a spirit of fear, but of power and of love and of a sound mind.'"
-                }, {
-                    advice: "Take a deep breath. You don't have to solve everything today. God is with you in this moment, and He will give you the strength for each step as it comes.",
-                    verse: "Matthew 6:34 — 'Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.'"
-                }]
+                reply: "😰 I hear your anxiety. The God of peace is greater than any storm. He promises to guard your heart and mind with a peace that doesn't make sense in the middle of chaos.\n\n📖 **Philippians 4:6-7** — 'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.'\n\n💡 **Practical steps:** Breathe deeply, write down your worries, pray out loud, and give each one to God."
             },
-
-            // ----- ANGER & FRUSTRATION -----
-            angry: {
-                keywords: ['angry', 'anger', 'furious', 'rage', 'frustrated', 'bitter', 'resentful', 'irritated',
-                    'annoyed', 'wrath', 'mad', 'outraged', 'enraged', 'fuming'
+            {
+                keywords: ['angry', 'anger', 'furious', 'rage', 'frustrated', 'bitter', 'resentful', 'mad', 'outraged',
+                    'enraged'
                 ],
-                responses: [{
-                    advice: "I feel your anger, and it's a powerful emotion. Anger can be a signal that something important is at stake. But don't let it control you — pause, breathe, and give your anger to God. He can handle it, and He can help you respond with wisdom.",
-                    verse: "Ephesians 4:26-27 — 'In your anger do not sin: Do not let the sun go down while you are still angry, and do not give the devil a foothold.'"
-                }, {
-                    advice: "It's okay to be angry, but don't let it take root in your heart. God understands your frustration, and He invites you to bring it to Him. Speak to Him honestly, and let His peace quiet your storm.",
-                    verse: "Psalm 37:8 — 'Refrain from anger and turn from wrath; do not fret—it leads only to evil.'"
-                }, {
-                    advice: "Anger can be like fire — useful when controlled, destructive when wild. Ask God to help you channel your anger into something good: justice, change, or even just a deep breath. He is patient with you.",
-                    verse: "James 1:19-20 — 'Everyone should be quick to listen, slow to speak and slow to become angry, because human anger does not produce the righteousness that God desires.'"
-                }, {
-                    advice: "Your anger is valid, but it doesn't have to own you. Take a step back, breathe, and ask God to give you His perspective. He sees the bigger picture.",
-                    verse: "Proverbs 15:1 — 'A gentle answer turns away wrath, but a harsh word stirs up anger.'"
-                }]
+                reply: "😤 I feel your anger. Anger can be a signal that something important is at stake. But don't let it control you — pause, breathe, and give your anger to God.\n\n📖 **Ephesians 4:26-27** — 'In your anger do not sin: Do not let the sun go down while you are still angry, and do not give the devil a foothold.'\n\n💡 **What to do:** Take a walk, count to ten, pray for God's peace, and ask Him to help you respond with wisdom."
             },
-
-            // ----- FEAR -----
-            fear: {
-                keywords: ['fear', 'terrified', 'scared', 'afraid', 'phobia', 'dread', 'frightened', 'panicked', 'horror',
-                    'trembling', 'petrified'
-                ],
-                responses: [{
-                    advice: "Fear can be paralyzing, but you don't have to face it alone. God says, 'Fear not, for I am with you.' He is holding your hand, and He won't let you go. Take a small step forward — He will meet you there.",
-                    verse: "Isaiah 41:10 — 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.'"
-                }, {
-                    advice: "Your fear is valid, but it doesn't have to have the last word. God has given you a spirit not of fear but of power. Speak to your fear and tell it that God is bigger.",
-                    verse: "Joshua 1:9 — 'Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.'"
-                }, {
-                    advice: "When you feel afraid, remember that you are in the palm of God's hand. Nothing can snatch you away. Let that truth settle in your heart, and let His perfect love drive out your fear.",
-                    verse: "1 John 4:18 — 'There is no fear in love. But perfect love drives out fear.'"
-                }, {
-                    advice: "Fear is a liar. God is with you, and He is greater than anything you face. Take courage — He has already won the victory.",
-                    verse: "Psalm 27:1 — 'The Lord is my light and my salvation— whom shall I fear? The Lord is the stronghold of my life— of whom shall I be afraid?'"
-                }]
+            {
+                keywords: ['fear', 'terrified', 'scared', 'afraid', 'phobia', 'dread', 'frightened', 'panic', 'horror'],
+                reply: "😨 Fear is real, but God is bigger. He says, 'Fear not, for I am with you.' He is holding your hand, and He won't let go.\n\n📖 **Isaiah 41:10** — 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.'\n\n💡 **Action:** Speak God's promises out loud, remember times He has helped you, and take one small step forward in faith."
             },
-
-            // ----- LONELINESS -----
-            lonely: {
+            {
                 keywords: ['lonely', 'loneliness', 'alone', 'isolated', 'abandoned', 'forsaken', 'unwanted', 'rejected',
-                    'left out', 'desolate', 'neglected', 'solitary'
+                    'left out'
                 ],
-                responses: [{
-                    advice: "Loneliness can feel like a desert, but you are never truly alone. God promises never to leave you or forsake you. He is with you in the silence, and He sees your heart. You are deeply loved and valued.",
-                    verse: "Deuteronomy 31:8 — 'The Lord himself goes before you and will be with you; he will never leave you nor forsake you. Do not be afraid; do not be discouraged.'"
-                }, {
-                    advice: "Even when everyone else seems far away, God is closer than your breath. He knows your name, and He calls you His own. You are not invisible to Him — you are precious in His sight.",
-                    verse: "Isaiah 43:1 — 'Do not fear, for I have redeemed you; I have summoned you by name; you are mine.'"
-                }, {
-                    advice: "Loneliness is a heavy weight, but it can also be a time to draw closer to God. He is the friend who sticks closer than a brother. Talk to Him, pour out your heart, and let His presence fill the empty spaces.",
-                    verse: "Psalm 25:16 — 'Turn to me and be gracious to me, for I am lonely and afflicted.'"
-                }, {
-                    advice: "You are never unwanted. God created you with purpose and love. Even in the quiet moments, He is there, and He delights in you.",
-                    verse: "Psalm 68:6 — 'God sets the lonely in families, he leads out the prisoners with singing.'"
-                }]
+                reply: "😔 You are never alone. God promises never to leave you or forsake you. He is with you in the silence, and He sees your heart.\n\n📖 **Deuteronomy 31:8** — 'The Lord himself goes before you and will be with you; he will never leave you nor forsake you. Do not be afraid; do not be discouraged.'\n\n💡 **Connect:** Reach out to someone, join a small group, volunteer, and talk to God — He is the friend who sticks closer than a brother."
             },
-
-            // ----- JOY & HAPPINESS -----
-            joyful: {
-                keywords: ['joy', 'happy', 'joyful', 'glad', 'delight', 'cheerful', 'blessed', 'excited', 'elated',
-                    'ecstatic', 'thrilled', 'overjoyed'
-                ],
-                responses: [{
-                    advice: "I'm so glad you're feeling joyful! This is a gift from God, and it's a beautiful thing. Let your joy be a light to others, and thank the One who gives you every reason to smile. Rejoice in the Lord always — He is worthy!",
-                    verse: "Nehemiah 8:10 — 'Do not grieve, for the joy of the Lord is your strength.'"
-                }, {
-                    advice: "Joy is a fruit of the Spirit, and it's wonderful to see it in you! Let this happiness remind you of God's faithfulness. Share it with someone today, and watch it multiply.",
-                    verse: "Psalm 16:11 — 'You make known to me the path of life; you will fill me with joy in your presence, with eternal pleasures at your right hand.'"
-                }, {
-                    advice: "Your joy is contagious! Thank God for this season of gladness. Remember that joy is not dependent on circumstances — it's rooted in the unshakeable love of God. Let that joy keep you steady.",
-                    verse: "Philippians 4:4 — 'Rejoice in the Lord always. I will say it again: Rejoice!'"
-                }, {
-                    advice: "Joy is a gift — cherish it and let it overflow. God delights in your happiness, and He wants you to experience His joy in every season.",
-                    verse: "Psalm 30:5 — 'Weeping may stay for the night, but rejoicing comes in the morning.'"
-                }]
+            {
+                keywords: ['joy', 'happy', 'joyful', 'glad', 'delight', 'cheerful', 'blessed', 'excited', 'elated'],
+                reply: "😊 I'm so glad you're feeling joyful! This is a gift from God. Let your joy be a light to others, and thank the One who gives you every reason to smile.\n\n📖 **Nehemiah 8:10** — 'Do not grieve, for the joy of the Lord is your strength.'\n\n💡 **Share it:** Tell someone about your joy, write a gratitude list, and worship God with all your heart."
             },
-
-            // ----- DISCOURAGEMENT & HOPELESSNESS -----
-            discouraged: {
+            {
+                keywords: ['peace', 'peaceful', 'calm', 'serene', 'content', 'tranquil', 'still', 'relaxed', 'unworried'],
+                reply: "😌 Peace is a precious gift from God. The peace of Christ is not like the world's peace — it's a deep stillness that settles your soul. Rest in Him today.\n\n📖 **John 14:27** — 'Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.'\n\n💡 **Stay in peace:** Meditate on scripture, practice deep breathing, and thank God for His calm."
+            },
+            {
+                keywords: ['grateful', 'thankful', 'gratitude', 'appreciative', 'blessed', 'thank you', 'appreciation'],
+                reply: "🙏 Gratitude is a powerful posture of the heart! Giving thanks shifts our focus from what we lack to what we have. It opens the door for God's peace and joy.\n\n📖 **1 Thessalonians 5:16-18** — 'Rejoice always, pray continually, give thanks in all circumstances; for this is God's will for you in Christ Jesus.'\n\n💡 **Practice:** Start a gratitude journal, thank God for three things every morning, and tell someone you appreciate them."
+            },
+            {
                 keywords: ['discouraged', 'discouragement', 'hopeless', 'despair', 'defeated', 'downhearted',
-                    'disheartened', 'giving up', 'tired', 'weary', 'exhausted', 'faint', 'helpless', 'burnout'
+                    'disheartened', 'giving up', 'tired', 'weary', 'exhausted'
                 ],
-                responses: [{
-                    advice: "I hear your weariness. It's so hard when hope feels far away. But God is the God of hope, and He promises to renew your strength. Don't give up — your breakthrough may be just around the corner.",
-                    verse: "Isaiah 40:31 — 'But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.'"
-                }, {
-                    advice: "When you feel like you can't go on, God carries you. His grace is sufficient, and His power is made perfect in your weakness. You are not a failure — you are a beloved child of God.",
-                    verse: "2 Corinthians 12:9 — 'My grace is sufficient for you, for my power is made perfect in weakness.'"
-                }, {
-                    advice: "It's okay to feel defeated sometimes. Even the prophets had moments of despair. But God never gave up on them, and He won't give up on you. Take a rest, and let Him fight for you.",
-                    verse: "Exodus 14:14 — 'The Lord will fight for you; you need only to be still.'"
-                }, {
-                    advice: "Hope is not lost. God is still working, even when you can't see it. Trust that He is moving in the shadows, and one day you will see His goodness.",
-                    verse: "Lamentations 3:22-23 — 'Because of the Lord's great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.'"
-                }]
+                reply: "😞 I hear your weariness. It's so hard when hope feels far away. But God is the God of hope, and He promises to renew your strength.\n\n📖 **Isaiah 40:31** — 'But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.'\n\n💡 **Keep going:** Rest, pray, and remember that your breakthrough may be just around the corner."
             },
-
-            // ----- GUILT, SHAME & CONFESSION -----
-            guilty: {
-                keywords: ['guilty', 'guilt', 'ashamed', 'shame', 'convicted', 'regret', 'remorse', 'sorry', 'unworthy',
-                    'condemned', 'blame', 'confess', 'confession', 'forgiveness', 'repent', 'sin'
-                ],
-                responses: [{
-                    advice: "Guilt can be a heavy burden, but God is the God of mercy. If you confess your sins, He is faithful to forgive and to cleanse you. You are not defined by your mistakes — you are defined by His grace.",
-                    verse: "1 John 1:9 — 'If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.'"
-                }, {
-                    advice: "Shame whispers that you are beyond repair, but God says you are redeemable. There is no condemnation for those who are in Christ Jesus. Let go of the shame and receive His forgiveness.",
-                    verse: "Romans 8:1 — 'Therefore, there is now no condemnation for those who are in Christ Jesus.'"
-                }, {
-                    advice: "Your past does not define you. God's mercy is new every morning. He removes your transgressions as far as the east is from the west. Let Him lift the weight of guilt and give you peace.",
-                    verse: "Psalm 103:12 — 'As far as the east is from the west, so far has he removed our transgressions from us.'"
-                }, {
-                    advice: "Confession is not about punishment — it's about freedom. When you bring your sins to God, He welcomes you with open arms. He already knows, and He still loves you.",
-                    verse: "Proverbs 28:13 — 'Whoever conceals their sins does not prosper, but the one who confesses and renounces them finds mercy.'"
-                }]
+            {
+                keywords: ['bored', 'boredom', 'uninterested', 'listless', 'dull', 'monotonous', 'restless', 'nothing to do'],
+                reply: "😑 Boredom can feel like a void, but it can also be an invitation. God might be calling you to something new — a new passion, a new skill, or a deeper relationship with Him.\n\n📖 **Jeremiah 29:13** — 'You will seek me and find me when you seek me with all your heart.'\n\n💡 **Try this:** Start a new hobby, serve someone, read a new book in the Bible, or ask God to show you what He wants to do through you."
             },
-
-            // ----- LOVED & CONTENT -----
-            loved: {
-                keywords: ['loved', 'love', 'cared for', 'valued', 'appreciated', 'cherished', 'beloved', 'accepted',
-                    'secure', 'content', 'grateful'
-                ],
-                responses: [{
-                    advice: "What a beautiful feeling! You are loved with an everlasting love. God has shown you His love through Jesus, and nothing can separate you from that love. Let that love overflow to others.",
-                    verse: "1 John 4:19 — 'We love because he first loved us.'"
-                }, {
-                    advice: "Being loved is a gift. Remember that God's love is not based on your performance — it's unconditional. Rest in that truth today, and let it give you confidence and peace.",
-                    verse: "Romans 8:38-39 — 'For I am convinced that neither death nor life... nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.'"
-                }, {
-                    advice: "You are not just loved — you are chosen, adopted, and cherished. Walk in that identity today, and let your heart be filled with gratitude.",
-                    verse: "Ephesians 1:4-5 — 'He chose us in him before the creation of the world to be holy and blameless in his sight. In love he predestined us for adoption to sonship through Jesus Christ.'"
-                }, {
-                    advice: "You are deeply loved — not because of what you do, but because of who you are. Rest in that truth today.",
-                    verse: "Zephaniah 3:17 — 'The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his quiet love he will rejoice over you with singing.'"
-                }]
+            {
+                keywords: ['stressed', 'overwhelmed', 'burdened', 'pressed', 'stretched', 'too much', 'burnout', 'frazzled'],
+                reply: "😩 Stress can make you feel like you're carrying the world on your shoulders. But God invites you to bring your burdens to Him. He gives rest to the weary.\n\n📖 **Matthew 11:28** — 'Come to me, all you who are weary and burdened, and I will give you rest.'\n\n💡 **Unload:** Make a list of your burdens, pray over each one, and trust God to carry what you can't."
             },
-
-            // ----- CONFUSION & DOUBT -----
-            confused: {
-                keywords: ['confused', 'confusion', 'lost', 'uncertain', 'unsure', 'perplexed', 'doubting', 'doubt',
-                    'questioning', 'wondering', 'puzzled', 'unclear'
-                ],
-                responses: [{
-                    advice: "It's okay not to have all the answers. God is not afraid of your questions — He invites you to seek wisdom. Take a step back, pray, and trust that He will guide you one step at a time.",
-                    verse: "James 1:5 — 'If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.'"
-                }, {
-                    advice: "Confusion can be unsettling, but it can also be a sign that you're growing. God promises to direct your paths when you acknowledge Him. Keep seeking, and He will make the way clear.",
-                    verse: "Proverbs 3:5-6 — 'Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.'"
-                }, {
-                    advice: "Doubt is not the opposite of faith — it's part of faith. Even the disciples doubted. But Jesus never rejected them. Bring your doubts to Him, and let Him show you the truth.",
-                    verse: "Mark 9:24 — 'I do believe; help me overcome my unbelief!'"
-                }, {
-                    advice: "It's okay to be uncertain. God is not afraid of your doubts. He will show you the way, one step at a time.",
-                    verse: "Psalm 32:8 — 'I will instruct you and teach you in the way you should go; I will counsel you with my loving eye on you.'"
-                }]
-            },
-
-            // ----- BETRAYAL & HURT -----
-            betrayed: {
-                keywords: ['betrayed', 'betrayal', 'deceived', 'hurt', 'wounded', 'unfaithful', 'cheated', 'backstabbed',
-                    'mistreated', 'used', 'abused', 'broken'
-                ],
-                responses: [{
-                    advice: "I'm so sorry you've been hurt like this. Betrayal cuts deep, and it's hard to trust again. But God is a faithful refuge — He will never betray you. Let Him heal your wounds and show you how to forgive, even when it's hard.",
-                    verse: "Psalm 91:14 — 'Because he loves me, says the Lord, I will rescue him; I will protect him, for he acknowledges my name.'"
-                }, {
-                    advice: "It's okay to feel broken by someone's betrayal. God sees your pain, and He will bring justice and restoration in His time. Hold onto His faithfulness, and let Him mend your heart.",
-                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
-                }, {
-                    advice: "When people fail you, God never will. He is a friend who sticks closer than a brother. Pour out your hurt to Him, and let His love wash over you and bring healing.",
-                    verse: "Psalm 56:8 — 'You keep track of all my sorrows. You have collected all my tears in your bottle. You have recorded each one in your book.'"
-                }, {
-                    advice: "Healing from betrayal takes time. Be gentle with yourself. God is patient, and He will restore what was broken.",
-                    verse: "Joel 2:25 — 'I will repay you for the years the locusts have eaten.'"
-                }]
-            },
-
-            // ----- HATRED & BITTERNESS -----
-            hatred: {
-                keywords: ['hate', 'hatred', 'loathe', 'despise', 'detest', 'disgust', 'scorn', 'contempt', 'bitterness',
-                    'malice', 'vengeance'
-                ],
-                responses: [{
-                    advice: "I hear your hatred and bitterness — it's a heavy burden to carry. God understands your pain, but He also calls us to love our enemies and pray for those who hurt us. Not because it's easy, but because love breaks the chains of hatred. Let God help you release this weight so you can find peace.",
-                    verse: "Matthew 5:44 — 'But I tell you, love your enemies and pray for those who persecute you.'"
-                }, {
-                    advice: "Hatred can poison your own heart. God invites you to give Him your anger and receive His love in return. It may take time, but He can transform your bitterness into compassion.",
-                    verse: "Ephesians 4:31-32 — 'Get rid of all bitterness, rage and anger... Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.'"
-                }, {
-                    advice: "It's hard to let go of hatred, but God can help you. He doesn't ask you to do it alone. With His grace, you can begin to forgive, not because they deserve it, but because you deserve peace.",
-                    verse: "Colossians 3:13 — 'Bear with each other and forgive one another... Forgive as the Lord forgave you.'"
-                }, {
-                    advice: "Hatred is a prison — but forgiveness sets you free. Let God break the chains, one day at a time.",
-                    verse: "Romans 12:19 — 'Do not take revenge, my dear friends, but leave room for God's wrath, for it is written: It is mine to avenge; I will repay, says the Lord.'"
-                }]
-            },
-
-            // ----- PEACE & CALM -----
-            peaceful: {
-                keywords: ['peace', 'peaceful', 'calm', 'at rest', 'serene', 'content', 'centered', 'tranquil', 'still',
-                    'relaxed', 'unworried', 'rest'
-                ],
-                responses: [{
-                    advice: "I'm so glad you're feeling peaceful. That is a precious gift from God. The peace of Christ is not like the world's peace — it's a deep stillness that settles your soul. Rest in Him today, and let that peace overflow into your relationships and your day.",
-                    verse: "John 14:27 — 'Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.'"
-                }, {
-                    advice: "Peace is a fruit of the Spirit, and it's beautiful to see it in you! Let this calm remind you that God is in control. Breathe deeply and trust that He is working all things for your good.",
-                    verse: "Romans 15:13 — 'May the God of hope fill you with all joy and peace as you trust in him.'"
-                }, {
-                    advice: "When you are at peace, you are a safe place for others. Thank God for this season of rest. Let His peace guard your heart and mind, and carry it with you wherever you go.",
-                    verse: "Colossians 3:15 — 'Let the peace of Christ rule in your hearts... and be thankful.'"
-                }, {
-                    advice: "Peace is not the absence of chaos, but the presence of God. Rest in Him today.",
-                    verse: "Psalm 4:8 — 'In peace I will lie down and sleep, for you alone, Lord, make me dwell in safety.'"
-                }]
-            },
-
-            // ----- GRATITUDE -----
-            gratitude: {
-                keywords: ['grateful', 'thankful', 'gratitude', 'appreciative', 'blessed', 'thank you', 'appreciation',
-                    'thankfulness', 'blessing'
-                ],
-                responses: [{
-                    advice: "Gratitude is a powerful posture of the heart! Giving thanks shifts our focus from what we lack to what we have. It opens the door for God's peace and joy. Keep a heart of thanksgiving, and watch how it transforms your perspective.",
-                    verse: "1 Thessalonians 5:16-18 — 'Rejoice always, pray continually, give thanks in all circumstances; for this is God's will for you in Christ Jesus.'"
-                }, {
-                    advice: "A thankful heart is a magnet for miracles. When you focus on God's goodness, your problems begin to shrink. Thank Him for the small things — He delights in your gratitude.",
-                    verse: "Psalm 107:1 — 'Give thanks to the Lord, for he is good; his love endures forever.'"
-                }, {
-                    advice: "Gratitude unlocks the fullness of life. It turns what we have into enough, and more. Keep counting your blessings, and you'll find joy in the ordinary.",
-                    verse: "Colossians 3:17 — 'And whatever you do... do it all in the name of the Lord Jesus, giving thanks to God the Father through him.'"
-                }, {
-                    advice: "A grateful heart sees God's hand in everything. Thank Him today — He is worthy of all praise.",
-                    verse: "Psalm 136:26 — 'Give thanks to the God of heaven. His love endures forever.'"
-                }]
-            },
-
-            // ----- BOREDOM -----
-            bored: {
-                keywords: ['bored', 'boredom', 'uninterested', 'listless', 'dull', 'monotonous', 'tedious', 'uninspired',
-                    'restless', 'nothing to do', 'boring'
-                ],
-                responses: [{
-                    advice: "Boredom can feel like a void, but it can also be an invitation. God might be calling you to something new — a new passion, a new skill, or a deeper relationship with Him. Ask Him to spark curiosity in your heart.",
-                    verse: "Jeremiah 29:13 — 'You will seek me and find me when you seek me with all your heart.'"
-                }, {
-                    advice: "Sometimes boredom is a sign that you need to step out of your comfort zone. Try something new, serve someone else, or dive into God's Word with fresh eyes. He can turn a dull moment into an adventure.",
-                    verse: "Colossians 3:23 — 'Whatever you do, work at it with all your heart, as working for the Lord.'"
-                }, {
-                    advice: "Boredom can be a gift — it gives you space to think, dream, and pray. Use this time to connect with God in a new way. He is always waiting to meet with you.",
-                    verse: "Psalm 119:105 — 'Your word is a lamp for my feet, a light on my path.'"
-                }, {
-                    advice: "Every moment has purpose. Ask God to show you what He wants you to see in this quiet season.",
-                    verse: "Ecclesiastes 3:1 — 'There is a time for everything, and a season for every activity under the heavens.'"
-                }]
-            },
-
-            // ----- SUICIDAL THOUGHTS (extreme care) -----
-            suicidal: {
-                keywords: ['suicide', 'suicidal', 'kill myself', 'want to die', 'end it all', 'give up on life',
-                    'not worth living', 'better off dead', 'want to disappear'
-                ],
-                responses: [{
-                    advice: "I'm so sorry you're feeling this way. Please know that your life is precious — you are a child of God, created with purpose and value. You are not alone, and there is hope even in the darkest moments. Please reach out for help — talk to a trusted person, a counselor, or call a helpline. God loves you more than you can imagine, and He wants you to live.",
-                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
-                }, {
-                    advice: "I can't pretend to know exactly what you're going through, but I do know that God sees you and He cares. You are not a burden — you are a beloved child of God. Please don't give up. Reach out to someone who can help you right now. There is hope, and there is help.",
-                    verse: "Jeremiah 29:11 — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'"
-                }, {
-                    advice: "Please, I urge you — your life matters. God created you with a purpose, and He is not finished with you yet. Even if you can't see it now, He is working in the shadows. Talk to Him, talk to a friend, and get professional help. You are so loved.",
-                    verse: "Psalm 40:1-2 — 'I waited patiently for the Lord; he turned to me and heard my cry. He lifted me out of the slimy pit, out of the mud and mire; he set my feet on a rock and gave me a firm place to stand.'"
-                }, {
-                    advice: "You are not alone. There are people who care about you, and God is with you right now. Please reach out — you are worth fighting for.",
-                    verse: "Psalm 27:10 — 'Though my father and mother forsake me, the Lord will receive me.'"
-                }]
-            },
-
-            // ----- STRESS & OVERWHELM -----
-            stressed: {
-                keywords: ['stress', 'stressed', 'overwhelmed', 'burdened', 'pressed', 'stretched', 'too much', 'burnout',
-                    'frazzled', 'drowning'
-                ],
-                responses: [{
-                    advice: "Stress can make you feel like you're carrying the world on your shoulders. But God invites you to bring your burdens to Him. He gives rest to the weary. Take a moment to breathe and let Him carry your load.",
-                    verse: "Matthew 11:28 — 'Come to me, all you who are weary and burdened, and I will give you rest.'"
-                }, {
-                    advice: "When you're overwhelmed, remember that God is bigger than your problems. He promises to be your refuge and strength. Take small steps, one at a time, and trust that He will guide you through.",
-                    verse: "Psalm 46:1 — 'God is our refuge and strength, an ever-present help in trouble.'"
-                }, {
-                    advice: "You are not superhuman, and that's okay. God doesn't expect you to do everything on your own. Rest in His presence, and let His peace calm your anxious heart.",
-                    verse: "Psalm 55:22 — 'Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.'"
-                }, {
-                    advice: "You can only carry so much. Give God your burdens, and let Him carry the weight you were never meant to bear.",
-                    verse: "1 Peter 5:7 — 'Cast all your anxiety on him because he cares for you.'"
-                }]
-            },
-
-            // ----- INSECURITY & REJECTION -----
-            insecure: {
+            {
                 keywords: ['insecure', 'insecurity', 'rejected', 'rejection', 'unworthy', 'not good enough', 'inadequate',
-                    'worthless', 'self-doubt', 'low self-esteem', 'not enough'
+                    'worthless'
                 ],
-                responses: [{
-                    advice: "I hear your insecurity. It's so easy to feel like you're not enough, but God says you are fearfully and wonderfully made. Your worth is not based on what others think — it's based on what God says about you. You are precious in His sight.",
-                    verse: "Psalm 139:14 — 'I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.'"
-                }, {
-                    advice: "Rejection hurts, but it doesn't define you. God accepts you completely in Christ. You are chosen, adopted, and loved. Let His acceptance heal your wounds and give you confidence.",
-                    verse: "Romans 15:7 — 'Accept one another, then, just as Christ accepted you, in order to bring praise to God.'"
-                }, {
-                    advice: "When you feel insecure, remember that God's opinion is the only one that ultimately matters. He sees you as His masterpiece. Let that truth sink deep into your heart.",
-                    verse: "Ephesians 2:10 — 'For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.'"
-                }, {
-                    advice: "You are enough because God says you are. You don't have to prove anything to anyone — you are already loved completely.",
-                    verse: "2 Corinthians 12:9 — 'My grace is sufficient for you, for my power is made perfect in weakness.'"
-                }]
+                reply: "😥 I hear your insecurity. It's so easy to feel like you're not enough, but God says you are fearfully and wonderfully made. Your worth is not based on what others think — it's based on what God says about you.\n\n📖 **Psalm 139:14** — 'I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.'\n\n💡 **Remember:** God chose you, created you on purpose, and He delights in you."
+            },
+            {
+                keywords: ['jealous', 'jealousy', 'envy', 'envious', 'covet', 'coveting', 'comparison', 'comparing'],
+                reply: "😒 Jealousy can creep in and steal your joy, but God's love for you is unique and personal. He has given you gifts that no one else has. Instead of comparing, let God show you how special you are to Him.\n\n📖 **Proverbs 14:30** — 'A heart at peace gives life to the body, but envy rots the bones.'\n\n💡 **Shift focus:** Celebrate others, thank God for what you have, and trust Him with your own path."
+            },
+            {
+                keywords: ['hope', 'hopeful', 'optimistic', 'expectant', 'looking forward', 'anticipating', 'trusting',
+                    'faithful', 'confident'
+                ],
+                reply: "🌟 Hope is not just wishful thinking — it's a confident expectation in God's promises. He has plans to prosper you and give you a future. Hold onto that hope, because it anchors your soul.\n\n📖 **Jeremiah 29:11** — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'\n\n💡 **Hope builders:** Read Psalm 23, listen to worship music, and remember God's faithfulness in your past."
+            },
+            {
+                keywords: ['faith', 'trust', 'believe', 'believing', 'trusting', 'spiritually strong', 'worship', 'prayer',
+                    'obedient'
+                ],
+                reply: "🙌 Your faith in God is a beautiful thing! It's the foundation that holds you steady. Keep trusting Him, even when you don't see the way. He is faithful, and He will never let you down.\n\n📖 **Hebrews 11:1** — 'Now faith is confidence in what we hope for and assurance about what we do not see.'\n\n💡 **Grow your faith:** Read the Bible daily, pray without ceasing, and surround yourself with other believers."
+            },
+            {
+                keywords: ['courage', 'brave', 'courageous', 'determined', 'determination', 'bold', 'fearless', 'resolute',
+                    'perseverance'
+                ],
+                reply: "💪 I admire your courage! Facing challenges head-on takes strength, and you have it because God is with you. He has not given you a spirit of fear, but of power, love, and a sound mind.\n\n📖 **Joshua 1:9** — 'Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.'\n\n💡 **Stand firm:** Speak God's promises, take small steps of faith, and remember that God goes before you."
+            },
+            {
+                keywords: ['patience', 'patient', 'waiting', 'wait', 'endurance', 'long-suffering', 'wait on God',
+                    'trust God\'s timing'
+                ],
+                reply: "⏳ Patience is a fruit of the Spirit, and it's not easy. But God is working while you wait. He is faithful, and His timing is perfect. Trust that He is preparing something wonderful for you.\n\n📖 **Psalm 27:14** — 'Wait for the Lord; be strong and take heart and wait for the Lord.'\n\n💡 **Wait well:** Use waiting time to pray, plan, and prepare. God is never late."
             },
 
-            // ----- JEALOUSY -----
-            jealous: {
-                keywords: ['jealous', 'jealousy', 'envy', 'envious', 'covet', 'coveting', 'green with envy', 'comparison',
-                    'comparing'
+            // ---- SINS ----
+            {
+                keywords: ['lust', 'pornography', 'masturbate', 'masturbation', 'sexual desire', 'impure thoughts',
+                    'fornication'
                 ],
-                responses: [{
-                    advice: "Jealousy can creep in and steal your joy, but God's love for you is unique and personal. He has given you gifts that no one else has. Instead of comparing, let God show you how special you are to Him.",
-                    verse: "Proverbs 14:30 — 'A heart at peace gives life to the body, but envy rots the bones.'"
-                }, {
-                    advice: "When jealousy arises, it's often because we feel inadequate. But God says you are enough in Christ. He will supply all your needs. Trust Him with your insecurities.",
-                    verse: "Philippians 4:19 — 'And my God will meet all your needs according to the riches of his glory in Christ Jesus.'"
-                }, {
-                    advice: "Jealousy is a sign that you're focusing on what others have instead of what God has given you. Shift your gaze to His faithfulness, and you'll find peace in your own journey.",
-                    verse: "Psalm 37:7 — 'Be still before the Lord and wait patiently for him; do not fret when people succeed in their ways.'"
-                }, {
-                    advice: "Your path is uniquely yours. God has a plan for you that no one else can fulfill. Celebrate others, and trust God with your own journey.",
-                    verse: "Galatians 6:4 — 'Each one should test their own actions. Then they can take pride in themselves alone, without comparing themselves to someone else.'"
-                }]
+                reply: "💔 Lust is a struggle that many face, but you are not alone. God can give you the strength to overcome. Flee from sexual immorality and ask God to renew your mind. Set boundaries, use accountability, and fill your mind with what is pure.\n\n📖 **1 Corinthians 6:18-20** — 'Flee from sexual immorality... Your body is a temple of the Holy Spirit... honor God with your bodies.'\n\n💡 **Freedom steps:** Install accountability software, avoid triggers, pray daily, and confess to a trusted mentor."
             },
-
-            // ----- PRIDE -----
-            pride: {
+            {
+                keywords: ['adultery', 'affair', 'cheated on spouse', 'unfaithful', 'broken marriage vow'],
+                reply: "💔 Adultery breaks trust and hurts deeply, but God can heal and restore. If you have committed adultery, repent, confess to God, and seek reconciliation if possible. God's grace is greater than any sin.\n\n📖 **Proverbs 6:32-33** — 'But a man who commits adultery has no sense; whoever does so destroys himself. Blows and disgrace are his lot.'\n\n💡 **Healing steps:** Confess, seek counseling, rebuild trust slowly, and lean on God's forgiveness."
+            },
+            {
+                keywords: ['lying', 'deceive', 'deception', 'dishonesty', 'cheat', 'cheating', 'steal', 'stole', 'theft'],
+                reply: "📖 'Thou shalt not steal' and 'Thou shalt not bear false witness' are God's commands. Lying and stealing hurt both you and others. God calls us to honesty and integrity. If you've done either, confess, repent, and make restitution where possible.\n\n📖 **Ephesians 4:28** — 'Anyone who has been stealing must steal no longer, but must work, doing something useful with their own hands.'\n\n💡 **Restore:** Return what you took, apologize to those you deceived, and commit to truthfulness."
+            },
+            {
+                keywords: ['murder', 'kill', 'killing', 'violence', 'homicide', 'abortion', 'anger killing'],
+                reply: "💔 Murder is a grave sin against God and against life. God values every human life. If you have taken a life or struggle with violent thoughts, seek immediate help — talk to a pastor, counselor, and authorities if needed. God can forgive even the darkest sins through Jesus Christ.\n\n📖 **Exodus 20:13** — 'You shall not murder.'\n\n💡 **Get help:** Call a crisis line, confess to God, and seek professional counseling."
+            },
+            {
+                keywords: ['hate', 'hatred', 'loathe', 'despise', 'detest', 'scorn', 'contempt', 'bitterness', 'malice',
+                    'vengeance'
+                ],
+                reply: "😤 Hatred is a heavy burden that poisons your own heart. God calls us to love our enemies and pray for those who hurt us. Not because it's easy, but because love breaks the chains of hatred.\n\n📖 **Matthew 5:44** — 'But I tell you, love your enemies and pray for those who persecute you.'\n\n💡 **Let go:** Pray for the person you hate, ask God to help you forgive, and release your vengeance to Him."
+            },
+            {
+                keywords: ['gossip', 'slander', 'backbiting', 'rumor', 'talking behind back'],
+                reply: "🗣️ Gossip and slander destroy relationships and hurt people deeply. God calls us to speak words that build others up. If you've gossiped, apologize and commit to speaking only what is helpful and kind.\n\n📖 **Proverbs 16:28** — 'A perverse person stirs up conflict, and a gossip separates close friends.'\n\n💡 **Change:** Before speaking, ask: 'Is it true? Is it kind? Is it necessary?'"
+            },
+            {
+                keywords: ['cursing', 'swear', 'swearing', 'profanity', 'blasphemy', 'taking god name'],
+                reply: "🙊 Our words have power. Cursing and blasphemy dishonor God and hurt others. God calls us to speak with grace and purity. Ask God to guard your mouth and fill you with words of life.\n\n📖 **Ephesians 4:29** — 'Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up according to their needs.'\n\n💡 **Change your speech:** Practice speaking blessings, memorize scripture, and pray for a clean tongue."
+            },
+            {
+                keywords: ['idolatry', 'idol', 'witchcraft', 'occult', 'fortune telling', 'astrology', 'magic', 'sorcery'],
+                reply: "🧙 God is a jealous God. He alone is worthy of our worship. Idolatry and occult practices separate us from Him. Turn away from these and put your trust in Jesus alone.\n\n📖 **Exodus 20:3** — 'You shall have no other gods before me.'\n\n💡 **Break free:** Destroy any occult objects, renounce these practices, and fill your heart with the truth of God's Word."
+            },
+            {
+                keywords: ['disobedience', 'rebellion', 'disobey', 'rebel', 'stubborn', 'defiant', 'rebellious child'],
+                reply: "🙇 Disobedience and rebellion separate us from God's blessing. God calls us to obey His commands and honor those in authority. If you've been rebellious, humble yourself, repent, and choose obedience.\n\n📖 **1 Samuel 15:22** — 'To obey is better than sacrifice, and to heed is better than the fat of rams.'\n\n💡 **Return:** Confess your rebellion, make amends, and ask God to help you walk in obedience."
+            },
+            {
+                keywords: ['hypocrisy', 'hypocrite', 'pretend', 'fake', 'insincere', 'double-faced'],
+                reply: "😶 Hypocrisy is when we say one thing and do another. It repels others and grieves God. Be authentic and honest. Let your 'yes' be 'yes' and your 'no' be 'no.'\n\n📖 **Matthew 23:27-28** — 'Woe to you, teachers of the law and Pharisees, you hypocrites! You are like whitewashed tombs...'\n\n💡 **Be real:** Ask God to make you sincere, confess your failures, and seek to live with integrity."
+            },
+            {
                 keywords: ['pride', 'proud', 'arrogant', 'haughty', 'conceited', 'superior', 'self-righteous', 'boastful',
                     'selfish'
                 ],
-                responses: [{
-                    advice: "Pride can feel good, but it can also separate us from God and others. Humility opens the door for grace. Remember that everything you have is a gift from God, and He gives grace to the humble.",
-                    verse: "James 4:6 — 'But he gives us more grace. That is why Scripture says: God opposes the proud but shows favor to the humble.'"
-                }, {
-                    advice: "It's okay to feel proud of your achievements, but don't forget that God is the source of your strength. Stay humble, stay teachable, and let God guide your steps.",
-                    verse: "Proverbs 16:18 — 'Pride goes before destruction, a haughty spirit before a fall.'"
-                }, {
-                    advice: "True greatness comes from serving others. Jesus humbled Himself and became a servant. Let His example keep you grounded.",
-                    verse: "Philippians 2:3-4 — 'Do nothing out of selfish ambition or vain conceit. Rather, in humility value others above yourselves.'"
-                }, {
-                    advice: "Humility is not thinking less of yourself — it's thinking of yourself less. Let God lift you up in His time.",
-                    verse: "1 Peter 5:6 — 'Humble yourselves, therefore, under God's mighty hand, that he may lift you up in due time.'"
-                }]
+                reply: "😏 Pride can feel good, but it separates us from God and others. Humility opens the door for grace. Remember that everything you have is a gift from God, and He gives grace to the humble.\n\n📖 **James 4:6** — 'But he gives us more grace. That is why Scripture says: God opposes the proud but shows favor to the humble.'\n\n💡 **Stay humble:** Thank God for everything, serve others, and remember that you need God every moment."
+            },
+            {
+                keywords: ['envy', 'envious', 'covet', 'coveting', 'want what others have', 'jealous of others'],
+                reply: "😒 Envy and coveting steal your joy and peace. God commands us not to covet. Instead of comparing, thank God for what you have and trust Him with your own journey.\n\n📖 **Exodus 20:17** — 'You shall not covet your neighbor's house... or anything that belongs to your neighbor.'\n\n💡 **Break free:** Celebrate others, practice gratitude, and pray for contentment."
+            },
+            {
+                keywords: ['gluttony', 'overeating', 'food addiction', 'binge eating', 'greedy for food'],
+                reply: "🍔 Gluttony is an excessive desire for food that can harm your body and spirit. God gave us food for nourishment, but it shouldn't become an idol. Practice self-control and ask God to help you eat in a way that honors Him.\n\n📖 **Proverbs 23:20-21** — 'Do not join those who drink too much wine or gorge themselves on meat, for drunkards and gluttons become poor.'\n\n💡 **Healthy habits:** Eat mindfully, pray before meals, and thank God for the food He provides."
+            },
+            {
+                keywords: ['sloth', 'sluggard', 'lazy', 'laziness', 'idle', 'procrastination', 'wasting time'],
+                reply: "😴 Laziness and sloth prevent us from fulfilling God's purposes. God calls us to work diligently and use our time wisely. Ask God to give you motivation and discipline.\n\n📖 **Proverbs 6:6-8** — 'Go to the ant, you sluggard; consider its ways and be wise! It has no commander, no overseer or ruler, yet it stores its provisions in summer and gathers its food at harvest.'\n\n💡 **Action steps:** Set daily goals, remove distractions, and ask God for a diligent spirit."
+            },
+            {
+                keywords: ['wrath', 'rage', 'temper', 'outburst', 'lose temper', 'uncontrolled anger'],
+                reply: "😤 Uncontrolled anger leads to destruction. God calls us to be slow to anger and quick to listen. When you feel rage, pause, pray, and ask God to help you respond with gentleness.\n\n📖 **Proverbs 15:1** — 'A gentle answer turns away wrath, but a harsh word stirs up anger.'\n\n💡 **Calm down:** Breathe deeply, walk away from the situation, pray, and come back when you're calm."
+            },
+            {
+                keywords: ['greed', 'greedy', 'materialism', 'love of money', 'hoarding', 'covetous', 'wanting more'],
+                reply: "💰 Greed is a form of idolatry. It tells us that more money and things will satisfy, but only God can truly fill our hearts. Learn to be content with what you have and give generously.\n\n📖 **1 Timothy 6:10** — 'For the love of money is a root of all kinds of evil.'\n\n💡 **Give:** Generosity breaks greed. Give to those in need, support God's work, and practice contentment."
+            },
+            {
+                keywords: ['unforgiveness', 'unforgiving', 'hold grudge', 'refuse to forgive', 'bitterness toward others'],
+                reply: "🫂 Unforgiveness is a prison that locks you in. God has forgiven you so much — extend that same forgiveness to others. It doesn't mean you excuse the wrong, but you release the burden to God.\n\n📖 **Ephesians 4:32** — 'Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.'\n\n💡 **Forgive:** Pray for the person, ask God to heal your heart, and release your right to revenge."
             },
 
-            // ----- HOPEFUL (wanting to encourage) -----
-            hopeful: {
-                keywords: ['hopeful', 'optimistic', 'expectant', 'looking forward', 'anticipating', 'trusting',
-                    'faithful', 'confident'
+            // ---- BETRAYAL & CHEATING ----
+            {
+                keywords: ['betrayed', 'betrayal', 'deceived', 'cheated', 'backstabbed', 'infidelity', 'adultery', 'affair',
+                    'unfaithfulness', 'cheated on me'
                 ],
-                responses: [{
-                    advice: "I love that you're feeling hopeful! Hope is not just wishful thinking — it's a confident expectation in God's promises. He has plans to prosper you and give you a future. Hold onto that hope, because it anchors your soul.",
-                    verse: "Romans 15:13 — 'May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit.'"
-                }, {
-                    advice: "Hope is a powerful force — it keeps you going even when you can't see the way. God is the author of hope, and He is faithful to complete what He started in you.",
-                    verse: "Jeremiah 29:11 — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'"
-                }, {
-                    advice: "Your hope is a testimony to others. Keep shining, keep believing, and keep trusting. God is working behind the scenes.",
-                    verse: "Psalm 130:5 — 'I wait for the Lord, my whole being waits, and in his word I put my hope.'"
-                }, {
-                    advice: "Hope is the anchor of the soul. Let it keep you steady, even in the storms.",
-                    verse: "Hebrews 6:19 — 'We have this hope as an anchor for the soul, firm and secure.'"
-                }]
+                reply: "💔 I'm so sorry you've been hurt like this. Betrayal cuts deep, and it's hard to trust again. But God is a faithful refuge — He will never betray you. Let Him heal your wounds and show you how to forgive, even when it's hard.\n\n📖 **Psalm 91:14** — 'Because he loves me, says the Lord, I will rescue him; I will protect him, for he acknowledges my name.'\n\n💡 **Healing:** Give yourself time to grieve, talk to a counselor, pray for wisdom, and don't rush decisions. Trust God with your future."
             },
 
-            // ----- "I DON'T KNOW" / NOT SURE -----
-            idontknow: {
-                keywords: ['i don\'t know', 'idk', 'not sure', 'don\'t know', 'unsure', 'no idea', 'don\'t know what to feel',
-                    'confused about my feelings'
+            // ---- RELATIONSHIPS ----
+            {
+                keywords: ['relationship', 'dating', 'marriage', 'boyfriend', 'girlfriend', 'spouse', 'partner', 'breakup',
+                    'divorce', 'separation'
                 ],
-                responses: [{
-                    advice: "It's okay not to know. Feelings can be complicated, and sometimes we don't have the words to describe what's happening inside. God understands your heart even when you can't find the words. Just be still with Him — He knows.",
-                    verse: "Romans 8:26 — 'In the same way, the Spirit helps us in our weakness. We do not know what we ought to pray for, but the Spirit himself intercedes for us through wordless groans.'"
-                }, {
-                    advice: "Not having a name for what you feel doesn't make it any less real. You don't have to figure it all out today. Just bring yourself — all of you — to God. He can handle the confusion.",
-                    verse: "Proverbs 3:5-6 — 'Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.'"
-                }, {
-                    advice: "It's okay to be in between feelings. You don't have to have it all figured out. God meets you right where you are — in the mystery, in the silence, in the unknown.",
-                    verse: "Psalm 46:10 — 'Be still, and know that I am God.'"
-                }, {
-                    advice: "Sometimes the most honest prayer is 'I don't know.' That's enough. God is listening, and He knows what you need before you ask.",
-                    verse: "Matthew 6:8 — 'Your Father knows what you need before you ask him.'"
-                }]
+                reply: "❤️ Relationships are beautiful and challenging. God designed love to reflect His heart. Whether you're single, dating, engaged, or married, He wants you to love with patience, kindness, and truth. If you're struggling, seek wise counsel, pray together, and be honest with each other.\n\n📖 **1 Corinthians 13:4-5** — 'Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.'\n\n💡 **Build strong relationships:** Communicate openly, forgive freely, spend quality time together, and put God at the center."
             },
 
-            // ----- "I'M NOT OKAY" / STRUGGLING -----
-            notokay: {
-                keywords: ['not okay', 'not fine', 'struggling', 'falling apart', 'losing it', 'can\'t cope',
-                    'i need help', 'i\'m lost', 'i\'m broken', 'i\'m empty', 'i\'m tired', 'i give up', 'i can\'t do this',
-                    'help me', 'broken'
+            // ---- FINANCIAL ----
+            {
+                keywords: ['money', 'debt', 'bills', 'poor', 'bankrupt', 'financial', 'job loss', 'unemployed',
+                    'struggling financially'
                 ],
-                responses: [{
-                    advice: "It's okay not to be okay. You don't have to have it all together. God meets you right where you are — in the mess, in the confusion, in the pain. Just breathe, and know that He is with you.",
-                    verse: "Psalm 34:18 — 'The Lord is near to the brokenhearted and saves those who are crushed in spirit.'"
-                }, {
-                    advice: "When you don't have words, God still hears your heart. You can come to Him just as you are — tired, confused, and hurting. He will give you rest.",
-                    verse: "Matthew 11:28 — 'Come to me, all you who are weary and burdened, and I will give you rest.'"
-                }, {
-                    advice: "I'm here for you. It's okay if you don't know exactly what you're feeling right now. God understands. He will hold you steady even when everything feels shaky.",
-                    verse: "Psalm 46:5 — 'God is within her, she will not fall; God will help her at break of day.'"
-                }, {
-                    advice: "You don't have to pretend. Bring your broken pieces to God — He is the master of making beautiful things out of dust.",
-                    verse: "Isaiah 61:3 — 'To bestow on them a crown of beauty instead of ashes, the oil of joy instead of mourning, and a garment of praise instead of a spirit of despair.'"
-                }]
+                reply: "💰 Financial stress is heavy, but God is your provider. He owns the cattle on a thousand hills, and He cares for you. Don't lose hope — seek His wisdom in your finances, be faithful with what you have, and trust Him to open doors.\n\n📖 **Philippians 4:19** — 'And my God will meet all your needs according to the riches of his glory in Christ Jesus.'\n\n💡 **Practical steps:** Create a budget, prioritize needs over wants, pray for provision, and seek help from community resources."
             },
 
-            // ----- MOCKING / SCORN -----
-            mocking: {
-                keywords: ['mock', 'mocking', 'scorn', 'sarcasm', 'cynical', 'ridicule', 'tease', 'insult', 'bad words',
-                    'curse', 'swear', 'cursing', 'foul language', 'profanity', 'insults'
+            // ---- HEALTH ----
+            {
+                keywords: ['sick', 'illness', 'disease', 'pain', 'suffering', 'hospital', 'surgery', 'recovery', 'cancer',
+                    'chronic'
                 ],
-                responses: [{
-                    advice: "I hear that you're feeling angry or hurt enough to use strong words. That's okay — God can handle your raw emotions. He already knows your heart. But remember, words have power. Let God help you find a way to express what's inside without hurting yourself or others.",
-                    verse: "Ephesians 4:29 — 'Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up according to their needs, that it may benefit those who listen.'"
-                }, {
-                    advice: "Sometimes we lash out when we're hurting inside. God sees beyond your words to the pain beneath. He wants to heal that pain. Let Him show you a better way to let it out.",
-                    verse: "Proverbs 15:1 — 'A gentle answer turns away wrath, but a harsh word stirs up anger.'"
-                }, {
-                    advice: "You don't have to hide your frustration — bring it to God. He can handle your rawest emotions. And He can help you find words that bring life instead of hurt.",
-                    verse: "Psalm 141:3 — 'Set a guard over my mouth, Lord; keep watch over the door of my lips.'"
-                }, {
-                    advice: "It's okay to be angry or frustrated. But let God help you speak with grace. Your words can either build up or tear down — and He wants to use you to build.",
-                    verse: "Colossians 4:6 — 'Let your conversation be always full of grace, seasoned with salt, so that you may know how to answer everyone.'"
-                }]
+                reply: "🩺 I'm sorry you're dealing with illness or pain. God is the great physician, and He cares about your physical and emotional well-being. Ask Him for healing, trust His plan, and lean on others for support. He is with you in every struggle.\n\n📖 **Jeremiah 30:17** — 'But I will restore you to health and heal your wounds, declares the Lord.'\n\n💡 **Care for yourself:** Rest, follow medical advice, pray, and don't be afraid to ask for help."
             },
 
-            // ----- GREED / MATERIALISM -----
-            greedy: {
-                keywords: ['greedy', 'greed', 'materialism', 'money', 'wealth', 'possessions', 'covetous', 'hoarding',
-                    'want more'
+            // ---- LOSS ----
+            {
+                keywords: ['death', 'died', 'passed away', 'loss', 'grieving', 'funeral', 'gone', 'bereavement', 'lost someone'
                 ],
-                responses: [{
-                    advice: "It's easy to get caught up in wanting more — more money, more things, more status. But true contentment comes from knowing that God is enough. He has given you everything you need for today.",
-                    verse: "1 Timothy 6:6-7 — 'But godliness with contentment is great gain. For we brought nothing into the world, and we can take nothing out of it.'"
-                }, {
-                    advice: "Your worth is not measured by what you own. God sees your heart, not your bank account. Ask Him to fill you with a sense of purpose that money can't buy.",
-                    verse: "Luke 12:15 — 'Watch out! Be on your guard against all kinds of greed; life does not consist in an abundance of possessions.'"
-                }, {
-                    advice: "The things of this world are temporary, but God's love is eternal. Invest your heart in what lasts forever — relationships, kindness, and faith.",
-                    verse: "Matthew 6:19-20 — 'Do not store up for yourselves treasures on earth... But store up for yourselves treasures in heaven.'"
-                }]
+                reply: "🕊️ I'm so sorry for your loss. Grief is heavy, and it takes time. God is close to the brokenhearted, and He promises to comfort you. He will wipe every tear from your eyes. Let yourself grieve, and know that you are not alone.\n\n📖 **Matthew 5:4** — 'Blessed are those who mourn, for they will be comforted.'\n\n💡 **Grieve well:** Cry, talk about your loved one, seek support, and trust God with your pain."
             },
 
-            // ----- JEALOUSY (already covered above, but adding more) -----
-            // ----- ADDICTION / RELIANCE -----
-            addicted: {
-                keywords: ['addict', 'addiction', 'dependent', 'craving', 'can\'t stop', 'obsessed', 'hooked',
-                    'substance', 'alcohol', 'drugs'
+            // ---- CAREER ----
+            {
+                keywords: ['work', 'career', 'job', 'employment', 'promotion', 'interview', 'workplace', 'boss', 'colleagues',
+                    'laid off', 'fired'
                 ],
-                responses: [{
-                    advice: "Addiction can feel like a prison, but there is freedom in Christ. You are not defined by your struggle. God sees you, and He wants to set you free. Seek help, and know that His grace is greater than any addiction.",
-                    verse: "2 Corinthians 5:17 — 'Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!'"
-                }, {
-                    advice: "You are not alone in this fight. God is with you, and He can break every chain. Reach out to someone you trust, and let God's strength carry you through.",
-                    verse: "Romans 6:14 — 'For sin shall no longer be your master, because you are not under the law, but under grace.'"
-                }, {
-                    advice: "Freedom is possible. One step at a time, with God's help, you can overcome. He has not given up on you, and He never will.",
-                    verse: "John 8:36 — 'So if the Son sets you free, you will be free indeed.'"
-                }]
+                reply: "💼 Work can be a source of purpose or pressure. Remember that God is your ultimate boss, and He has called you to work as unto Him. Whether you're thriving or struggling, He is with you. Seek His wisdom and ask Him to guide your career path.\n\n📖 **Colossians 3:23** — 'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.'\n\n💡 **Excel:** Work diligently, be honest, treat others with respect, and trust God with your career growth."
+            },
+
+            // ---- DECISIONS ----
+            {
+                keywords: ['decision', 'choose', 'choice', 'decide', 'undecided', 'should i', 'what should i', 'direction',
+                    'future'
+                ],
+                reply: "🤔 Big decisions can feel overwhelming. God is not confused — He knows the way forward. Seek His guidance through prayer, scripture, and wise counsel. Trust that He will make your path clear.\n\n📖 **Proverbs 3:5-6** — 'Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.'\n\n💡 **Decision-making:** Pray, list pros and cons, seek godly advice, and trust God's peace to guide you."
+            },
+
+            // ---- DOUBT ----
+            {
+                keywords: ['doubt', 'doubting', 'questioning', 'uncertain', 'unbelief', 'skeptical', 'cynical', 'lost faith',
+                    'why god'
+                ],
+                reply: "❓ Doubt is not the opposite of faith — it's part of faith. Even the disciples doubted. But Jesus never rejected them. Bring your doubts to Him, and let Him show you the truth.\n\n📖 **Mark 9:24** — 'I do believe; help me overcome my unbelief!'\n\n💡 **Explore:** Read the Bible honestly, talk to mature Christians, and pray, 'Lord, help my unbelief.'"
+            },
+            {
+                keywords: ['does god love me', 'is god real', 'why is this happening', 'how do i pray', 'how do i trust god'],
+                reply: "🙏 These are deep and important questions. God is not afraid of your doubts or your curiosity. He invites you to seek Him with all your heart. Keep asking, keep seeking, and keep knocking — He promises to answer.\n\n📖 **Matthew 7:7-8** — 'Ask and it will be given to you; seek and you will find; knock and the door will be opened to you. For everyone who asks receives; the one who seeks finds; and to the one who knocks, the door will be opened.'\n\n💡 **Seek God:** Read the Gospel of John, pray honestly, and talk to a pastor or mature believer."
+            },
+
+            // ---- PERSONAL INFO ----
+            {
+                keywords: ['who is breezy', 'what is breezy', 'jojo kalim', 'april joy contiga', 'camingawan', 'kabankalan',
+                    'who made you', 'creator', 'developer', 'girlfriend'
+                ],
+                reply: "ℹ️ Breezy is an emotional support AI created by **Jojo Kalim** ❤️. Jojo lives in **Brgy. Camingawan, Kabankalan City**. His beautiful girlfriend is **April Joy Contiga** — she's the inspiration behind this project! Breezy was built to help people find comfort, hope, and encouragement through God's Word.\n\n📖 **Proverbs 18:22** — 'He who finds a wife finds what is good and receives favor from the Lord.' (And Jojo found April!)\n\n💡 **Love story:** Jojo created Breezy out of his love for April and his desire to help others. ❤️"
+            },
+
+            // ---- SUICIDE ----
+            {
+                keywords: ['suicide', 'suicidal', 'kill myself', 'want to die', 'end it all', 'give up on life',
+                    'not worth living'
+                ],
+                reply: "🆘 I'm so sorry you're feeling this way. Please know that your life is precious — you are a child of God, created with purpose and value. You are not alone, and there is hope even in the darkest moments. Please reach out for help — talk to a trusted person, a counselor, or call a helpline.\n\n📖 **Jeremiah 29:11** — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'\n\n📞 **Crisis Hotline (Philippines):** 0917-899-8727 (National Center for Mental Health) or call 24/7: 0966-351-4518.\n\n💡 **You matter.** God loves you, and He wants you to live. Please reach out right now."
+            },
+
+            // ---- BECOMING BETTER ----
+            {
+                keywords: ['how to be a good person', 'be good', 'good person', 'improve myself', 'become better',
+                    'be better'
+                ],
+                reply: "🌟 Becoming a good person is a journey of growth. The Bible says that goodness is a fruit of the Spirit — it comes from walking with God and letting His character shape you.\n\n📖 **Galatians 5:22-23** — 'But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control.'\n\n💡 **Practical steps:** Love God and love others, read the Bible daily, pray, serve people, confess your sins, and practice kindness and integrity every day."
+            },
+
+            // ---- GETTING OUT OF PROBLEMS ----
+            {
+                keywords: ['how to get out of problems', 'get out of this', 'overcome problems', 'solve my problems',
+                    'escape problems'
+                ],
+                reply: "🛤️ Problems can feel overwhelming, but God is your way out. He promises to make a way where there seems to be no way. Start by praying, seeking wise counsel, and taking one step at a time.\n\n📖 **1 Corinthians 10:13** — 'No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear. But when you are tempted, he will also provide a way out so that you can endure it.'\n\n💡 **Action plan:** Pray, break the problem into small steps, talk to a mentor, and trust God for wisdom."
+            },
+
+            // ---- UNEMPLOYMENT ----
+            {
+                keywords: ['unemployed', 'no job', 'jobless', 'looking for job', 'can\'t find job'],
+                reply: "💼 Being unemployed is hard, but God is your provider. He knows your needs and He will open doors at the right time. Keep applying, networking, and trusting Him. Use this time to grow skills and volunteer.\n\n📖 **Psalm 37:25** — 'I was young and now I am old, yet I have never seen the righteous forsaken or their children begging bread.'\n\n💡 **Steps:** Update your resume, apply daily, pray for wisdom, and don't lose hope."
+            },
+
+            // ---- TECHNOLOGY ----
+            {
+                keywords: ['technology', 'tech problem', 'computer issue', 'phone problem', 'internet', 'gadget',
+                    'device broken'
+                ],
+                reply: "📱 I understand tech problems are frustrating. While I'm not a technician, I can encourage you to stay calm, restart your device, check for updates, and search online for solutions. Also, ask a tech-savvy friend for help.\n\n📖 **Proverbs 15:22** — 'Plans fail for lack of counsel, but with many advisers they succeed.'\n\n💡 **Practical:** Google the error, watch a YouTube tutorial, or visit a repair shop if needed."
+            },
+
+            // ---- SPIRITUAL / MENTAL / PHYSICAL ----
+            {
+                keywords: ['spiritual', 'spiritually dry', 'mental health', 'mental illness', 'depression', 'physical exhaustion',
+                    'physical pain'
+                ],
+                reply: "💪 God cares about your whole being — spiritual, mental, and physical. If you're struggling, don't isolate yourself. Seek help, pray, rest, and take care of your body and mind.\n\n📖 **3 John 1:2** — 'Dear friend, I pray that you may enjoy good health and that all may go well with you, even as your soul is getting along well.'\n\n💡 **Holistic care:** Pray, rest, exercise, eat well, see a doctor, talk to a counselor, and spend time in God's Word."
+            },
+
+            // ---- HELP ----
+            {
+                keywords: ['i need help', 'help me', 'i don\'t know what to do', 'i\'m lost', 'i\'m broken', 'i\'m empty',
+                    'i give up', 'i can\'t do this'
+                ],
+                reply: "🫂 I'm here for you. It's okay to not be okay. You don't have to have it all together. God meets you right where you are — in the mess, in the confusion, in the pain. Just breathe, and know that He is with you.\n\n📖 **Matthew 11:28** — 'Come to me, all you who are weary and burdened, and I will give you rest.'\n\n💡 **Reach out:** Call a friend, pray, and take one step at a time. You are not alone."
+            },
+
+            // ---- BIBLE VERSE REQUEST ----
+            {
+                keywords: ['verse', 'bible verse', 'scripture', 'give me a verse', 'encourage me', 'surprise me'],
+                reply: "📖 Here's a Bible verse just for you:\n\n**Romans 8:38-39** — 'For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.'\n\n💡 Let this truth sink deep into your heart today. You are deeply loved, and nothing can change that."
+            },
+
+            // ---- CATCH-ALL ----
+            {
+                keywords: [''],
+                reply: "I hear you. ❤️ Can you tell me more about how you're feeling right now? I'm here to listen, encourage you, and share God's love. What's on your heart today?"
             }
-        };
+        ];
 
         // ============================================================
         // CHAT LOGIC
@@ -1150,47 +2294,49 @@
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
         const typingIndicator = document.getElementById('typingIndicator');
+        const libraryBtn = document.getElementById('libraryBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+        const modalBody = document.getElementById('modalBody');
 
+        // --- Back button ---
         document.getElementById('backBtn').addEventListener('click', function() {
             window.location.href = 'index.html';
         });
 
+        // --- Send message ---
         function sendMessage() {
             const text = userInput.value.trim();
-            if (!text) return;
-
+            if (!text) {
+                addMessage('bot', "I'm here to listen. ❤️ What's on your mind today?");
+                return;
+            }
             addMessage('user', text);
             userInput.value = '';
             userInput.focus();
-
             typingIndicator.classList.add('show');
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             setTimeout(() => {
-                const reply = generateReply(text);
                 typingIndicator.classList.remove('show');
+                const reply = generateReply(text);
                 addMessage('bot', reply);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 400 + Math.random() * 300);
+            }, 500 + Math.random() * 400);
         }
 
         function addMessage(type, text) {
             const wrapper = document.createElement('div');
             wrapper.className = `message-wrapper ${type}`;
-
             const avatar = document.createElement('div');
             avatar.className = 'avatar';
-            if (type === 'bot') {
-                avatar.innerHTML = '<i class="fas fa-robot"></i>';
-            } else {
-                avatar.innerHTML = '<i class="fas fa-user"></i>';
-            }
+            avatar.innerHTML = type === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
             wrapper.appendChild(avatar);
 
             const bubble = document.createElement('div');
             bubble.className = 'message';
-
             const textSpan = document.createElement('div');
+            textSpan.style.whiteSpace = 'pre-wrap';
             textSpan.textContent = text;
             bubble.appendChild(textSpan);
 
@@ -1198,11 +2344,7 @@
             meta.className = 'msg-meta';
             const now = new Date();
             const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            if (type === 'bot') {
-                meta.innerHTML = `Breezy · ${timeStr}`;
-            } else {
-                meta.innerHTML = `${timeStr} · You`;
-            }
+            meta.innerHTML = type === 'bot' ? `Breezy · ${timeStr}` : `${timeStr} · You`;
             bubble.appendChild(meta);
 
             wrapper.appendChild(bubble);
@@ -1210,199 +2352,189 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // ============================================================
-        // GENERATE REPLY — ONLY FEELINGS
-        // ============================================================
-
+        // --- Generate reply ---
         function generateReply(query) {
-            const lower = query.toLowerCase().trim();
+            try {
+                const lower = query.toLowerCase().trim();
 
-            // 1) DETECT FEELING
-            let detectedEmotion = null;
-            let bestScore = 0;
-
-            for (const [key, emotion] of Object.entries(feelingsData)) {
-                let score = 0;
-                for (const kw of emotion.keywords) {
-                    if (lower.includes(kw)) {
-                        const regex = new RegExp('\\b' + kw + '\\b', 'i');
-                        if (regex.test(lower)) {
-                            score += 12;
-                        } else if (lower.includes(kw)) {
-                            score += 6;
-                        }
-                    }
-                }
-                // Check "I feel", "feeling", "so", "very" patterns
-                for (const kw of emotion.keywords) {
-                    const patterns = ['feel ' + kw, 'feeling ' + kw, 'felt ' + kw, 'am ' + kw, 'so ' + kw, 'very ' + kw,
-                        'feel like ' + kw, 'feeling like ' + kw
+                // Special: verse request
+                if (lower.includes('verse') || lower.includes('surprise me') || lower.includes('give me a verse') || lower
+                    .includes('bible verse')) {
+                    const verses = [
+                        "📖 **Isaiah 41:10** — 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.'",
+                        "📖 **Philippians 4:13** — 'I can do all this through him who gives me strength.'",
+                        "📖 **Jeremiah 29:11** — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'",
+                        "📖 **John 14:27** — 'Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.'",
+                        "📖 **Romans 8:28** — 'And we know that in all things God works for the good of those who love him, who have been called according to his purpose.'",
+                        "📖 **Psalm 23:4** — 'Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.'",
+                        "📖 **Joshua 1:9** — 'Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.'",
+                        "📖 **2 Timothy 1:7** — 'For God has not given us a spirit of fear, but of power and of love and of a sound mind.'"
                     ];
-                    for (const p of patterns) {
-                        if (lower.includes(p)) {
-                            score += 20;
+                    return "Here's a verse for you:\n\n" + verses[Math.floor(Math.random() * verses.length)] +
+                        "\n\nI hope this encourages you! 🙏";
+                }
+
+                // Score each knowledge base item
+                let bestMatch = null;
+                let bestScore = 0;
+
+                for (const item of knowledgeBase) {
+                    let score = 0;
+                    for (const kw of item.keywords) {
+                        if (kw === '') continue;
+                        if (lower.includes(kw)) {
+                            const regex = new RegExp('\\b' + kw.replace(/'/g, "\\'") + '\\b', 'i');
+                            if (regex.test(lower)) {
+                                score += 3;
+                            } else {
+                                score += 1;
+                            }
                         }
                     }
+                    for (const kw of item.keywords) {
+                        if (kw === '') continue;
+                        if (lower.includes('feel ' + kw) || lower.includes('feeling ' + kw) || lower.includes('am ' + kw)) {
+                            score += 5;
+                        }
+                    }
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMatch = item;
+                    }
                 }
-                if (score > bestScore) {
-                    bestScore = score;
-                    detectedEmotion = key;
+
+                if (bestMatch && bestScore >= 1) {
+                    return bestMatch.reply;
                 }
+
+                const fallback = knowledgeBase[knowledgeBase.length - 1];
+                return fallback.reply;
+
+            } catch (error) {
+                console.warn('Error generating reply:', error);
+                return "I'm here for you. ❤️ Sometimes I don't have the perfect words, but God does. He loves you and He's listening. 🙏";
             }
-
-            // If we have a strong detection (score >= 4), give emotional response
-            if (detectedEmotion && bestScore >= 4) {
-                const emotion = feelingsData[detectedEmotion];
-                const responses = emotion.responses;
-                const randomIndex = Math.floor(Math.random() * responses.length);
-                const chosen = responses[randomIndex];
-
-                const emojiMap = {
-                    sad: '😢',
-                    anxious: '😰',
-                    angry: '😤',
-                    fear: '😨',
-                    lonely: '😔',
-                    joyful: '😊',
-                    discouraged: '😞',
-                    guilty: '😣',
-                    loved: '🥰',
-                    confused: '🤔',
-                    betrayed: '💔',
-                    hatred: '🤬',
-                    peaceful: '😌',
-                    gratitude: '🙏',
-                    bored: '😑',
-                    suicidal: '💔',
-                    stressed: '😩',
-                    insecure: '😥',
-                    notokay: '🫂',
-                    jealous: '😒',
-                    pride: '😏',
-                    hopeful: '🌟',
-                    idontknow: '🤷',
-                    mocking: '😕',
-                    greedy: '💰',
-                    addicted: '🔄'
-                };
-                const emoji = emojiMap[detectedEmotion] || '❤️';
-
-                let response =
-                    `${emoji} I hear that you're feeling **${detectedEmotion}**.\n\n${chosen.advice}\n\n📖 ${chosen.verse}`;
-                const closings = [
-                    "You are loved, and you are never alone. 🙏",
-                    "God is with you, and He will never let you go. 🌟",
-                    "Hold on — hope is on the way. 💪",
-                    "You are precious in His sight. Let that sink in. 💖",
-                    "Take a deep breath. He's got this. 🕊️",
-                    "Don't give up — God is fighting for you. ⚔️",
-                    "You are stronger than you think, because He is with you. 💪",
-                    "Rest in His love today. ❤️"
-                ];
-                response += `\n\n${closings[Math.floor(Math.random() * closings.length)]}`;
-                return response;
-            }
-
-            // 2) Check for general "not okay" or "I don't know" even without strong keyword match
-            if (/not okay|not fine|struggling|falling apart|losing it|can't cope|i don't know what to do|i need help|i'm lost|i'm broken|i'm empty|i'm tired|i'm exhausted|i give up|i can't do this|help me/i
-                .test(lower)) {
-                const responses = feelingsData.notokay.responses;
-                const chosen = responses[Math.floor(Math.random() * responses.length)];
-                return `🫂 I'm here for you. ${chosen.advice}\n\n📖 ${chosen.verse}\n\nYou are not alone. 🙏`;
-            }
-
-            // 3) If user is asking about something else, gently guide back to feelings
-            if (/what is|who is|tell me about|explain|define|what does|what are|what's|how many/i.test(lower)) {
-                return "I'm here to listen to your heart, not just to give information. 😊 Tell me how you're feeling — sad, anxious, angry, lonely, joyful, or anything else — and I'll share encouragement and a Bible verse just for you. What's on your heart today? ❤️";
-            }
-
-            // 4) Quick greeting
-            if (/^(hi|hello|hey|greetings|good morning|good afternoon|good evening|howdy|sup|yo)/i.test(lower) && lower
-                .length < 30) {
-                return "Hello! I'm Breezy 🤖❤️. I'm here to listen to your heart. Tell me how you're feeling — sad, anxious, angry, lonely, joyful, bored, stressed, or anything else — and I'll share encouragement and a Bible verse just for you. What's on your mind today?";
-            }
-
-            // 5) Thanks
-            if (/thank|thanks|appreciate|grateful/i.test(lower)) {
-                const thanks = [
-                    "You're so welcome! ❤️ I'm glad I could encourage you. If you ever need to talk again, I'll be right here. God bless you! 🙏",
-                    "It's my joy to help! Remember, God is always with you. 🌟",
-                    "I'm here anytime you need a listening ear. You are loved! 💖"
-                ];
-                return thanks[Math.floor(Math.random() * thanks.length)];
-            }
-
-            // 6) If the user asks for encouragement directly
-            if (/encourage|motivate|uplift|give me hope|need strength|need peace|need joy|lift me up|cheer me up|give me a word/i
-                .test(lower)) {
-                const encouragements = [
-                    "🌟 You are stronger than you think, because God's strength is made perfect in weakness.\n\n📖 **Philippians 4:13** — 'I can do all this through him who gives me strength.'\n\nKeep going — God is with you every step of the way. 🙏",
-                    "💪 You are not alone in this fight. God is your refuge and strength.\n\n📖 **Isaiah 41:10** — 'So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.'",
-                    "🌅 Hope is not lost. God has plans to prosper you and give you a future.\n\n📖 **Jeremiah 29:11** — 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.'",
-                    "🕊️ Peace I leave with you. Not as the world gives, but as Christ gives.\n\n📖 **John 14:27** — 'Peace I leave with you; my peace I give you. Do not let your hearts be troubled and do not be afraid.'"
-                ];
-                return encouragements[Math.floor(Math.random() * encouragements.length)];
-            }
-
-            // 7) If user asks "How are you?" or "What do you do?"
-            if (/how are you|what do you do|who are you|tell me about yourself/i.test(lower)) {
-                return "I'm Breezy 🤖❤️ — your emotional support companion. My only purpose is to listen to your heart and help you find hope and encouragement in God's Word. Tell me how you're feeling, and I'll share a verse and advice just for you. That's all I'm here for — to be a friend who listens. 💕";
-            }
-
-            // 8) If no feeling detected at all
-            return "I'm here to listen to your heart. ❤️ Tell me how you're feeling — sad, anxious, angry, lonely, joyful, bored, stressed, confused, or anything else — and I'll share encouragement and a Bible verse just for you. What's on your mind today? 🙏";
         }
 
         // ============================================================
-        // EVENT LISTENERS
+        // QUESTION LIBRARY MODAL
         // ============================================================
 
-        sendBtn.addEventListener('click', sendMessage);
-        userInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') sendMessage();
+        function renderLibrary() {
+            let html = '';
+            for (const [category, questions] of Object.entries(questionLibrary)) {
+                const catId = 'cat-' + category.replace(/[^a-zA-Z0-9]/g, '');
+                html += `
+                    <div class="category-group">
+                        <div class="category-title" data-cat="${catId}">
+                            ${category}
+                            <span class="arrow" id="arrow-${catId}"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="category-questions" id="${catId}">
+                            ${questions.map(q => `<span class="question-chip"><i class="fas fa-comment"></i> ${q}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            modalBody.innerHTML = html;
+
+            // Toggle categories
+            document.querySelectorAll('.category-title').forEach(title => {
+                title.addEventListener('click', function() {
+                    const catId = this.dataset.cat;
+                    const panel = document.getElementById(catId);
+                    const arrow = document.getElementById('arrow-' + catId);
+                    panel.classList.toggle('open');
+                    arrow.classList.toggle('open');
+                });
+            });
+
+            // Click on question chip
+            document.querySelectorAll('.question-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const question = this.textContent.trim();
+                    modalOverlay.classList.remove('active');
+                    // Send the question as a user message
+                    addMessage('user', question);
+                    userInput.value = '';
+                    typingIndicator.classList.add('show');
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    setTimeout(() => {
+                        typingIndicator.classList.remove('show');
+                        const reply = generateReply(question);
+                        addMessage('bot', reply);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 500 + Math.random() * 400);
+                });
+            });
+
+            // Open first category by default
+            const firstPanel = document.querySelector('.category-questions');
+            if (firstPanel) {
+                firstPanel.classList.add('open');
+                const firstArrow = document.querySelector('.arrow');
+                if (firstArrow) firstArrow.classList.add('open');
+            }
+        }
+
+        // --- Modal controls ---
+        libraryBtn.addEventListener('click', function() {
+            modalOverlay.classList.add('active');
+            renderLibrary();
         });
 
-        // ============================================================
-        // WELCOME MESSAGE
-        // ============================================================
+        modalClose.addEventListener('click', function() {
+            modalOverlay.classList.remove('active');
+        });
 
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) modalOverlay.classList.remove('active');
+        });
+
+        // --- Event listeners ---
+        sendBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            sendMessage();
+        });
+
+        userInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // --- Welcome ---
         function showWelcome() {
             const welcomeText =
-                "Hi, I'm Breezy 🤖❤️. I'm here to listen to your heart — no matter what you're feeling.\n\nJust tell me what's on your mind: sadness, anger, joy, boredom, stress, confusion, fear, loneliness, or anything else. I'll share encouragement and a Bible verse to help you through.\n\nYou don't have to be okay. I'm here for you. What's going on today?";
+                "Hi, I'm Breezy 🤖❤️ — your all-in-one support friend.\n\nWhatever you're going through — emotions, sin, love life, cheating, financial problems, health, loss, career, boredom, spiritual struggles, or just needing a Bible verse — I'm here to listen and encourage you.\n\n**Just ask anything.** Or tap the 📖 button below to browse thousands of questions. What's on your mind today? 🙏";
 
             const wrapper = document.createElement('div');
             wrapper.className = 'message-wrapper bot';
-
             const avatar = document.createElement('div');
             avatar.className = 'avatar';
             avatar.innerHTML = '<i class="fas fa-robot"></i>';
             wrapper.appendChild(avatar);
-
             const bubble = document.createElement('div');
             bubble.className = 'message';
-
             const textSpan = document.createElement('div');
+            textSpan.style.whiteSpace = 'pre-wrap';
             textSpan.textContent = welcomeText;
             bubble.appendChild(textSpan);
-
             const meta = document.createElement('div');
             meta.className = 'msg-meta';
             meta.innerHTML = `Breezy · now`;
             bubble.appendChild(meta);
-
             wrapper.appendChild(bubble);
             chatMessages.appendChild(wrapper);
         }
 
-        // ============================================================
-        // INIT
-        // ============================================================
-
+        // --- Init ---
         showWelcome();
         userInput.focus();
 
-        console.log('❤️ Breezy Emotional Support loaded!');
-        console.log('😊 Emotions covered:', Object.keys(feelingsData).length);
+        console.log('❤️ Breezy loaded with ' + knowledgeBase.length + ' knowledge items.');
+        console.log('📚 Question library has ' + Object.keys(questionLibrary).length + ' categories.');
     </script>
 </body>
 </html>
