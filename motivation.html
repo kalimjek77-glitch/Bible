@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Breezy · Videos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== BREEZY DESIGN ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: #f2ede8;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #2c241e;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .fullscreen {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 1.5rem 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(160deg, #f7f2ec 0%, #e8e0d8 100%);
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .fullscreen::-webkit-scrollbar {
+            width: 4px;
+        }
+        .fullscreen::-webkit-scrollbar-track {
+            background: #e4dad2;
+            border-radius: 20px;
+        }
+        .fullscreen::-webkit-scrollbar-thumb {
+            background: #b8a69a;
+            border-radius: 20px;
+        }
+        .fullscreen {
+            scrollbar-width: thin;
+            scrollbar-color: #b8a69a #e4dad2;
+        }
+
+        /* === HEADER === */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(218, 207, 196, 0.4);
+            margin-bottom: 1.2rem;
+            flex-shrink: 0;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 250, 245, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid #d6c8bc;
+            border-radius: 60px;
+            padding: 0.6rem 1.4rem 0.6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 470;
+            color: #332a23;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .back-btn:active {
+            transform: scale(0.94);
+            background: #d6c7bb;
+        }
+
+        .back-btn i {
+            font-size: 1.1rem;
+            color: #5e4d3f;
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-icons .icon-robot {
+            font-size: 2rem;
+            color: #6d8f7a;
+        }
+
+        .header-icons .icon-feather {
+            font-size: 1.8rem;
+            color: #8a7566;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: #2b211b;
+            white-space: nowrap;
+        }
+
+        .header h1 span {
+            font-weight: 300;
+            font-size: 0.7rem;
+            background: rgba(210, 195, 182, 0.5);
+            color: #2b211b;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            margin-left: 0.3rem;
+        }
+
+        .header-spacer {
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-wrap: nowrap;
+                gap: 6px;
+            }
+            .back-btn {
+                padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+                font-size: 0.8rem;
+            }
+            .back-btn i {
+                font-size: 0.85rem;
+            }
+            .back-btn span {
+                display: none;
+            }
+            .header-icons .icon-robot {
+                font-size: 1.5rem;
+            }
+            .header-icons .icon-feather {
+                font-size: 1.3rem;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            .header h1 span {
+                font-size: 0.55rem;
+                padding: 0.05rem 0.5rem;
+            }
+            .header-spacer {
+                width: 30px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .back-btn {
+                padding: 0.3rem 0.6rem;
+            }
+            .header h1 {
+                font-size: 1.1rem;
+            }
+            .header-icons .icon-robot {
+                font-size: 1.2rem;
+            }
+            .header-icons .icon-feather {
+                font-size: 1rem;
+            }
+            .header-spacer {
+                width: 20px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header-icons .icon-robot {
+                font-size: 2.4rem;
+            }
+            .header-icons .icon-feather {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* === CREDIT BAR === */
+        .credit-bar {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #5f5146;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.2rem;
+            background: rgba(255, 250, 245, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            border: 1px solid rgba(214, 200, 188, 0.2);
+            flex-shrink: 0;
+            letter-spacing: 0.2px;
+        }
+
+        .credit-bar i {
+            color: #8a7566;
+            margin: 0 6px;
+        }
+
+        .credit-bar .owner {
+            color: #6d8f7a;
+            font-weight: 600;
+        }
+
+        .credit-bar .heart {
+            color: #c47a7a;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 480px) {
+            .credit-bar {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.6rem;
+            }
+        }
+
+        /* === VIDEO GRID — SPACIOUS === */
+        .video-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            padding-bottom: 0.5rem;
+            align-content: start;
+        }
+
+        .video-card {
+            background: rgba(255, 250, 245, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            border: 1px solid rgba(214, 200, 188, 0.15);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(214, 200, 188, 0.2), rgba(255, 255, 255, 0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .video-card:active {
+            transform: scale(0.97);
+        }
+
+        .video-card .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #1a1512;
+            overflow: hidden;
+            border-radius: 0;
+        }
+
+        .video-card .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .video-card:hover .video-wrapper video {
+            transform: scale(1.02);
+        }
+
+        /* Play overlay */
+        .video-card .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .video-card .play-overlay .play-circle {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-card .play-overlay .play-circle i {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-left: 5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .play-overlay .play-circle {
+            transform: scale(1.08);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .video-card:hover .play-overlay .play-circle i {
+            transform: scale(1.05);
+        }
+
+        /* Shimmer */
+        .video-card .shimmer {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            animation: shimmer 2.5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { left: -60%; }
+            100% { left: 120%; }
+        }
+
+        /* Playing state hides overlay */
+        .video-card.playing .play-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Fade-in animations */
+        .video-card {
+            animation: cardFadeIn 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .video-card:nth-child(1) { animation-delay: 0.05s; }
+        .video-card:nth-child(2) { animation-delay: 0.10s; }
+        .video-card:nth-child(3) { animation-delay: 0.15s; }
+        .video-card:nth-child(4) { animation-delay: 0.20s; }
+        .video-card:nth-child(5) { animation-delay: 0.25s; }
+        .video-card:nth-child(6) { animation-delay: 0.30s; }
+        .video-card:nth-child(7) { animation-delay: 0.35s; }
+        .video-card:nth-child(8) { animation-delay: 0.40s; }
+        .video-card:nth-child(9) { animation-delay: 0.45s; }
+        .video-card:nth-child(10) { animation-delay: 0.50s; }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive grid */
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .video-card .play-overlay .play-circle {
+                width: 60px;
+                height: 60px;
+            }
+            .video-card .play-overlay .play-circle i {
+                font-size: 1.6rem;
+            }
+            .video-card {
+                border-radius: 20px;
+            }
+        }
+
+        @media (min-width: 600px) and (max-width: 899px) {
+            .video-grid {
+                gap: 28px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+            .fullscreen {
+                padding: 2.5rem 4rem 3rem;
+                max-width: 1300px;
+                margin: 0 auto;
+            }
+            .video-card .play-overlay .play-circle {
+                width: 88px;
+                height: 88px;
+            }
+            .video-card .play-overlay .play-circle i {
+                font-size: 2.6rem;
+            }
+        }
+
+        /* === VIDEO OVERLAY (Fullscreen modal) === */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            flex-direction: column;
+        }
+
+        .video-overlay.active {
+            display: flex;
+        }
+
+        .video-overlay .close-overlay {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            width: 52px;
+            height: 52px;
+            border-radius: 60px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .video-overlay .close-overlay:active {
+            transform: scale(0.9);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .video-overlay .overlay-video-wrapper {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .video-overlay .overlay-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .video-overlay .overlay-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            margin-top: 1.2rem;
+            text-align: center;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+
+        @media (max-width: 480px) {
+            .video-overlay {
+                padding: 1rem;
+            }
+            .video-overlay .close-overlay {
+                top: 1rem;
+                right: 1rem;
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .video-overlay .overlay-video-wrapper {
+                border-radius: 16px;
+            }
+            .video-overlay .overlay-label {
+                font-size: 0.85rem;
+                margin-top: 0.8rem;
+            }
+        }
+
+        /* === FOOTER === */
+        .footer {
+            flex-shrink: 0;
+            text-align: center;
+            font-size: 0.65rem;
+            color: rgba(160, 143, 128, 0.6);
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid rgba(220, 207, 196, 0.2);
+        }
+
+        .footer i {
+            margin: 0 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fullscreen">
+
+        <!-- Header -->
+        <div class="header">
+            <button class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i> <span>Back</span>
+            </button>
+            <div class="header-center">
+                <div class="header-icons">
+                    <i class="fas fa-robot icon-robot"></i>
+                    <i class="fas fa-feather-alt icon-feather"></i>
+                </div>
+                <h1>Breezy <span>Videos</span></h1>
+            </div>
+            <div class="header-spacer"></div>
+        </div>
+
+        <!-- Credit -->
+        <div class="credit-bar">
+            <i class="fas fa-video"></i> Credit to the owner of
+            <span class="owner">Rietro C</span> —
+            <span class="owner">Magnify The Love</span> on YouTube
+            <i class="fas fa-heart heart"></i>
+        </div>
+
+        <!-- Video Grid -->
+        <div class="video-grid" id="videoGrid"></div>
+
+        <div class="footer">
+            <i class="fas fa-robot"></i> Breezy · 10 Inspirational Videos <i class="fas fa-feather-alt"></i>
+        </div>
+    </div>
+
+    <!-- ===== VIDEO OVERLAY ===== -->
+    <div class="video-overlay" id="videoOverlay">
+        <button class="close-overlay" id="closeOverlay"><i class="fas fa-times"></i></button>
+        <div class="overlay-video-wrapper">
+            <video id="overlayVideo" controls autoplay playsinline></video>
+        </div>
+        <div class="overlay-label" id="overlayLabel">Now Playing</div>
+    </div>
+
+    <script>
+        // ============================================================
+        // VIDEO LIST — Matches the filenames in the screenshot
+        // ============================================================
+
+        const videoFiles = [
+            { id: 1, file: 'v1 (1).mp4' },
+            { id: 2, file: 'v2.mp4' },
+            { id: 3, file: 'v3.mp4' },
+            { id: 4, file: 'v4 (1).mp4' },
+            { id: 5, file: 'v5.mp4' },
+            { id: 6, file: 'v6.mp4' },
+            { id: 7, file: 'v7 (1).mp4' },
+            { id: 8, file: 'v8.mp4' },
+            { id: 9, file: 'v9.mp4' },
+            { id: 10, file: 'v10.mp4' }
+        ];
+
+        // ============================================================
+        // DOM REFERENCES
+        // ============================================================
+
+        const videoGrid = document.getElementById('videoGrid');
+        const overlay = document.getElementById('videoOverlay');
+        const overlayVideo = document.getElementById('overlayVideo');
+        const overlayLabel = document.getElementById('overlayLabel');
+        const closeOverlayBtn = document.getElementById('closeOverlay');
+        const backBtn = document.getElementById('backBtn');
+
+        // ============================================================
+        // RENDER VIDEOS
+        // ============================================================
+
+        function renderVideos() {
+            let html = '';
+
+            videoFiles.forEach((video, index) => {
+                html += `
+                        <div class="video-card" data-index="${index}">
+                            <div class="video-wrapper">
+                                <video 
+                                    src="${video.file}" 
+                                    preload="metadata"
+                                    muted
+                                    playsinline
+                                    webkit-playsinline
+                                ></video>
+                                <div class="play-overlay">
+                                    <div class="play-circle">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                <div class="shimmer"></div>
+                            </div>
+                        </div>
+                    `;
+            });
+
+            videoGrid.innerHTML = html;
+
+            // Attach click events to cards
+            document.querySelectorAll('.video-card').forEach((card) => {
+                card.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const videoFile = videoFiles[index].file;
+                    openOverlay(videoFile, 'Video ' + (index + 1));
+                });
+            });
+
+            // Also pause all videos when overlay opens (we'll handle in openOverlay)
+        }
+
+        // ============================================================
+        // OVERLAY CONTROLS
+        // ============================================================
+
+        function openOverlay(src, label) {
+            overlayVideo.src = src;
+            overlayVideo.load();
+            overlayVideo.play();
+            overlayLabel.textContent = label || 'Now Playing';
+            overlay.classList.add('active');
+
+            // Pause any playing videos in the grid
+            document.querySelectorAll('.video-card video').forEach(v => {
+                if (!v.paused) {
+                    v.pause();
+                    const card = v.closest('.video-card');
+                    if (card) card.classList.remove('playing');
+                }
+            });
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOverlay() {
+            overlayVideo.pause();
+            overlayVideo.src = '';
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close overlay events
+        closeOverlayBtn.addEventListener('click', closeOverlay);
+        overlay.addEventListener('click', function(e) {
+            if (e.target === this) closeOverlay();
+        });
+
+        // Also close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeOverlay();
+            }
+        });
+
+        // ============================================================
+        // BACK BUTTON
+        // ============================================================
+
+        backBtn.addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+
+        // ============================================================
+        // INIT
+        // ============================================================
+
+        renderVideos();
+
+        console.log('📽️ Breezy Videos loaded — tap any video to watch in fullscreen overlay.');
+    </script>
+</body>
+</html>
