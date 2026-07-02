@@ -64,6 +64,20 @@
             height: 100%;
             object-fit: contain;
             display: block;
+            background: #0d0b0a;
+        }
+
+        /* Fallback if video fails — show a subtle gradient */
+        #loadingScreen .loader-video-wrapper .fallback-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, #1a1512, #0d0b0a);
+            z-index: 0;
+            display: none;
+        }
+
+        #loadingScreen .loader-video-wrapper .fallback-bg.visible {
+            display: block;
         }
 
         #loadingScreen .loader-overlay-grad {
@@ -739,8 +753,9 @@
     <!-- ===== LOADING SCREEN — audio‑enabled video (load.mp4), no zoom ===== -->
     <div id="loadingScreen">
         <div class="loader-video-wrapper">
-            <!-- Removed 'muted' attribute and changed src to load.mp4 -->
-            <video id="loaderVideo" src="load.mp4" autoplay playsinline webkit-playsinline></video>
+            <video id="loaderVideo" src="load.mp4" autoplay playsinline webkit-playsinline preload="auto"></video>
+            <!-- fallback background in case video fails -->
+            <div class="fallback-bg" id="fallbackBg"></div>
             <div class="loader-overlay-grad"></div>
         </div>
         <div class="loader-text">Loading &hellip;</div>
@@ -824,41 +839,69 @@
 
     <script>
         // ============================================================
-        // LOADING SCREEN — plays load.mp4 for 6 seconds with audio,
-        // then fades. Only on first launch per session (sessionStorage).
+        // LOADING SCREEN — plays load.mp4 with audio (if allowed),
+        // always dismisses after 6s. Uses sessionStorage to show only once per session.
         // ============================================================
         (function initLoading() {
-            // --- Check if we've already shown the loading screen this session ---
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loaderVideo = document.getElementById('loaderVideo');
+            const fallbackBg = document.getElementById('fallbackBg');
+            const duration = 6; // seconds
+            let loadingHidden = false;
+
+            // --- Check session flag ---
             if (sessionStorage.getItem('loadingShown')) {
-                // Loading already shown → skip straight to content
+                // Already shown → skip loading entirely
                 document.querySelectorAll('.page').forEach(p => p.classList.add('visible'));
                 showPage('pageHome');
-                const ls = document.getElementById('loadingScreen');
-                ls.style.display = 'none';
-                // Stop video if it's somehow playing
-                const vid = document.getElementById('loaderVideo');
-                vid.pause();
-                vid.src = '';
+                loadingScreen.style.display = 'none';
+                loaderVideo.pause();
+                loaderVideo.src = '';
                 return;
             }
 
-            // --- First launch in this session → show loading screen ---
-            const loadingScreen = document.getElementById('loadingScreen');
-            const loaderVideo = document.getElementById('loaderVideo');
-            const duration = 6; // seconds
+            // --- Video error handling ---
+            loaderVideo.addEventListener('error', function(e) {
+                console.warn('Video failed to load. Showing fallback background.', e);
+                fallbackBg.classList.add('visible');
+                // Continue with timer — no need to block
+            });
+
+            // If video cannot play due to missing codec or network, fallback
+            loaderVideo.addEventListener('stalled', function() {
+                fallbackBg.classList.add('visible');
+            });
+
+            // --- Attempt to play with sound ---
+            const playPromise = loaderVideo.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(function(error) {
+                    // Autoplay with sound was blocked (most common on mobile)
+                    console.warn('Autoplay with audio blocked. Falling back to muted?', error);
+                    // We don't mute because user wants audio, but we still show video if possible.
+                    // The timer will still dismiss the loading screen.
+                    // Also show fallback gradient so it's not just black.
+                    fallbackBg.classList.add('visible');
+                    // Try to play muted as a fallback? But user wants audio, so we don't.
+                    // We'll just let the timer run.
+                });
+            }
+
+            // --- Timer-based dismissal ---
             const startTime = performance.now();
 
             function checkAndHide() {
+                if (loadingHidden) return;
                 const elapsed = (performance.now() - startTime) / 1000;
                 if (elapsed >= duration) {
-                    // Hide loading screen
+                    // Hide loading
                     loadingScreen.classList.add('hide');
-                    // Remember that we've shown it this session
+                    loadingHidden = true;
                     try { sessionStorage.setItem('loadingShown', 'true'); } catch (_) {}
-                    // Show pages
                     document.querySelectorAll('.page').forEach(p => p.classList.add('visible'));
                     showPage('pageHome');
-                    // Clean up video after transition
+                    // Cleanup video after transition
                     setTimeout(() => {
                         loadingScreen.style.display = 'none';
                         loaderVideo.pause();
@@ -869,20 +912,14 @@
                 requestAnimationFrame(checkAndHide);
             }
 
-            // Start the video (audio will play if autoplay with sound is allowed)
-            loaderVideo.play().catch(() => {
-                // Autoplay with sound may be blocked on some devices.
-                // We still continue with the timer.
-                console.warn('Video autoplay with audio was blocked. Timer continues.');
-            });
-
-            // Begin checking
+            // Start checking
             requestAnimationFrame(checkAndHide);
 
             // Fallback: force hide after 6.5s even if something stalls
             setTimeout(() => {
-                if (!loadingScreen.classList.contains('hide')) {
+                if (!loadingHidden) {
                     loadingScreen.classList.add('hide');
+                    loadingHidden = true;
                     try { sessionStorage.setItem('loadingShown', 'true'); } catch (_) {}
                     document.querySelectorAll('.page').forEach(p => p.classList.add('visible'));
                     showPage('pageHome');
