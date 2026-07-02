@@ -20,9 +20,87 @@
             min-height: 100dvh;
             color: #2c241e;
             position: relative;
+            overflow: hidden;
         }
 
-        /* === PAGES === */
+        /* ===== LOADING SCREEN — full video, no clutter ===== */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: #0d0b0a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        #loadingScreen.hide {
+            opacity: 0;
+            transform: scale(1.04);
+            pointer-events: none;
+        }
+
+        #loadingScreen .loader-video-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0d0b0a;
+        }
+
+        #loadingScreen .loader-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Very subtle overlay — just to give text readability if needed */
+        #loadingScreen .loader-overlay-grad {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Minimal loading text — fades with the video */
+        #loadingScreen .loader-text {
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: auto;
+            margin-bottom: 3rem;
+            animation: textPulse 2s ease-in-out infinite;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        @keyframes textPulse {
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.9;
+            }
+        }
+
+        /* === PAGES — hidden until loading completes === */
         .page {
             position: fixed;
             top: 0;
@@ -39,6 +117,13 @@
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .page.visible {
+            opacity: 1;
+            pointer-events: all;
         }
 
         .page.hidden {
@@ -133,7 +218,7 @@
             margin-right: auto;
         }
 
-        /* --- BUTTON ROW: Devotion + Breezy + Relax + Bible + Motivation --- */
+        /* --- BUTTON ROW --- */
         .button-row {
             display: flex;
             flex-wrap: wrap;
@@ -184,33 +269,14 @@
         .action-btn.breezy i {
             color: #4a7c6b;
         }
-
-        .action-btn.breezy:active i {
-            color: #2b211b;
-        }
-
         .action-btn.relax i {
             color: #7a6a8a;
         }
-
-        .action-btn.relax:active i {
-            color: #2b211b;
-        }
-
         .action-btn.bible i {
             color: #6d8f7a;
         }
-
-        .action-btn.bible:active i {
-            color: #2b211b;
-        }
-
         .action-btn.motivation i {
             color: #c47a3a;
-        }
-
-        .action-btn.motivation:active i {
-            color: #2b211b;
         }
 
         .sub-loading {
@@ -584,6 +650,10 @@
             .verse-header-spacer {
                 width: 54px;
             }
+            #loadingScreen .loader-text {
+                font-size: 0.65rem;
+                margin-bottom: 2rem;
+            }
         }
 
         @media (min-width: 420px) and (max-width: 599px) {
@@ -668,8 +738,17 @@
 </head>
 <body>
 
+    <!-- ===== LOADING SCREEN — full video, minimal text ===== -->
+    <div id="loadingScreen">
+        <div class="loader-video-wrapper">
+            <video id="loaderVideo" src="load.webm" muted autoplay playsinline webkit-playsinline></video>
+            <div class="loader-overlay-grad"></div>
+        </div>
+        <div class="loader-text">Loading &hellip;</div>
+    </div>
+
     <!-- ===== PAGE 1: HOME / EMOTIONS ===== -->
-    <div id="pageHome" class="page active">
+    <div id="pageHome" class="page">
         <div class="welcome-section">
             <i class="fas fa-feather-alt welcome-icon"></i>
             <h1>
@@ -678,7 +757,6 @@
             </h1>
             <p>Let your emotions find rest in His word</p>
 
-            <!-- BUTTON ROW: Devotion + Breezy + Relax + Bible + Motivation -->
             <div class="button-row">
                 <a href="devotion.html" class="action-btn">
                     <i class="fas fa-book-open"></i> Daily Devotion
@@ -746,6 +824,58 @@
     </div>
 
     <script>
+        // ============================================================
+        // LOADING SCREEN — plays load.webm for 6 seconds, then fades
+        // ============================================================
+        (function initLoading() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loaderVideo = document.getElementById('loaderVideo');
+            const duration = 6; // seconds
+            const startTime = performance.now();
+
+            function checkAndHide() {
+                const elapsed = (performance.now() - startTime) / 1000;
+                if (elapsed >= duration) {
+                    // Hide loading screen
+                    loadingScreen.classList.add('hide');
+                    // Show pages
+                    document.querySelectorAll('.page').forEach(p => p.classList.add('visible'));
+                    // Ensure home is active
+                    showPage('pageHome');
+                    // Clean up video after transition
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        loaderVideo.pause();
+                        loaderVideo.src = '';
+                    }, 1000);
+                    return;
+                }
+                requestAnimationFrame(checkAndHide);
+            }
+
+            // Start the video
+            loaderVideo.play().catch(() => {
+                // Autoplay blocked — still continue with timer
+            });
+
+            // Begin checking
+            requestAnimationFrame(checkAndHide);
+
+            // Fallback: force hide after 6.5s even if something stalls
+            setTimeout(() => {
+                if (!loadingScreen.classList.contains('hide')) {
+                    loadingScreen.classList.add('hide');
+                    document.querySelectorAll('.page').forEach(p => p.classList.add('visible'));
+                    showPage('pageHome');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        loaderVideo.pause();
+                        loaderVideo.src = '';
+                    }, 1000);
+                }
+            }, 6500);
+        })();
+
         // ============================================================
         // BIBLE DATA — 18 emotions, 10 verses each
         // ============================================================
@@ -1106,9 +1236,13 @@
         });
 
         // ============================================================
-        // INIT — default to home
+        // INIT — home page is shown after loading completes
         // ============================================================
-        showPage('pageHome');
+        // The loading script above calls showPage('pageHome') after 6s.
+        // But we need to ensure that if the user somehow interacts before,
+        // it's safe. The pages are hidden by default until loading finishes.
+        // We'll also set home as active when pages become visible.
+        // The loading script already does that.
     </script>
 </body>
 </html>
