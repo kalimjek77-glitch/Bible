@@ -736,10 +736,11 @@
 </head>
 <body>
 
-    <!-- ===== LOADING SCREEN — full video, NO ZOOM (object-fit: contain) ===== -->
+    <!-- ===== LOADING SCREEN — audio‑enabled video (load.mp4), no zoom ===== -->
     <div id="loadingScreen">
         <div class="loader-video-wrapper">
-            <video id="loaderVideo" src="load.webm" muted autoplay playsinline webkit-playsinline></video>
+            <!-- Removed 'muted' attribute and changed src to load.mp4 -->
+            <video id="loaderVideo" src="load.mp4" autoplay playsinline webkit-playsinline></video>
             <div class="loader-overlay-grad"></div>
         </div>
         <div class="loader-text">Loading &hellip;</div>
@@ -823,13 +824,11 @@
 
     <script>
         // ============================================================
-        // LOADING SCREEN — plays load.webm for 6 seconds, then fades
-        // BUT ONLY ON FIRST LAUNCH (sessionStorage flag)
+        // LOADING SCREEN — plays load.mp4 for 6 seconds with audio,
+        // then fades. Only on first launch per session (sessionStorage).
         // ============================================================
         (function initLoading() {
             // --- Check if we've already shown the loading screen this session ---
-            // sessionStorage persists across page navigations within the same tab.
-            // When the app is closed and reopened, sessionStorage is cleared.
             if (sessionStorage.getItem('loadingShown')) {
                 // Loading already shown → skip straight to content
                 document.querySelectorAll('.page').forEach(p => p.classList.add('visible'));
@@ -870,9 +869,11 @@
                 requestAnimationFrame(checkAndHide);
             }
 
-            // Start the video
+            // Start the video (audio will play if autoplay with sound is allowed)
             loaderVideo.play().catch(() => {
-                // Autoplay blocked — still continue with timer
+                // Autoplay with sound may be blocked on some devices.
+                // We still continue with the timer.
+                console.warn('Video autoplay with audio was blocked. Timer continues.');
             });
 
             // Begin checking
